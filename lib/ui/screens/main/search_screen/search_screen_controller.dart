@@ -6,10 +6,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:house_jet_properties/models/properties_detail.dart';
@@ -20,13 +18,9 @@ import 'package:house_jet_properties/ui/widgets/bottom_sheet/price_filter_bottom
 import 'package:house_jet_properties/ui/widgets/bottom_sheet/property_type_bottomsheet.dart';
 import 'package:house_jet_properties/ui/widgets/marker_detail_card.dart';
 import 'package:house_jet_properties/utils/app_routes.dart';
-
 import 'package:house_jet_properties/utils/extension.dart';
 import 'package:house_jet_properties/utils/map_utils.dart';
-import '../../../../Theme/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../../Theme/app_colors.dart';
 
 class SearchController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -232,12 +226,25 @@ class SearchController extends GetxController
       {bool isFormDrag = false, int? index}) {
     // placeDetailes = placeDetail;
     propertiesDetailModel = placeDetail;
-
+    // new one
     mapController.animateCamera(
-      CameraUpdate.newLatLng(
-        LatLng(propertiesDetailModel!.lat, propertiesDetailModel!.long),
-      ),
+      // CameraUpdate.newCameraPosition(
+      //   CameraPosition(
+      //     target:  LatLng(propertiesDetailModel!.lat, propertiesDetailModel!.long),
+      //     zoom: 15.0,
+      //     tilt: 5.0
+      //   ),
+      //
+      //
+      // ),
+        CameraUpdate.newLatLngZoom(LatLng(propertiesDetailModel!.lat, propertiesDetailModel!.long), 15.0)
     );
+   // old one
+    // mapController.animateCamera(
+    //   CameraUpdate.newLatLng(
+    //     LatLng(propertiesDetailModel!.lat, propertiesDetailModel!.long),
+    //   ),
+    // );
     if (isFormDrag) {
       selectedMarkerIndex = index!;
       selectedMarkerId = placeDetail.id.toString();
@@ -468,11 +475,7 @@ class SearchController extends GetxController
     }
   }*/
 
-  getFullAddress() async {
-    List<Placemark> placeMarks =
-        await placemarkFromCoordinates(21.229620, 72.814840);
-    print(placeMarks);
-  }
+
 }
 
 

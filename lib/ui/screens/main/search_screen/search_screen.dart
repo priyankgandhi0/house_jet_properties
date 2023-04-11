@@ -380,7 +380,6 @@ class SearchScreen extends StatelessWidget {
 
   void _showModal(BuildContext context) {
     Navigator.of(context).push(FullScreenSearchModal());
-
     //return FullScreenSearchModal();
   }
 }

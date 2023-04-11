@@ -324,6 +324,7 @@ class FilterScreenController extends GetxController
       isSeleacted: false,
     ),
     HomeTypeModel(
+
       subTitleText: "2000",
       isSeleacted: false,
     ),

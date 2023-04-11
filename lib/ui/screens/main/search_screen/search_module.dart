@@ -155,6 +155,7 @@ class FullScreenSearchModal extends ModalRoute {
                     margin: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
                     child: Column(
+
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ctrl.searchTempList[index].name.appBlackText1B1B1B(

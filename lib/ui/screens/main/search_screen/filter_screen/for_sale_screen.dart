@@ -28,12 +28,10 @@ class ForSaleScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              homeTypeText
-                  .appBlackText1B1B1B(
+              homeTypeText.appBlackText1B1B1B(
                     size: 16,
                     fontWeight: FontWeight.w600,
-                  )
-                  .paddingOnly(
+              ).paddingOnly(
                     left: 20,
                     top: 20,
                   ),
@@ -1330,6 +1328,7 @@ class ForSaleScreen extends StatelessWidget {
                               ctrl.update();
                             },
                             tileTileWidget: Row(
+
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 openHouseText.appBlackText1B1B1B(
