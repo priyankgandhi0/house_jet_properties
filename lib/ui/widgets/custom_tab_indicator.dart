@@ -16,7 +16,6 @@ class CustomTabIndicator extends Decoration {
   @override
   _CustomPainter createBoxPainter([VoidCallback? onChanged]) {
     return _CustomPainter(
-
       this,
       onChanged,
       radius,

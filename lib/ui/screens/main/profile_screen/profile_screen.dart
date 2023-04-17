@@ -93,9 +93,11 @@ class ProfileScreen extends StatelessWidget {
                     icon: logoutIcon,
                     textColor: false,
                     onTap: () {
-                      HomeScreenController().currentIndex.value = 0;
                       preferences.clearUserItem();
-                      Get.off(LoginScreen());
+                      Get.find<HomeScreenController>().currentIndex.value = 0;
+                      // HomeScreenController().currentIndex.value = 0;
+
+                      // Get.off(LoginScreen());
                     }),
               ],
             ),

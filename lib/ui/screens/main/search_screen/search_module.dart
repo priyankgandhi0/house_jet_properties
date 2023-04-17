@@ -8,7 +8,6 @@ import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen
 import 'package:house_jet_properties/ui/widgets/custom_tab_indicator.dart';
 import 'package:house_jet_properties/utils/extension.dart';
 import '../../../../Theme/app_colors.dart';
-import 'search_screen_controller.dart';
 
 
 class FullScreenSearchModal extends ModalRoute {
@@ -144,12 +143,13 @@ class FullScreenSearchModal extends ModalRoute {
               ).paddingSymmetric(horizontal: 20),
               ListView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: ctrl.searchTempList.length,
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {
                     Get.back();
-                    ctrl.setInfoWindowModel(ctrl.searchTempList[index]);
+                    ctrl.setInfoWindowModel(ctrl.searchTempList[index],isFormDrag: true);
+
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(
@@ -170,12 +170,12 @@ class FullScreenSearchModal extends ModalRoute {
               ),
               (30.0).addHSpace(),
               Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: recentlyViewedText.appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w600)),
 
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

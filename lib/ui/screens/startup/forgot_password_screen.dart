@@ -23,8 +23,10 @@ class ForgotPasswordScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Column(
               children: [
-                Image.asset("assets/icons/ic_logo.png")
-                    .paddingOnly(left: 99.0, right: 99, top: 90, bottom: 52),
+                Image.asset("assets/icons/ic_logo.png",height: 145,width: 150,).paddingOnly(top: 40,bottom: 25),
+                // old one
+                // Image.asset("assets/icons/ic_logo.png")
+                //     .paddingOnly(left: 99.0, right: 99, top: 90, bottom: 52),
                 'Forgot Password'
                     .appOrangeText(size: 30, fontWeight: FontWeight.w600),
                 10.0.addHSpace(),

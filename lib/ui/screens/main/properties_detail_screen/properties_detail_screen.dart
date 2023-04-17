@@ -6,6 +6,7 @@ import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/contact_agent_screen/contact_agent_screen.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
 import 'package:house_jet_properties/ui/widgets/app_button.dart';
+import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/extension.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -291,7 +292,10 @@ class PropertiesDetail extends StatelessWidget {
                           height: 50,
                           width: 50,
                           child: FloatingActionButton(
-                            onPressed: () {},
+                            onPressed: () {
+
+
+                            },
                             backgroundColor: Colors.white,
                             child: Padding(
                               padding: const EdgeInsets.only(top: 5),
@@ -315,6 +319,7 @@ class PropertiesDetail extends StatelessWidget {
                         color: Colors.black38,
                         borderRadius: BorderRadiusDirectional.circular(6)),
                     child: Padding(
+
                       padding: const EdgeInsets.all(10.0),
                       child: Image.asset(backArrowIcon, color: Colors.white),
                     ),
@@ -328,9 +333,11 @@ class PropertiesDetail extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 20, left: 20, bottom: 26),
         child: AppButton(
+
             onTap: () {
-              Get.to(const ContactAgentScreen());
+              Get.toNamed(Routes.contactAnAgentScreen);
             },
+
             text: "CONTACT AN AGENT",
             textSize: 16,
             textFontWeight: FontWeight.w600,

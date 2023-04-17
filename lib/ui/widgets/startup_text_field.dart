@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,7 +24,9 @@ class AppTextFields extends StatefulWidget {
       this.fillColor,
       this.borderColor,
       this.textInputType,
-      this.validator})
+      this.validator,
+      this.textInputForMater
+      })
       : super(key: key);
   TextEditingController controller;
   String hintText;
@@ -39,6 +42,7 @@ class AppTextFields extends StatefulWidget {
   Function(String)? onChange;
   TextInputAction? textInputAction;
   TextInputType? textInputType;
+  List<TextInputFormatter>? textInputForMater;
 
   int? maxLine;
   final FormFieldValidator<String>? validator;
@@ -79,7 +83,9 @@ class _AppTextFieldsState extends State<AppTextFields> {
           textInputAction: widget.textInputAction ?? TextInputAction.next,
           keyboardType: widget.textInputType,
           autofocus: false,
+          inputFormatters:widget.textInputForMater??[],
           decoration: InputDecoration(
+
             prefixIcon: widget.leading,
             filled: true,
             contentPadding:

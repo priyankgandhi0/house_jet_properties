@@ -19,7 +19,7 @@ String cameraImage = 'assets/images/ig_camera.png';
 ///Search Screen
 String listMapIcon = 'assets/icons/ic_menu.png';
 String mapListIcon = 'assets/icons/ic_map.png';
-String miceIcon = 'assets/icons/ic_mice.png';
+String miceIcon = 'assets/icons/ic_mic.png';
 String filterIcon = 'assets/icons/ic_filter.png';
 String locationIcon = 'assets/icons/ic_location.png';
 String likeIcon = 'assets/icons/ic_like.png';

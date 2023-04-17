@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/properties_detail_screen.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
+import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/extension.dart';
+import 'package:house_jet_properties/utils/shared_pref.dart';
 
 
 
@@ -38,14 +40,24 @@ class FavouriteScreen extends StatelessWidget {
         builder: (ctrl) => SizedBox(
           height: Get.height,
           child: ListView.separated(
+
               padding: const EdgeInsets.symmetric(vertical: 20),
               itemBuilder: (context, index) => InkWell(
                     overlayColor:
                         const MaterialStatePropertyAll(Colors.transparent),
                     onTap: () {
                       ctrl.imageSliderIndex = 0;
-                      ctrl.setInfoWindowModel(ctrl.propertiesDetailList[index]);
-                      Get.to(PropertiesDetail());
+
+                      ctrl.setInfoWindowModel(ctrl.propertiesDetailList[index],isFormDrag: false);
+                      if(preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false){
+                        Get.toNamed(Routes.propertyDetailScreen);
+
+                      }else{
+                        Get.toNamed(Routes.loginScreen);
+                      }
+
+
+
                     },
                     child: Container(
                       height: 210,

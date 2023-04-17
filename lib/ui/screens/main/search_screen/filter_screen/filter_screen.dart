@@ -43,7 +43,7 @@ class FilterScreen extends StatelessWidget {
                         //.appGreyText(size: 14, fontWeight: FontWeight.w500),
                         colorHandle('For Rent', ctrl.currentIndex.value, 1),
                         //.appGreyText(size: 14, fontWeight: FontWeight.w500),
-                        colorHandle('For Sold', ctrl.currentIndex.value, 2),
+                        //colorHandle('For Sold', ctrl.currentIndex.value, 2),
                       ],
                     ),
                   ],
@@ -55,7 +55,7 @@ class FilterScreen extends StatelessWidget {
           children: [
             ForSaleScreen(),
             ForSaleScreen(),
-            ForSaleScreen(),
+            // ForSaleScreen(),
           ],
         ),
       );

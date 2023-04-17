@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:house_jet_properties/ui/widgets/app_button.dart';
 import 'package:house_jet_properties/ui/widgets/app_loader.dart';
 import 'package:house_jet_properties/ui/widgets/startup_text_field.dart';
+import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/extension.dart';
+import 'package:house_jet_properties/utils/shared_pref.dart';
 import '../../../../Theme/app_colors.dart';
 
 import '../../../../Theme/app_colors.dart';
@@ -29,8 +31,9 @@ class SignUpScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 30, right: 30),
                     child: Column(
                       children: [
-                        Image.asset("assets/icons/ic_logo.png").paddingOnly(
-                            left: 99.0, right: 99, top: 90, bottom: 50),
+                        Image.asset("assets/icons/ic_logo.png",height: 145,width: 150,).paddingOnly(top: 40,bottom: 25),
+                        // Image.asset("assets/icons/ic_logo.png").paddingOnly(
+                        //     left: 99.0, right: 99, top: 90, bottom: 50),
                         'Welcome Back!'.appOrangeText(
                             size: 30, fontWeight: FontWeight.w600),
                         Padding(
@@ -75,31 +78,62 @@ class SignUpScreen extends StatelessWidget {
                         if (!ctrl.isPasswordValid.value) ...[
                           Align(
                             alignment: Alignment.topRight,
-                            child: 'please enter valid Password'
+                            child: 'please enter valid Mobile No.'
                                 .appOrangeText(size: 14),
                           ),
                           4.0.addHSpace(),
                         ],
                         AppTextFields(
                           controller: ctrl.passwordController,
-                          hintText: 'Passsword',
-                          isSecureEntry: true,
+                          hintText: 'Enter Mobile No',
+                          isSecureEntry: false,
                         ),
-                        30.0.addHSpace(),
-                        AppTextFields(
-                          controller: ctrl.confirmPasswordController,
-                          hintText: 'Confirm Password ',
-                          isSecureEntry: true,
-                        ),
+
+                        // AppTextFields(
+                        //   controller: ctrl.passwordController,
+                        //   hintText: 'Passsword',
+                        //   isSecureEntry: true,
+                        // ),
+                        // 30.0.addHSpace(),
+                        // AppTextFields(
+                        //   controller: ctrl.confirmPasswordController,
+                        //   hintText: 'Confirm Password ',
+                        //   isSecureEntry: true,
+                        // ),
                         60.0.addHSpace(),
                         AppButton(
                           text: 'SIGN UP',
                           onTap: () {
+                            if (ctrl.userFirstNameController.text.trim().isEmpty) {
+                              showAppSnackBar("Please Enter First Name");
+                            } else if (ctrl.userLastNameController.text
+                                .trim()
+                                .isEmpty) {
+                              // showAppSnackBar("Please Enter Password");
+                              showAppSnackBar("Please Enter Last Name");
+                            } else if(ctrl.userEmailController.text
+                                .trim()
+                                .isEmpty){
+                              showAppSnackBar("Please Enter Email");
+                              // Get.off(() => HomeScreen());
+                            } else if(ctrl.passwordController.text
+                                .trim()
+                                .isEmpty){
+                              showAppSnackBar("Please Enter Mobile No");
+                              // Get.off(() => HomeScreen());
+                            }
+                            else{
+                              preferences.putBool(
+                                  SharedPreference.IS_LOGGED_IN, true);
+                              preferences.putString(
+                                  SharedPreference.USER_EMAIL, ctrl.userEmailController.text);
+                              Get.offAndToNamed(Routes.propertyDetailScreen);
+                            }
                             // printData(tittle: 'tittle');
-                            // ctrl.signIn();
+
                           },
                         ),
-                        30.0.addHSpace(),
+                        (30.0).addHSpace(),
                         InkWell(
                           overlayColor: const MaterialStatePropertyAll(
                               Colors.transparent),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/theme/app_strings.dart';
@@ -43,6 +44,8 @@ class ForSaleScreen extends StatelessWidget {
                       crossAxisSpacing: 10,
                       mainAxisExtent: 76,
                       mainAxisSpacing: 10),
+
+
                   itemCount: ctrl.homeTypeList.length,
                   itemBuilder: (context, i) => homeTypeCard(
                       onTap: () {
@@ -64,10 +67,46 @@ class ForSaleScreen extends StatelessWidget {
               Divider(
                 color: app_divider_E1EBF0,
               ),
+              // textInputFormater: [
+              //
+              //   FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d{0,2})'))
+              //
+              // ],
+
               priceRangeText
                   .appBlackText1B1B1B(fontWeight: FontWeight.w600, size: 16)
                   .paddingSymmetric(horizontal: 20),
               (10.0).addHSpace(),
+              Row(
+                children: [
+                  Expanded(
+                    child: AppTextFields(
+                      controller: ctrl.minPriceController,
+                      hintText: 'Min Price',
+                      fillColor: Colors.transparent,
+                      isSecureEntry: false,
+                      borderColor: app_grey_E3EAEE,
+                      textInputForMater: [
+                        FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d{0,2})'))
+                      ],
+                    ).paddingSymmetric(horizontal: 5),
+                  ),
+                  Expanded(
+                    child: AppTextFields(
+                      controller: ctrl.maxPriceController,
+                      hintText: 'Max Price',
+                      fillColor: Colors.transparent,
+                      isSecureEntry: false,
+                      borderColor: app_grey_E3EAEE,
+                      textInputForMater: [
+
+                          FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d{0,2})'))
+
+                      ],
+                    ).paddingSymmetric(horizontal: 5),
+                  ),
+                ],
+              ).paddingSymmetric(horizontal: 15),
               priceSlider(
                   context: context,
                   rangeThumbShape: ctrl.indicatorRangeSliderThumbShape,
@@ -81,6 +120,8 @@ class ForSaleScreen extends StatelessWidget {
               Divider(
                 color: app_divider_E1EBF0,
               ),
+
+
               bedRoomText
                   .appBlackText1B1B1B(fontWeight: FontWeight.w600, size: 16)
                   .paddingSymmetric(horizontal: 20),
@@ -149,6 +190,7 @@ class ForSaleScreen extends StatelessWidget {
                             .paddingSymmetric(horizontal: 20),
                         (10.0).addHSpace(),
                         AppTextFields(
+
                           controller: ctrl.commuteController,
                           hintText: commuteDestinationAddressText,
                           trailing: GestureDetector(
@@ -166,6 +208,7 @@ class ForSaleScreen extends StatelessWidget {
                         (20.0).addHSpace(),
                         selectMaximumDriveTimeText
                             .appBlackText1B1B1B(
+
                                 fontWeight: FontWeight.w400, size: 16)
                             .paddingSymmetric(horizontal: 20),
                         (10.0).addHSpace(),
@@ -326,6 +369,9 @@ class ForSaleScreen extends StatelessWidget {
                               .paddingSymmetric(horizontal: 14)
                         ])
                   : (0.0).addWSpace(),
+
+
+
               ctrl.currentIndex.value == 2 || ctrl.currentIndex.value == 0
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -334,6 +380,7 @@ class ForSaleScreen extends StatelessWidget {
                             .appBlackText1B1B1B(
                                 fontWeight: FontWeight.w600, size: 16)
                             .paddingSymmetric(horizontal: 20),
+
                         AppExpansionTile(
                             context: context,
                             isExpanded: ctrl.isSquareFit,
@@ -1118,9 +1165,9 @@ class ForSaleScreen extends StatelessWidget {
                                                 ))
                                             .toList(),
                                         onSelectedItemChanged: (int index) {
-                                          for (var data in ctrl.lotNoMaxList) {
+                                          for (var data in ctrl.yearBuiltCostFinnanceList2) {
                                             data.isSeleacted = false;
-                                            ctrl.lotNoMaxList[index]
+                                            ctrl.yearBuiltCostFinnanceList2[index]
                                                 .isSeleacted = true;
                                             ctrl.update();
                                           }
@@ -1135,9 +1182,10 @@ class ForSaleScreen extends StatelessWidget {
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  10.0.addHSpace(),
+                                  (10.0).addHSpace(),
                                   acceptedFinancing
                                       .appBlackText1B1B1B(
+
                                           fontWeight: FontWeight.w600, size: 16)
                                       .paddingSymmetric(
                                           horizontal: 20, vertical: 5),
@@ -1145,6 +1193,7 @@ class ForSaleScreen extends StatelessWidget {
                                       .map((e) => Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
+
                                             children: [
                                               e.subTitleText.appBlackText1B1B1B(
                                                   size: 16,
@@ -1254,20 +1303,28 @@ class ForSaleScreen extends StatelessWidget {
                                       size: 14, fontWeight: FontWeight.w500),
                                 ],
                               ).paddingOnly(left: 15, right: 12),
-                              SizedBox(
-                                height: 80,
-                                child: appSimpleSlider(
-                                    context: context,
-                                    rangeThumbShape:
-                                        ctrl.schoolRatingSliderThumbShape,
-                                    priceStartValue:
-                                        ctrl.schoolRatingValueStart,
-                                    // priceEndValue: ctrl.schoolRatingEndValue,
-                                    onChanged: (val) {
-                                      ctrl.onSchoolRatingChange(val);
-
-                                    }).paddingSymmetric(horizontal: 12),
-                              ),
+                              AppTextFields(
+                                controller: ctrl.schoolRatingController,
+                                hintText: 'School Rating',
+                                fillColor: Colors.transparent,
+                                isSecureEntry: false,
+                                borderColor: app_grey_E3EAEE,
+                               
+                              ).paddingSymmetric(horizontal: 15,vertical: 10),
+                              // SizedBox(
+                              //   height: 80,
+                              //   child: appSimpleSlider(
+                              //       context: context,
+                              //       rangeThumbShape:
+                              //           ctrl.schoolRatingSliderThumbShape,
+                              //       priceStartValue:
+                              //           ctrl.schoolRatingValueStart,
+                              //       // priceEndValue: ctrl.schoolRatingEndValue,
+                              //       onChanged: (val) {
+                              //         ctrl.onSchoolRatingChange(val);
+                              //
+                              //       }).paddingSymmetric(horizontal: 12),
+                              // ),
                             ]),
                         AppExpansionTile(
                             context: context,

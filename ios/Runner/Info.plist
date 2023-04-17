@@ -45,21 +45,21 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key> Privacy - Location Always and When In Use Usage Description</key>
+	<string>House Jet Property needs access to location to show your location in app.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>House Jet Property requires access to the photo library.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>House Jet Property requires access to the camera.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>House Jet Property does not require access to the microphone.</string>
-	<key>NSLocationUsageDescription</key>
-	<string>House Jet Property  requires location services to work</string>
 	<key>NSUserDefaults</key>
 	<string></string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>House Jet Property  needs access to location when in the background.</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array/>
 	<key>tel</key>
 	<string></string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>

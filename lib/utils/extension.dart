@@ -2,6 +2,7 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../theme/app_colors.dart';
 
@@ -17,6 +18,52 @@ extension space on double {
       width: this,
     );
   }
+}
+
+extension AppDateTime on DateTime {
+  appDateExtension() {
+    return DateFormat('dd MMMM, yyyy kk:mm').format(this);
+  }
+  appDateTimeFormat() {
+    return DateFormat('dd/MM/yyyy, hh:mm a').format(this);
+  }
+
+  appDateMonthExtension() {
+    return DateFormat('MMM dd, yyyy ').format(this);
+  }
+
+
+
+  taskDueDateExtension() {
+    return DateFormat('EEEE, MMMM dd, yyyy hh:mm a').format(this);
+  }
+
+  ticketDateExtension() {
+    return DateFormat('EEEE, MMMM dd, yyyy').format(this);
+  }
+  monthNameAndDateExt() {
+    return DateFormat('MMM d').format(this);
+  }
+
+  taskCreatedDateExtension() {
+    return DateFormat('MMM dd, yyyy hh:mm a').format(this);
+  }
+
+  getAppointmentShowFormat() {
+    return DateFormat("yyyy-MM-dd hh:mm a").format(this);
+  }
+  getspecificTimeFormat() {
+    return DateFormat("yyyy-MM-dd HH:mm").format(this);
+  }
+  simpledDateOnlyFormat() {
+    return DateFormat("yyyy-MM-dd").format(this);
+  }
+
+  getAppointmentRequestFormat(){
+    String timeFormat = DateFormat("yyyy-MM-ddTHH:mm:00.000").format(toUtc());
+    return "${timeFormat}Z";
+  }
+
 }
 
 TextStyle appTextStyleBlack500 = GoogleFonts.manrope(

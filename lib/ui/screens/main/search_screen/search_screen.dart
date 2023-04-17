@@ -6,7 +6,9 @@ import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/properties_detail_screen.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_module.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
+import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/extension.dart';
+import 'package:house_jet_properties/utils/shared_pref.dart';
 
 
 import '../../../../theme/app_colors.dart';
@@ -45,7 +47,10 @@ class SearchScreen extends StatelessWidget {
                         ctrl.mapController = controller;
                         // ctrl.controller.complete(controller);
                       },
+                   
                       markers: ctrl.markers,
+                     // circles: ctrl.circles,
+                     //  polygons: ctrl.polygon,
                       onCameraMove: (position) {
                         ctrl.manager.onCameraMove(position);
                       },
@@ -54,6 +59,7 @@ class SearchScreen extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.only(top: 140),
                       child: ListView.separated(
+
                           padding: const EdgeInsets.only(top: 20, bottom: 20),
                           itemBuilder: (context, index) => InkWell(
                                 overlayColor: const MaterialStatePropertyAll(
@@ -62,7 +68,13 @@ class SearchScreen extends StatelessWidget {
                                   ctrl.imageSliderIndex = 0;
                                   ctrl.setInfoWindowModel(
                                       ctrl.propertiesDetailList[index]);
-                                  Get.to(PropertiesDetail());
+                                  if(preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false){
+                                    Get.toNamed(Routes.propertyDetailScreen);
+                                  }else{
+                                    Get.toNamed(Routes.loginScreen);
+                                  }
+
+
                                 },
                                 child: Container(
                                   height: 210,
@@ -91,6 +103,7 @@ class SearchScreen extends StatelessWidget {
                                         child: Container(
                                           height: 30,
                                           decoration: BoxDecoration(
+
                                               color: Colors.black54,
                                               borderRadius:
                                                   BorderRadiusDirectional
@@ -306,6 +319,7 @@ class SearchScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(6),
                                       boxShadow: [
                                         BoxShadow(
+
                                           color: Colors.black.withOpacity(0.1),
                                           spreadRadius: 1,
                                           blurRadius: 8,
@@ -367,6 +381,8 @@ class SearchScreen extends StatelessWidget {
                       ),
                     )
                   : const SizedBox(),
+
+
 
               // ctrl.searchFiledController.text.isNotEmpty
               //     ? Align(

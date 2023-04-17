@@ -29,7 +29,7 @@ class FilterScreenController extends GetxController
   configTabBar() {
     tabController = TabController(
       vsync: this,
-      length: 3,
+      length: 2,
     );
 
     tabController.addListener(() {
@@ -62,6 +62,9 @@ class FilterScreenController extends GetxController
   HomeTypeModel homeFeatureRadio = HomeTypeModel();
   HomeTypeModel listingTypeRadio = HomeTypeModel();
   TextEditingController commuteController = TextEditingController();
+  TextEditingController maxPriceController = TextEditingController();
+  TextEditingController minPriceController = TextEditingController();
+  TextEditingController schoolRatingController = TextEditingController();
   TextEditingController keyWordSearchController = TextEditingController();
 
   late IndicatorRangeSliderThumbShape<int> indicatorRangeSliderThumbShape =
@@ -121,6 +124,7 @@ class FilterScreenController extends GetxController
     for (var val in homeTypeList) {
       val.isSeleacted = false;
     }
+
     homeTypeList[i].isSeleacted = !homeTypeList[i].isSeleacted;
     update();
   }
@@ -152,8 +156,10 @@ class FilterScreenController extends GetxController
     for (var val in bedroomList) {
       val.isSeleacted = false;
     }
-    bedroomList[i].isSeleacted = !bedroomList[i].isSeleacted;
+
+    bedroomList[i].isSeleacted = ! bedroomList[i].isSeleacted;
     update();
+
   }
 
   List<HomeTypeModel> bathroomList = [
@@ -272,7 +278,7 @@ class FilterScreenController extends GetxController
       isSeleacted: false,
     ),
   ];
-
+  HomeTypeModel? selectedGen;
   List<HomeTypeModel> squareFeetNoMaxList = [
     HomeTypeModel(
       subTitleText: "No Max",
@@ -293,6 +299,7 @@ class FilterScreenController extends GetxController
   ];
 
   List<HomeTypeModel> lotSizeNoMinList = [
+
     HomeTypeModel(
       subTitleText: "No Min",
       isSeleacted: true,
@@ -309,12 +316,14 @@ class FilterScreenController extends GetxController
       subTitleText: "2000",
       isSeleacted: false,
     ),
+
   ];
   List<HomeTypeModel> lotNoMaxList = [
     HomeTypeModel(
       subTitleText: "No Max",
       isSeleacted: true,
     ),
+
     HomeTypeModel(
       subTitleText: "1250",
       isSeleacted: true,
@@ -348,6 +357,7 @@ class FilterScreenController extends GetxController
       subTitleText: "01",
       isSeleacted: true,
     ),
+
     HomeTypeModel(
       subTitleText: "02",
       isSeleacted: true,
