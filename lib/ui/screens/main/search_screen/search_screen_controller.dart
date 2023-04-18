@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,9 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:house_jet_properties/Theme/app_colors.dart';
 import 'package:house_jet_properties/models/properties_detail.dart';
-import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/properties_detail_screen.dart';
 import 'package:house_jet_properties/ui/widgets/app_price_slider.dart';
 import 'package:house_jet_properties/ui/widgets/bottom_sheet/bed_bath_filter_bottomsheet.dart';
 import 'package:house_jet_properties/ui/widgets/bottom_sheet/price_filter_bottomsheet.dart';
@@ -31,9 +28,32 @@ class SearchController extends GetxController
   void onInit() {
     configTabBar();
     loadData();
+    configCall();
     // _getPlaces();
     manager = _initClusterManager();
     super.onInit();
+  }
+
+  bool hasCallSupport = false;
+  Future<void>? launched;
+  String phone = '';
+
+  configCall(){
+    canLaunchUrl(
+        Uri(scheme: 'tel', path: '123')).then((bool result) {
+      hasCallSupport = result;
+      update();
+    });
+  }
+
+  Future<void> makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+
   }
 
   configTabBar() {
@@ -76,7 +96,7 @@ class SearchController extends GetxController
   List<PropertiesDetailModel> searchTempList = [];
 
   TextEditingController searchFiledController = TextEditingController();
-
+  TextEditingController scheduleTimeCtr = TextEditingController();
   Set<Marker> markers = {};
 
 
@@ -270,6 +290,7 @@ class SearchController extends GetxController
 
       //};
       isFormDrag ?mapController.animateCamera(
+
 
         // CameraUpdate.newCameraPosition(
         //   CameraPosition(

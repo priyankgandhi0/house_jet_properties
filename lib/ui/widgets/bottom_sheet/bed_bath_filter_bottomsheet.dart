@@ -35,12 +35,14 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                     shape: BoxShape.rectangle,
                     color: const Color(0xffC5CFD3)),
               ),
-              20.0.addHSpace(),
+              (20.0).addHSpace(),
               Stack(
                 alignment: Alignment.center,
                 children: [
+
                   "Bed / Bath".appBlackText1B1B1B(
                       size: 20, fontWeight: FontWeight.w600),
+
                   Align(
                     alignment: Alignment.centerRight,
                     child: InkWell(
@@ -49,13 +51,13 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              30.0.addHSpace(),
+              (30.0).addHSpace(),
               Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: "Bedrooms"
                     .appBlackText1B1B1B(size: 16, fontWeight: FontWeight.w500),
               ),
-              10.0.addHSpace(),
+              (10.0).addHSpace(),
               SizedBox(
                 height: 45,
                 child: ListView.separated(

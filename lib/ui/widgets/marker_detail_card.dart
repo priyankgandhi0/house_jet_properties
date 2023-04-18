@@ -63,6 +63,7 @@ class MarkerDetailCard extends StatelessWidget {
                     },
                     itemBuilder: (context, index) => SingleChildScrollView(
                       child: Column(
+
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
@@ -72,6 +73,7 @@ class MarkerDetailCard extends StatelessWidget {
                             child: Stack(
                               children: [
                                 Container(
+
                                   height: 195,
                                   margin: const EdgeInsets.only(right: 1),
                                   decoration: BoxDecoration(
@@ -95,16 +97,19 @@ class MarkerDetailCard extends StatelessWidget {
                                             BorderRadiusDirectional.circular(
                                                 50)),
                                     child: Padding(
+
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 12),
                                       child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           const CircleAvatar(
                                             radius: 5,
                                             backgroundColor: Color(0xff3EE763),
                                           ),
-                                          7.0.addWSpace(),
+
+                                          (7.0).addWSpace(),
                                           "For Sale".whiteText(
                                               size: 12,
                                               fontWeight: FontWeight.w600),
@@ -144,6 +149,7 @@ class MarkerDetailCard extends StatelessWidget {
                               .appGreyText(
                                   size: 14, fontWeight: FontWeight.w400),
                           ListTile(
+
                             visualDensity: const VisualDensity(vertical: -4),
                             contentPadding: EdgeInsets.zero,
                             horizontalTitleGap: 10,

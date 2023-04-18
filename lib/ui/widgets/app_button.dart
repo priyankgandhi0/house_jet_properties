@@ -40,6 +40,7 @@ class AppButton extends StatelessWidget {
         onTap();
       },
       child: unselected!
+
           ? text.appOrangeText(size: textSize, fontWeight: textFontWeight)
           : text.whiteText(size: textSize, fontWeight: textFontWeight),
     );

@@ -39,8 +39,10 @@ class PropertyTypeBottomSheet extends StatelessWidget {
               Stack(
                 alignment: Alignment.center,
                 children: [
+
                   "Property Type".appBlackText1B1B1B(
                       size: 20, fontWeight: FontWeight.w600),
+
                   Align(
                     alignment: Alignment.centerRight,
                     child: InkWell(
@@ -49,7 +51,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              30.0.addHSpace(),
+              (30.0).addHSpace(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -103,6 +105,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  "town home"
                   "Townhome".toString().appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w500),
                   SizedBox(
@@ -124,7 +127,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              10.0.addHSpace(),
+              (10.0).addHSpace(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -137,11 +140,13 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                       value: ctrl.multiFamilyHomeCheckBox,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
+
                           Radius.circular(2),
                         ),
                       ),
                       fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
                       onChanged: (value) {
+
                         ctrl.multiFamilyHomeCheckBox = value!;
                         ctrl.update();
                       },
@@ -154,6 +159,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   "Mobile".toString().appBlackText1B1B1B(
+
                       size: 16, fontWeight: FontWeight.w500),
                   SizedBox(
                     width: 15,

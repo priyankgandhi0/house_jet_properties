@@ -71,6 +71,7 @@ class SearchScreen extends StatelessWidget {
                                   if(preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false){
                                     Get.toNamed(Routes.propertyDetailScreen);
                                   }else{
+
                                     Get.toNamed(Routes.loginScreen);
                                   }
 

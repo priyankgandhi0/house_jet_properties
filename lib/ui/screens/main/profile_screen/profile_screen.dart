@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                30.0.addHSpace(),
+                (30.0).addHSpace(),
                 Align(
                   alignment: Alignment.center,
                   child: Container(
@@ -60,6 +60,7 @@ class ProfileScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: CircleAvatar(
+
                         backgroundImage: ctrl.profileImage == null
                             ? Image.asset(userProfileImage).image
                             : Image.file(ctrl.profileImage!, fit: BoxFit.fill)
@@ -68,13 +69,13 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                15.0.addHSpace(),
+                (15.0).addHSpace(),
                 "Michael Dam "
                     .appBlackText1B1B1B(size: 18, fontWeight: FontWeight.w600),
-                4.0.addHSpace(),
+                (4.0).addHSpace(),
                 "michaeldam@gmail.com"
                     .appGreyText(size: 16, fontWeight: FontWeight.w500),
-                30.0.addHSpace(),
+                (30.0).addHSpace(),
                 AppListTile(
                   title: "Edit Profile",
                   icon: editProfileIcon,

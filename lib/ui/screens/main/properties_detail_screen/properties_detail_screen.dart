@@ -7,6 +7,7 @@ import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/co
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
 import 'package:house_jet_properties/ui/widgets/app_button.dart';
 import 'package:house_jet_properties/utils/app_routes.dart';
+import 'package:house_jet_properties/utils/app_schedule_time_dialog.dart';
 import 'package:house_jet_properties/utils/extension.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -51,6 +52,7 @@ class PropertiesDetail extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
+
                           alignment: Alignment.center,
                           height: 18,
                           width: 46,
@@ -59,6 +61,7 @@ class PropertiesDetail extends StatelessWidget {
                               borderRadius:
                                   BorderRadiusDirectional.circular(50)),
                           child: AnimatedSmoothIndicator(
+
                             activeIndex: ctrl.imageSliderIndex,
                             count: 3,
                             effect: JumpingDotEffect(
@@ -278,7 +281,7 @@ class PropertiesDetail extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              60.0.addHSpace(),
+                              (130.0).addHSpace(),
                             ],
                           ),
                         ),
@@ -332,16 +335,47 @@ class PropertiesDetail extends StatelessWidget {
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 20, left: 20, bottom: 26),
-        child: AppButton(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            AppButton(
 
-            onTap: () {
-              Get.toNamed(Routes.contactAnAgentScreen);
-            },
+                onTap: () {
+                  searchController.makePhoneCall("(667) 596 5407");
+                 // Get.toNamed(Routes.contactAnAgentScreen);
+                },
 
-            text: "CONTACT AN AGENT",
-            textSize: 16,
-            textFontWeight: FontWeight.w600,
-            radius: 50),
+                text: "CONTACT AN AGENT",
+                textSize: 16,
+                textFontWeight: FontWeight.w600,
+                radius: 50),
+            (10.0).addHSpace(),
+            AppButton(
+              unselected: true,
+
+                onTap: () {
+                  //Get.toNamed(Routes.contactAnAgentScreen);
+                  Get.dialog(
+                      AppScheduleTimeDialog(
+
+                      context: context,
+                      buttonColor: Colors.blue,
+                      onTap: () {
+                        Get.back();
+                      },
+                      showCancelButton: true,
+                      buttonText: "Yes",
+                      description: "Are you sure you  want to Sign Out ?",
+                      tittle: "Schedule a showing",
+                  ));
+                },
+
+                text: "Schedule a showing".toUpperCase(),
+                textSize: 16,
+                textFontWeight: FontWeight.w600,
+                radius: 50),
+          ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

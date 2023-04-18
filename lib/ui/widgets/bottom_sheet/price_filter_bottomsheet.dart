@@ -24,6 +24,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
+
             mainAxisSize: MainAxisSize.min,
             children: [
               10.0.addHSpace(),
@@ -35,7 +36,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
                     shape: BoxShape.rectangle,
                     color: const Color(0xffC5CFD3)),
               ),
-              20.0.addHSpace(),
+              (20.0).addHSpace(),
               Stack(
                 alignment: Alignment.center,
                 children: [
@@ -61,6 +62,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
                     ctrl.onIndicatorRangeChange(values.start, values.end);
                     ctrl.onPriceRangeChange(values.start, values.end);
                   },
+
                   min: 18,
                   max: 300,
                   activeColor: app_Orange_FF7448,

@@ -29,18 +29,18 @@ class ForgotPasswordScreen extends StatelessWidget {
                 //     .paddingOnly(left: 99.0, right: 99, top: 90, bottom: 52),
                 'Forgot Password'
                     .appOrangeText(size: 30, fontWeight: FontWeight.w600),
-                10.0.addHSpace(),
+                (10.0).addHSpace(),
                 'Enter your email to reset your password'.appGreyText(
                   size: 14,
                   fontWeight: FontWeight.w500,
                 ),
-                50.0.addHSpace(),
+                (50.0).addHSpace(),
                 AppTextFields(
                   controller: loginController.userEmailController,
                   hintText: 'Email',
                   isSecureEntry: false,
                 ),
-                50.0.addHSpace(),
+                (50.0).addHSpace(),
                 AppButton(
                   text: 'REQUEST',
                   onTap: () {
@@ -55,7 +55,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     }
                   },
                 ),
-                30.0.addHSpace(),
+                (30.0).addHSpace(),
                 InkWell(
                   overlayColor:
                       const MaterialStatePropertyAll(Colors.transparent),
@@ -82,7 +82,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                10.0.addHSpace(),
+                (10.0).addHSpace(),
               ],
             ),
           ),

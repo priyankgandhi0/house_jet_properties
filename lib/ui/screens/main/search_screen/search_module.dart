@@ -74,7 +74,11 @@ class FullScreenSearchModal extends ModalRoute {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                ctrl.searchFiledController.clear();
+                ctrl.update();
+
+              },
               icon: Image.asset(
                 closeIcon,
                 width: 20,
@@ -103,6 +107,7 @@ class FullScreenSearchModal extends ModalRoute {
                   indicator: CustomTabIndicator(
                       color: app_Orange_FFB49C, indicatorHeight: 2),
                   tabs: [
+
                     colorHandle('Buy', ctrl.currentIndex.value, 0),
                     //.appGreyText(size: 14, fontWeight: FontWeight.w500),
                     colorHandle('Rent', ctrl.currentIndex.value, 1),

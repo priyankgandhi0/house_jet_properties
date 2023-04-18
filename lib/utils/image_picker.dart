@@ -174,8 +174,10 @@ class PickImageOnly {
                     onPressed: () {
                       openAppSettings();
                     },
+
                   )
                 : SnackBarAction(
+
                     label: "Settings",
                     textColor: app_Orange_FF7448,
                     onPressed: () {

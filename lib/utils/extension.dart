@@ -39,6 +39,7 @@ extension AppDateTime on DateTime {
   }
 
   ticketDateExtension() {
+
     return DateFormat('EEEE, MMMM dd, yyyy').format(this);
   }
   monthNameAndDateExt() {
@@ -73,6 +74,7 @@ TextStyle appTextStyleGrey400 = GoogleFonts.manrope(
     color: app_grey_99A7AE, fontSize: 14, fontWeight: FontWeight.w400);
 
 extension AppText on String {
+
   darkText({double? size, FontWeight? fontWeight}) {
     return Text(
       this,

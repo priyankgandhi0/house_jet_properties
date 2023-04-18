@@ -106,6 +106,7 @@ class EditProfile extends StatelessWidget {
                         Align(
                           alignment: Alignment.center,
                           child: InkWell(
+
                             overlayColor:
                             const MaterialStatePropertyAll(Colors.transparent),
                             onTap: () {
@@ -143,7 +144,7 @@ class EditProfile extends StatelessWidget {
                         )
                       ],
                     ),
-                    30.0.addHSpace(),
+                    (30.0).addHSpace(),
                     AppTextFields(
                         controller: ctrl.userEmail,
                         readOnly: true,
@@ -167,6 +168,7 @@ class EditProfile extends StatelessWidget {
                           showAppSnackBar("Enter Last Name");
                         }
                         else {
+
                           Get.back();
                           showAppSnackBar("Profile update Success");
                         }
