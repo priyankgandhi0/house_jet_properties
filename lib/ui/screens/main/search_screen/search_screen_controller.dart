@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:house_jet_properties/models/properties_detail.dart';
+import 'package:house_jet_properties/theme/app_colors.dart';
 import 'package:house_jet_properties/ui/widgets/app_price_slider.dart';
 import 'package:house_jet_properties/ui/widgets/bottom_sheet/bed_bath_filter_bottomsheet.dart';
 import 'package:house_jet_properties/ui/widgets/bottom_sheet/price_filter_bottomsheet.dart';
@@ -106,8 +107,8 @@ class SearchController extends GetxController
 
   Position? currentPosition;
 
-  // Set<Polygon> polygon = {};
-  // Set<Circle> circles = {};
+  Set<Polygon> polygon = {};
+  Set<Circle> circles = {};
 
   LatLng? cicleMark;
 
@@ -258,10 +259,12 @@ class SearchController extends GetxController
 
   getLocationData(String address)async{
 
-
+    print("Address -------> $address");
     List<Location> locations = await locationFromAddress(address);
 
     print("Location -------> ${locations.first.latitude} --- ${locations.first.longitude}");
+
+    print("Locations int the Second Change ---> $locations");
     return LatLng(locations.first.latitude, locations.first.longitude);
 
 
@@ -277,21 +280,22 @@ class SearchController extends GetxController
     // new one
     if(placeDetail != null){
 
-      print("Addedres ===>${placeDetail.address}");
-      // circles = {Circle(
-      //     circleId: CircleId("myCircle"),
-      //     radius: 500,
-      //     center:await getLocationData(placeDetail.address),
-      //     fillColor: Color.fromRGBO(171, 39, 133, 0.1),
-      //     strokeColor: Color.fromRGBO(171, 39, 133, 0.5),
-      //     onTap: () {
-      //       print('circle pressed');
-      //     })
+      print("Address ===> ${placeDetail.address}");
 
-      //};
-      isFormDrag ?mapController.animateCamera(
+      circles = {
+        Circle(
+          circleId: const CircleId("myCircle"),
+          radius: 500,
+          center:await getLocationData(placeDetail.address),
+          fillColor: app_Orange_FF7448.withOpacity(0.1),
+          strokeColor: app_Orange_FF7448,
+          onTap: () {
+            print('circle pressed');
+          })
 
+      };
 
+      isFormDrag ? mapController.animateCamera(
         // CameraUpdate.newCameraPosition(
         //   CameraPosition(
         //     target:  LatLng(propertiesDetailModel!.lat, propertiesDetailModel!.long),
@@ -301,6 +305,7 @@ class SearchController extends GetxController
         //
         //
         // ),
+
           CameraUpdate.newLatLngZoom(LatLng(propertiesDetailModel!.lat, propertiesDetailModel!.long), 15.0)
       ):null;
     }
@@ -355,6 +360,7 @@ class SearchController extends GetxController
     }
     markers = newMarkers;
 
+   
 
 
     // polygon = {

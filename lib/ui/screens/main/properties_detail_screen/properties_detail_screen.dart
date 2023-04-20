@@ -336,6 +336,7 @@ class PropertiesDetail extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 20, left: 20, bottom: 26),
         child: Column(
+
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             AppButton(
@@ -354,6 +355,7 @@ class PropertiesDetail extends StatelessWidget {
               unselected: true,
 
                 onTap: () {
+
                   //Get.toNamed(Routes.contactAnAgentScreen);
                   Get.dialog(
                       AppScheduleTimeDialog(
@@ -367,6 +369,7 @@ class PropertiesDetail extends StatelessWidget {
                       buttonText: "Yes",
                       description: "Are you sure you  want to Sign Out ?",
                       tittle: "Schedule a showing",
+
                   ));
                 },
 

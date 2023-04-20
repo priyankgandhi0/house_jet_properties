@@ -150,6 +150,7 @@ class EditProfile extends StatelessWidget {
                         readOnly: true,
                         shoeCursor: false,
                         hintText: "Email Address",
+
                         hintStyle: GoogleFonts.manrope(
                             color: app_grey_99A7AE,
                             fontWeight: FontWeight.w500,
@@ -165,6 +166,7 @@ class EditProfile extends StatelessWidget {
                         else if (ctrl.userLastName.text
                             .trim()
                             .isEmpty) {
+
                           showAppSnackBar("Enter Last Name");
                         }
                         else {

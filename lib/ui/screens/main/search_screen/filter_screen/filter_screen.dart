@@ -31,6 +31,7 @@ class FilterScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: Stack(
+
                   alignment: Alignment.center,
                   children: [
                     TabBar(
@@ -38,6 +39,7 @@ class FilterScreen extends StatelessWidget {
                       indicatorSize: TabBarIndicatorSize.tab,
                       indicator: CustomTabIndicator(
                           color: app_Orange_FF7448, indicatorHeight: 2),
+
                       tabs: [
                         colorHandle('For sale', ctrl.currentIndex.value, 0),
                         //.appGreyText(size: 14, fontWeight: FontWeight.w500),
@@ -51,6 +53,7 @@ class FilterScreen extends StatelessWidget {
               ),
             )),
         body: TabBarView(
+
           controller: ctrl.tabController,
           children: [
             ForSaleScreen(),
@@ -64,6 +67,7 @@ class FilterScreen extends StatelessWidget {
 
   colorHandle(String title, int currentIndex, int index) {
     if (currentIndex == index) {
+
       return Tab(
         child: title.appOrangeText(size: 14, fontWeight: FontWeight.w500),
       );

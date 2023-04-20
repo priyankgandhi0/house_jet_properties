@@ -27,7 +27,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
 
             mainAxisSize: MainAxisSize.min,
             children: [
-              10.0.addHSpace(),
+              (10.0).addHSpace(),
               Container(
                 width: 70,
                 height: 4,
@@ -43,6 +43,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
                   "Price Range".appBlackText1B1B1B(
                       size: 20, fontWeight: FontWeight.w600),
                   Align(
+
                     alignment: Alignment.centerRight,
                     child: InkWell(
                         onTap: () => Navigator.pop(context),
@@ -50,7 +51,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              20.0.addHSpace(),
+              (20.0).addHSpace(),
               SliderTheme(
                 data: Theme.of(context).sliderTheme.copyWith(
                     inactiveTrackColor: const Color(0xffC8D9E1),
@@ -59,6 +60,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
                 child: RangeSlider(
                   values: RangeValues(ctrl.priceStartValue, ctrl.priceEndValue),
                   onChanged: (values) {
+
                     ctrl.onIndicatorRangeChange(values.start, values.end);
                     ctrl.onPriceRangeChange(values.start, values.end);
                   },
@@ -68,7 +70,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
                   activeColor: app_Orange_FF7448,
                 ),
               ),
-              20.0.addHSpace(),
+              (20.0).addHSpace(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 40),
                 child: AppButton(

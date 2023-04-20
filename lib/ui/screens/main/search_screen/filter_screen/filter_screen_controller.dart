@@ -122,6 +122,8 @@ class FilterScreenController extends GetxController
 
   onHomeCardTypeTap(int i) {
     for (var val in homeTypeList) {
+
+ 
       val.isSeleacted = false;
     }
 
@@ -414,6 +416,7 @@ class FilterScreenController extends GetxController
       subTitleText: "2022",
       isSeleacted: true,
     ),
+
     HomeTypeModel(
 
       subTitleText: "2023",
@@ -437,6 +440,7 @@ class FilterScreenController extends GetxController
       subTitleText: "2022",
       isSeleacted: true,
     ),
+
     HomeTypeModel(
       subTitleText: "2023",
       isSeleacted: false,

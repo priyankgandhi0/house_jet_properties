@@ -17,6 +17,7 @@ class LoginController extends GetxController {
 
   @override
   void onInit() async {
+
     userEmailController.text =
         (preferences.getString(SharedPreference.USER_INFO))!;
     rememberCheck.value =

@@ -65,6 +65,7 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                     itemBuilder: (context, index) {
                       bool sameIndex = ctrl.filterBedroomIndex == index;
                       return InkWell(
+
                         onTap: () {
                           ctrl.onBedroomFilterClick(index);
                         },

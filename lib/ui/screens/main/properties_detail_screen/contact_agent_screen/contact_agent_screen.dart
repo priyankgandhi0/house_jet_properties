@@ -129,6 +129,7 @@ class ContactAgentScreen extends StatelessWidget {
                             color: app_grey_99A7AE,
                             fontWeight: FontWeight.w400,
                             fontSize: 14)),
+
                     AppTextFields(
                         onTap: () async{
                          DateTime? meetingTime = await AppDateTimePicker
@@ -145,6 +146,7 @@ class ContactAgentScreen extends StatelessWidget {
                         controller:ctrl.scheduleTimeCtr,
                         hintText: "Select Meeting Time",
                         maxLine: 1,
+
                         hintStyle: GoogleFonts.manrope(
                             color: app_grey_99A7AE,
                             fontWeight: FontWeight.w400,

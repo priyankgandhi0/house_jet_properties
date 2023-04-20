@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:house_jet_properties/ui/screens/main/home_screen/home_screen.dart';
+import 'package:house_jet_properties/ui/screens/main/profile_screen/change_password/change_password.dart';
+import 'package:house_jet_properties/ui/screens/main/profile_screen/edit_profile/edit_profile.dart';
 import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/contact_agent_screen/contact_agent_screen.dart';
 import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/properties_detail_screen.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/filter_screen/filter_screen.dart';
@@ -18,6 +20,8 @@ class Routes {
   static const String forgotPasswordScreen  = "/ForgotPasswordScreen";
   static const String homeScreen  = "/homeScreen";
   static const String contactAnAgentScreen  = "/contactAnAgent";
+  static const String editProfileScreen  = "/editProfileScreen";
+  static const String changePassword  = "/changePasswordScreen";
 
   static List<GetPage> pages = [
     //splash screen
@@ -28,6 +32,8 @@ class Routes {
     GetPage(name: forgotPasswordScreen, page: () => ForgotPasswordScreen()),
     GetPage(name: homeScreen, page: () => HomeScreen()),
     GetPage(name: contactAnAgentScreen, page: () => ContactAgentScreen()),
+    GetPage(name: editProfileScreen, page: () => EditProfile()),
+    GetPage(name: changePassword, page: () => ChangePassword()),
 
   ];
 }

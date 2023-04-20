@@ -26,7 +26,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              10.0.addHSpace(),
+              (10.0).addHSpace(),
               Container(
                 width: 70,
                 height: 4,
@@ -35,7 +35,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                     shape: BoxShape.rectangle,
                     color: const Color(0xffC5CFD3)),
               ),
-              20.0.addHSpace(),
+              (20.0).addHSpace(),
               Stack(
                 alignment: Alignment.center,
                 children: [
@@ -76,7 +76,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              10.0.addHSpace(),
+              (10.0).addHSpace(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -101,7 +101,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              10.0.addHSpace(),
+              (10.0).addHSpace(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -154,7 +154,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              10.0.addHSpace(),
+              (10.0).addHSpace(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -174,19 +174,21 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                       fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
                       onChanged: (value) {
                         ctrl.mobileCheckBox = value!;
+
                         ctrl.update();
                       },
                     ),
                   ),
                 ],
               ),
-              10.0.addHSpace(),
+              (10.0).addHSpace(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   "Farm".toString().appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w500),
                   SizedBox(
+
                     width: 15,
                     height: 15,
                     child: Checkbox(
@@ -205,7 +207,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              10.0.addHSpace(),
+              (10.0).addHSpace(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -228,6 +230,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                       },
                     ),
                   ),
+
                 ],
               ),
               Padding(

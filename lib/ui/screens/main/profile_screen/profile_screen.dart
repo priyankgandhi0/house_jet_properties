@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/ui/screens/main/home_screen/home_controller.dart';
-import 'package:house_jet_properties/ui/screens/main/profile_screen/change_password/change_password.dart';
-import 'package:house_jet_properties/ui/screens/main/profile_screen/edit_profile/edit_profile.dart';
 import 'package:house_jet_properties/ui/screens/main/profile_screen/edit_profile/edit_profile_controller.dart';
-import 'package:house_jet_properties/ui/screens/startup/login_screen/login_screen.dart';
 import 'package:house_jet_properties/ui/widgets/app_listtile.dart';
+import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/extension.dart';
 import 'package:house_jet_properties/utils/shared_pref.dart';
 
@@ -50,6 +48,7 @@ class ProfileScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Container(
+
                     height: 160,
                     width: 160,
                     decoration: BoxDecoration(
@@ -79,12 +78,12 @@ class ProfileScreen extends StatelessWidget {
                 AppListTile(
                   title: "Edit Profile",
                   icon: editProfileIcon,
-                  onTap: () => Get.to(EditProfile()),
+                  onTap: () => Get.toNamed(Routes.editProfileScreen)
                 ),
                 AppListTile(
                   title: "Change Password",
                   icon: changePassIcon,
-                  onTap: () => Get.to(ChangePassword()),
+                  onTap: () => Get.toNamed(Routes.changePassword)
                 ),
                 AppListTile(title: "Help", icon: helpIcon, onTap: () {}),
                 AppListTile(

@@ -75,7 +75,9 @@ class FullScreenSearchModal extends ModalRoute {
           actions: [
             IconButton(
               onPressed: () {
+                FocusScope.of(context).unfocus();
                 ctrl.searchFiledController.clear();
+
                 ctrl.update();
 
               },
@@ -93,6 +95,7 @@ class FullScreenSearchModal extends ModalRoute {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               DecoratedBox(
                 decoration: BoxDecoration(
                   //This is for background color
@@ -102,6 +105,7 @@ class FullScreenSearchModal extends ModalRoute {
                       bottom: BorderSide(color: app_grey_99A7AE, width: 0.8)),
                 ),
                 child: TabBar(
+
                   controller: ctrl.tabController,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: CustomTabIndicator(
@@ -140,6 +144,7 @@ class FullScreenSearchModal extends ModalRoute {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+
                   recentlySearchesText.appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w600),
                   clearAllText.appOrangeText600(
@@ -147,6 +152,7 @@ class FullScreenSearchModal extends ModalRoute {
                 ],
               ).paddingSymmetric(horizontal: 20),
               ListView.builder(
+
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: ctrl.searchTempList.length,

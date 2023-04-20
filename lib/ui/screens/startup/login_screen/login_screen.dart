@@ -150,6 +150,7 @@ class LoginScreen extends StatelessWidget {
                           // ctrl.signIn();
                           if (ctrl.userEmailController.text.trim().isEmpty) {
                             showAppSnackBar("Please Enter Email");
+
                           } else if (ctrl.passwordController.text.trim().isEmpty) {
                             // showAppSnackBar("Please Enter Password");
                             showAppSnackBar("Enter Mobile No.");

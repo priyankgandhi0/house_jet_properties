@@ -171,6 +171,7 @@ class ForSaleScreen extends StatelessWidget {
                           child: ctrl.bathroomList[i].subTitleText
                               .appColorChangeText(
                                   size: 14,
+
                                   fontWeight: FontWeight.w500,
                                   color: ctrl.bathroomList[i].isSeleacted
                                       ? app_Orange_FF7448
@@ -194,6 +195,7 @@ class ForSaleScreen extends StatelessWidget {
                           controller: ctrl.commuteController,
                           hintText: commuteDestinationAddressText,
                           trailing: GestureDetector(
+
                               onTap: () {
                                 ctrl.commuteController.clear();
                                 ctrl.update();
@@ -303,6 +305,7 @@ class ForSaleScreen extends StatelessWidget {
                                     children: [
                                       e.subTitleText.appBlackText1B1B1B(
                                           size: 16,
+
                                           fontWeight: FontWeight.w400),
                                       appCheckBox(
                                           value: e.isSeleacted,
@@ -326,6 +329,7 @@ class ForSaleScreen extends StatelessWidget {
                         ctrl.update();
                       },
                       tileTileWidget: Row(
+
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           soldWithinText.appBlackText1B1B1B(
@@ -345,6 +349,7 @@ class ForSaleScreen extends StatelessWidget {
                                     color: app_Orange_FF7448.withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(5)),
                               ),
+
                               childrenList: ctrl.soldWithinList
                                   .map((e) => Center(
                                         child: e.subTitleText
@@ -359,6 +364,7 @@ class ForSaleScreen extends StatelessWidget {
                               onSelectedItemChanged: (int index) {
                                 for (var data in ctrl.soldWithinList) {
                                   data.isSeleacted = false;
+
                                   ctrl.soldWithinList[index].isSeleacted = true;
                                   ctrl.update();
                                 }
@@ -418,6 +424,7 @@ class ForSaleScreen extends StatelessWidget {
                                         ),
                                         childrenList: ctrl.squareFeetNoMinList
                                             .map((e) => Center(
+
                                                   child: e.subTitleText
                                                       .appColorChangeText(
                                                           color: e.isSeleacted
@@ -497,6 +504,7 @@ class ForSaleScreen extends StatelessWidget {
                                     ? "2000 - 2000 sq ft".appBlackText1B1B1B(
                                         fontWeight: FontWeight.w400, size: 14)
                                     : (0.0).addHSpace(),
+                                
                               ],
                             ).paddingOnly(left: 4),
                             childrenWidgetList: [

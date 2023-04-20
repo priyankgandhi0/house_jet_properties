@@ -139,11 +139,11 @@ class MarkerDetailCard extends StatelessWidget {
                           ),
                           ctrl.propertiesDetailModel!.name.appBlackText1B1B1B(
                               size: 18, fontWeight: FontWeight.w600),
-                          8.0.addHSpace(),
+                          (8.0).addHSpace(),
                           '\$${ctrl.propertiesDetailModel?.price}'
                               .appBlackText1B1B1B(
                                   size: 20, fontWeight: FontWeight.w700),
-                          10.0.addHSpace(),
+                          (10.0).addHSpace(),
                           ("${ctrl.propertiesDetailModel?.bedSize} beds, ${ctrl.propertiesDetailModel?.bathRoomSize} Bathrooms, 1 Swimming Pool, ${ctrl.propertiesDetailModel?.squareFt} Sqft Lot")
                               .toString()
                               .appGreyText(
