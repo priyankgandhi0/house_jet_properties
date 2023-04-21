@@ -578,6 +578,7 @@ class ForSaleScreen extends StatelessWidget {
                                           for (var data in ctrl.lotNoMaxList) {
                                             data.isSeleacted = false;
                                             ctrl.lotNoMaxList[index]
+
                                                 .isSeleacted = true;
                                             ctrl.update();
                                           }
@@ -659,6 +660,7 @@ class ForSaleScreen extends StatelessWidget {
                               children: [
                                 storiesText.appBlackText1B1B1B(
                                     fontWeight: FontWeight.w500, size: 16),
+
                                 ctrl.isStories
                                     ? "08 - 08".appBlackText1B1B1B(
                                         fontWeight: FontWeight.w400, size: 14)
@@ -671,6 +673,7 @@ class ForSaleScreen extends StatelessWidget {
                                   Expanded(
                                     child: SizedBox(
                                       height: 150,
+
                                       child: appCupertinoPicker(
                                         selectionOverlayWidget: Container(
                                           decoration: BoxDecoration(
@@ -709,6 +712,7 @@ class ForSaleScreen extends StatelessWidget {
                                   Expanded(
                                     child: SizedBox(
                                       height: 150,
+
                                       child: appCupertinoPicker(
                                         selectionOverlayWidget: Container(
                                           decoration: BoxDecoration(
@@ -767,6 +771,7 @@ class ForSaleScreen extends StatelessWidget {
                                   Expanded(
                                     child: SizedBox(
                                       height: 150,
+
                                       child: appCupertinoPicker(
                                         selectionOverlayWidget: Container(
                                           decoration: BoxDecoration(
@@ -780,6 +785,7 @@ class ForSaleScreen extends StatelessWidget {
                                         ),
                                         childrenList: ctrl.yearBuiltList
                                             .map((e) => Center(
+
                                                   child: e.subTitleText
                                                       .appColorChangeText(
                                                           color: e.isSeleacted

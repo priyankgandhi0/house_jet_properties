@@ -158,6 +158,7 @@ class EditProfile extends StatelessWidget {
                     60.0.addHSpace(),
                     AppButton(
                       onTap: () {
+
                         if (ctrl.userFirstName.text
                             .trim()
                             .isEmpty) {

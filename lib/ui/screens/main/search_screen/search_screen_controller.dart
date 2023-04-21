@@ -59,6 +59,8 @@ class SearchController extends GetxController
 
   configTabBar() {
     tabController = TabController(
+
+
       vsync: this,
       length: 3,
     );
@@ -116,6 +118,7 @@ class SearchController extends GetxController
   String selectedMarkerId = "";
   int selectedMarkerIndex = 0;
   int filterIndex = 0;
+
   int filterBedroomIndex = 0;
   int filterBathroomIndex = 0;
 
@@ -170,6 +173,7 @@ class SearchController extends GetxController
           priceStartValue.toInt(), priceEndValue.toInt());
 
   onPriceRangeChange(double start, double end) {
+
     priceStartValue = start;
     priceEndValue = end;
     update();
@@ -178,6 +182,7 @@ class SearchController extends GetxController
   onIndicatorRangeChange(double start, double end) {
     indicatorRangeSliderThumbShape.start = start.toInt();
     indicatorRangeSliderThumbShape.end = end.toInt();
+
     update();
   }
 
@@ -187,6 +192,7 @@ class SearchController extends GetxController
   }
 
   onViewTypeChange() {
+
     viewAsGoogleMap = !viewAsGoogleMap;
     update();
   }
@@ -212,6 +218,7 @@ class SearchController extends GetxController
   }
 
   onBathroomFilterClick(int index) {
+
     filterBathroomIndex = index;
     update();
   }
@@ -237,9 +244,9 @@ class SearchController extends GetxController
         Get.toNamed(Routes.filterScreen);
         break;
       case 1:
+
         Get.bottomSheet(PriceFilterBottomSheet());
         break;
-
       case 2:
         Get.bottomSheet(BedBathFilterBottomSheet());
         break;
@@ -261,8 +268,7 @@ class SearchController extends GetxController
 
     print("Address -------> $address");
     List<Location> locations = await locationFromAddress(address);
-
-    print("Location -------> ${locations.first.latitude} --- ${locations.first.longitude}");
+         print("Location -------> ${locations.first.latitude} --- ${locations.first.longitude}");
 
     print("Locations int the Second Change ---> $locations");
     return LatLng(locations.first.latitude, locations.first.longitude);
@@ -291,6 +297,7 @@ class SearchController extends GetxController
           strokeColor: app_Orange_FF7448,
           onTap: () {
             print('circle pressed');
+
           })
 
       };
@@ -356,6 +363,7 @@ class SearchController extends GetxController
 
   void _showMarkers(Set<Marker> newMarkers) {
     if (kDebugMode) {
+
       print('Updated ${newMarkers.length} markers');
     }
     markers = newMarkers;
@@ -373,6 +381,7 @@ class SearchController extends GetxController
     //     points: const [
     //       LatLng(21.2497222,72.6946928),
     //       //LatLng(21.2435317,72.8701549),
+    //        LatLng(21.2702262,72.8951576),
     //        LatLng(21.2702262,72.8951576),
     //       // LatLng(21.2501985,72.8698966),
     //       LatLng(21.2045978,72.9248321),

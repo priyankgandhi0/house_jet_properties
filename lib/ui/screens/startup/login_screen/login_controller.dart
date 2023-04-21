@@ -105,6 +105,7 @@ class LoginController extends GetxController {
   onCheckTerms(bool value) {
     termCheck.value = value;
     update();
+
   }
 
   onCheckRememberMe(bool value) {

@@ -20,6 +20,7 @@ class FilterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FilterScreenController>(builder: (ctrl) {
       return Scaffold(
+
         appBar: appHeaderBar(
             titleText: filterText,
             leadingOnTap: () {
@@ -34,6 +35,7 @@ class FilterScreen extends StatelessWidget {
 
                   alignment: Alignment.center,
                   children: [
+
                     TabBar(
                       controller: ctrl.tabController,
                       indicatorSize: TabBarIndicatorSize.tab,

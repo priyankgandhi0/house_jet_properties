@@ -24,11 +24,11 @@ class PriceFilterBottomSheet extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
-
             mainAxisSize: MainAxisSize.min,
             children: [
               (10.0).addHSpace(),
               Container(
+
                 width: 70,
                 height: 4,
                 decoration: BoxDecoration(

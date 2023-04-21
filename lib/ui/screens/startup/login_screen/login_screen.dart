@@ -146,6 +146,7 @@ class LoginScreen extends StatelessWidget {
                       AppButton(
                         text: 'SIGN IN',
                         onTap: () {
+
                           // printData(tittle: 'tittle');
                           // ctrl.signIn();
                           if (ctrl.userEmailController.text.trim().isEmpty) {
@@ -197,6 +198,7 @@ class LoginScreen extends StatelessWidget {
                                       color: app_text_black_1B1B1B,
                                       fontWeight: FontWeight.w400)),
                               TextSpan(
+
                                 text: 'Sign Up',
                                 style: TextStyle(
                                     fontSize: 14,

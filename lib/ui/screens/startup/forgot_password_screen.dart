@@ -48,6 +48,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     if (loginController.userEmailController.text
                         .trim()
                         .isEmpty) {
+
                       showAppSnackBar("Enter Email");
                     } else {
                       loginController.clearAllTextField();

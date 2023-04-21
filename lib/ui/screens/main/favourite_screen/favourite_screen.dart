@@ -31,16 +31,16 @@ class FavouriteScreen extends StatelessWidget {
           preferredSize: Size.zero,
           child: Padding(
             padding: const EdgeInsets.only(bottom: 15),
-            child: "Favourite".darkText(size: 20, fontWeight: FontWeight.w700),
+            child: "favorite".darkText(size: 20, fontWeight: FontWeight.w700),
           ),
         ),
         backgroundColor: Colors.white,
       ),
       body: GetBuilder<SearchController>(
         builder: (ctrl) => SizedBox(
+
           height: Get.height,
           child: ListView.separated(
-
               padding: const EdgeInsets.symmetric(vertical: 20),
               itemBuilder: (context, index) => InkWell(
                     overlayColor:
@@ -65,6 +65,7 @@ class FavouriteScreen extends StatelessWidget {
                         horizontal: 20,
                       ),
                       decoration: BoxDecoration(
+
                         borderRadius: BorderRadiusDirectional.circular(10),
                         image: DecorationImage(
                             colorFilter:
@@ -87,9 +88,11 @@ class FavouriteScreen extends StatelessWidget {
                                   borderRadius:
                                       BorderRadiusDirectional.circular(50)),
                               child: Padding(
+
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 12),
                                 child: Row(
+
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     const CircleAvatar(

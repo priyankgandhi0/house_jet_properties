@@ -38,6 +38,7 @@ class ChangePassword extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
+
                 Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: Align(
@@ -50,6 +51,7 @@ class ChangePassword extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 "Change Password"
                     .darkText(size: 20, fontWeight: FontWeight.w700),
               ],

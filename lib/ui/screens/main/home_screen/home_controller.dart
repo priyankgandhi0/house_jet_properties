@@ -45,7 +45,7 @@ class HomeScreenController extends GetxController {
   ];
   List<String> title = [
     'Search',
-    'Favourite',
+    'favorite',
     'My Profile',
   ];
 

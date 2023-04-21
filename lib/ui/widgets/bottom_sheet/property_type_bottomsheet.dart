@@ -134,6 +134,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                   "Multi Family Home".toString().appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w500),
                   SizedBox(
+
                     width: 15,
                     height: 15,
                     child: Checkbox(
@@ -195,6 +196,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                       value: ctrl.farmCheckBox,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
+
                           Radius.circular(2),
                         ),
                       ),
@@ -211,6 +213,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+
                   "Land".toString().appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w500),
                   SizedBox(
@@ -233,6 +236,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
 
                 ],
               ),
+
               Padding(
                 padding: const EdgeInsets.only(
                     right: 20, left: 20, bottom: 40, top: 30),

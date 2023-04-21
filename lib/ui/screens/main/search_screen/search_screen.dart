@@ -137,7 +137,6 @@ class SearchScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                         children: [
-
                                           Column(
                                             crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -184,6 +183,7 @@ class SearchScreen extends StatelessWidget {
                           boxShadow: [
                             !ctrl.viewAsGoogleMap
                                 ? BoxShadow(
+
                               color: Colors.black.withOpacity(0.08),
                               spreadRadius: 1,
                               blurRadius: 8,
@@ -193,10 +193,12 @@ class SearchScreen extends StatelessWidget {
                                 : const BoxShadow(color: Colors.transparent)
                           ],
 
+
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(20),
                           child: Row(
+
                             children: [
                               Expanded(
                                 flex: 5,
@@ -254,6 +256,7 @@ class SearchScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Image.asset(
+
                                           miceIcon,
                                           height: 25,
                                           color: app_Orange_FF7448,

@@ -83,6 +83,7 @@ class MapUtils {
         .endRecording()
         .toImage(size.width.toInt(), size.height.toInt());
 
+
     ByteData? byteData =
         await markerAsImage.toByteData(format: ui.ImageByteFormat.png);
 

@@ -104,6 +104,7 @@ class FilterScreenController extends GetxController
       isSeleacted: false,
     ),
     HomeTypeModel(
+
       icon: coOpIcon,
       subTitleText: coOpText,
       isSeleacted: false,

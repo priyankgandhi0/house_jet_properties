@@ -36,18 +36,20 @@ class SignUpScreen extends StatelessWidget {
                         //     left: 99.0, right: 99, top: 90, bottom: 50),
                         'Welcome Back!'.appOrangeText(
                             size: 30, fontWeight: FontWeight.w600),
+
                         Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 50),
                           child: 'Sign Up to continue'.appGreyText(
                               size: 14, fontWeight: FontWeight.w500),
                         ),
                         if (!ctrl.isUserNameValid.value) ...[
+
                           Align(
                             alignment: Alignment.topRight,
                             child: 'please enter valid UserName'
                                 .appOrangeText(size: 14),
                           ),
-                          4.0.addHSpace(),
+                          (4.0).addHSpace(),
                         ],
                         Row(
                           children: [

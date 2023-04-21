@@ -25,6 +25,7 @@ class AppExpansionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
+
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         tilePadding: const EdgeInsets.only(left: 16, right: 16),

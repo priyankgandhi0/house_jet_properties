@@ -147,22 +147,24 @@ class FullScreenSearchModal extends ModalRoute {
 
                   recentlySearchesText.appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w600),
+
                   clearAllText.appOrangeText600(
                       size: 14, fontWeight: FontWeight.w500),
                 ],
               ).paddingSymmetric(horizontal: 20),
               ListView.builder(
-
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: ctrl.searchTempList.length,
                 itemBuilder: (context, index) => InkWell(
+
                   onTap: () {
                     Get.back();
                     ctrl.setInfoWindowModel(ctrl.searchTempList[index],isFormDrag: true);
 
                   },
                   child: Container(
+
                     margin: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
                     child: Column(
@@ -172,8 +174,9 @@ class FullScreenSearchModal extends ModalRoute {
                         ctrl.searchTempList[index].name.appBlackText1B1B1B(
                             size: 16, fontWeight: FontWeight.w400),
                         (5.0).addHSpace(),
-                        "For Sale"
-                            .appGreyText(size: 14, fontWeight: FontWeight.w400),
+
+                        "For Sale".appGreyText(size: 14, fontWeight: FontWeight.w400),
+
                       ],
                     ),
                   ),
@@ -190,6 +193,7 @@ class FullScreenSearchModal extends ModalRoute {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     "433 sylvan Ave Spc 16, Mountain View, CA"
                         .appBlackText1B1B1B(
                             size: 16, fontWeight: FontWeight.w400),

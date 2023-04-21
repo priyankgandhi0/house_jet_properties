@@ -137,16 +137,13 @@ class ContactAgentScreen extends StatelessWidget {
                               context,DateTime.now());
                          if(meetingTime != null){
                            ctrl.scheduleTimeCtr.text = meetingTime.appDateTimeFormat();
-
                          }
-
                           ctrl.update();
                         },
                         readOnly: true,
                         controller:ctrl.scheduleTimeCtr,
                         hintText: "Select Meeting Time",
                         maxLine: 1,
-
                         hintStyle: GoogleFonts.manrope(
                             color: app_grey_99A7AE,
                             fontWeight: FontWeight.w400,

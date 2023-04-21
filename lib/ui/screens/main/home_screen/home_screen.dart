@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                       AssetImage(navigationFavouriteIcon),
                       // color: app_grey_99A7AE,
                     ),
-                    label: 'Favourite'),
+                    label: 'favorite'),
                 BottomNavigationBarItem(
                     icon: ImageIcon(
                       AssetImage(navigationProfileIcon),
