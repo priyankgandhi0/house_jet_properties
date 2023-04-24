@@ -184,6 +184,7 @@ class LoginScreen extends StatelessWidget {
                         overlayColor:
                             const MaterialStatePropertyAll(Colors.transparent),
                         onTap: () {
+
                           primaryFocus?.unfocus();
                           ctrl.clearAllTextField();
                           Get.toNamed(Routes.signUpScreen);
@@ -198,7 +199,6 @@ class LoginScreen extends StatelessWidget {
                                       color: app_text_black_1B1B1B,
                                       fontWeight: FontWeight.w400)),
                               TextSpan(
-
                                 text: 'Sign Up',
                                 style: TextStyle(
                                     fontSize: 14,

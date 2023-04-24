@@ -167,6 +167,7 @@ class FilterScreenController extends GetxController
 
   List<HomeTypeModel> bathroomList = [
     HomeTypeModel(
+
       subTitleText: "Any",
       isSeleacted: true,
     ),

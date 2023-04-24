@@ -297,7 +297,6 @@ class PropertiesDetail extends StatelessWidget {
                           child: FloatingActionButton(
                             onPressed: () {
 
-
                             },
                             backgroundColor: Colors.white,
                             child: Padding(
@@ -369,6 +368,9 @@ class PropertiesDetail extends StatelessWidget {
                       buttonText: "Yes",
                       description: "Are you sure you  want to Sign Out ?",
                       tittle: "Schedule a showing",
+
+
+
 
                   ));
                 },

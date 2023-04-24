@@ -17,7 +17,15 @@ class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
 
   SearchController searchController = Get.put(SearchController());
-
+  List<LatLng> latLen = [
+    LatLng(19.0759837, 72.8776559),
+    LatLng(28.679079, 77.069710),
+    LatLng(26.850000, 80.949997),
+    LatLng(24.879999, 74.629997),
+    LatLng(16.166700, 74.833298),
+    LatLng(12.971599, 77.594563),
+    LatLng(19.0759837, 72.8776559),
+  ];
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SearchController>(
@@ -43,6 +51,24 @@ class SearchScreen extends StatelessWidget {
                     myLocationButtonEnabled: false,
                     mapToolbarEnabled: false,
                     initialCameraPosition: ctrl.cameraPosition,
+                    polylines:  {
+                      Polyline(
+                        polylineId: PolylineId('1'),
+                        points: latLen,
+                        width: 4,
+
+                  patterns: [
+                    PatternItem.dot,
+                    PatternItem.dash(1),
+                    PatternItem.gap(1)],
+                        // patterns: [
+                        //  // PatternItem.dash(8),
+                        //   PatternItem.gap(15),
+                        // ],
+                        color: Colors.green,
+
+                      ),
+                    },
                     onMapCreated: (GoogleMapController controller) {
                       ctrl.manager.setMapId(controller.mapId);
                       ctrl.mapController = controller;
@@ -53,6 +79,7 @@ class SearchScreen extends StatelessWidget {
                     circles: ctrl.circles,
                      polygons: ctrl.polygon,
                     onCameraMove: (position) {
+
                       ctrl.manager.onCameraMove(position);
                     },
                     onCameraIdle: ctrl.manager.updateMap,

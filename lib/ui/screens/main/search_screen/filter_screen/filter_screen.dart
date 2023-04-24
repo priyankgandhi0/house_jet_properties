@@ -32,10 +32,8 @@ class FilterScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: Stack(
-
                   alignment: Alignment.center,
-                  children: [
-
+                  children:[
                     TabBar(
                       controller: ctrl.tabController,
                       indicatorSize: TabBarIndicatorSize.tab,
@@ -55,7 +53,6 @@ class FilterScreen extends StatelessWidget {
               ),
             )),
         body: TabBarView(
-
           controller: ctrl.tabController,
           children: [
             ForSaleScreen(),

@@ -26,6 +26,7 @@ class LoginController extends GetxController {
   }
 
   clearAllTextField() {
+
     userFirstNameController.clear();
     userLastNameController.clear();
     userEmailController.clear();

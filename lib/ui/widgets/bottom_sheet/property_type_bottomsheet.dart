@@ -174,6 +174,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                       ),
                       fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
                       onChanged: (value) {
+
                         ctrl.mobileCheckBox = value!;
 
                         ctrl.update();

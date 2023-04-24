@@ -887,6 +887,7 @@ class ForSaleScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
+
                                       e.subTitleText.appBlackText1B1B1B(
                                           size: 16,
                                           fontWeight: FontWeight.w400),
@@ -993,6 +994,7 @@ class ForSaleScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 hqaFeesText.appBlackText1B1B1B(
+
                                     fontWeight: FontWeight.w500, size: 16),
                                 ctrl.isHqaFees
                                     ? "\$500/Month".appBlackText1B1B1B(

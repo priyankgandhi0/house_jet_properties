@@ -60,7 +60,7 @@ class SignUpScreen extends StatelessWidget {
                                 isSecureEntry: false,
                               ),
                             ),
-                            20.0.addWSpace(),
+                            (20.0).addWSpace(),
                             Expanded(
                               child: AppTextFields(
                                 controller: ctrl.userLastNameController,
@@ -70,20 +70,20 @@ class SignUpScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        30.0.addHSpace(),
+                        (30.0).addHSpace(),
                         AppTextFields(
                           controller: ctrl.userEmailController,
                           hintText: 'Enter Email',
                           isSecureEntry: false,
                         ),
-                        30.0.addHSpace(),
+                        (30.0).addHSpace(),
                         if (!ctrl.isPasswordValid.value) ...[
                           Align(
                             alignment: Alignment.topRight,
                             child: 'please enter valid Mobile No.'
                                 .appOrangeText(size: 14),
                           ),
-                          4.0.addHSpace(),
+                          (4.0).addHSpace(),
                         ],
                         AppTextFields(
                           controller: ctrl.passwordController,
@@ -102,7 +102,7 @@ class SignUpScreen extends StatelessWidget {
                         //   hintText: 'Confirm Password ',
                         //   isSecureEntry: true,
                         // ),
-                        60.0.addHSpace(),
+                        (60.0).addHSpace(),
                         AppButton(
                           text: 'SIGN UP',
                           onTap: () {

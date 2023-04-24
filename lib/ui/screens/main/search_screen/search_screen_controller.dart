@@ -367,10 +367,6 @@ class SearchController extends GetxController
       print('Updated ${newMarkers.length} markers');
     }
     markers = newMarkers;
-
-   
-
-
     // polygon = {
     //   Polygon(
     //     polygonId: const PolygonId("1"),
@@ -399,6 +395,7 @@ class SearchController extends GetxController
     // };
 
     update();
+
   }
 
   // List<LatLng> boundriesLatLng = [

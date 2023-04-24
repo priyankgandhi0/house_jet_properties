@@ -157,7 +157,6 @@ class FullScreenSearchModal extends ModalRoute {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: ctrl.searchTempList.length,
                 itemBuilder: (context, index) => InkWell(
-
                   onTap: () {
                     Get.back();
                     ctrl.setInfoWindowModel(ctrl.searchTempList[index],isFormDrag: true);

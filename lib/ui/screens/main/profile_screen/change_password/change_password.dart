@@ -61,6 +61,7 @@ class ChangePassword extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: GetBuilder<ChangePasswordController>(
+
         builder: (ctrl) =>
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -68,7 +69,6 @@ class ChangePassword extends StatelessWidget {
                 children: [
                   20.0.addHSpace(),
                   AppTextFields(
-
                       controller: ctrl.oldPassword,
                       hintText: "Old Password",
                       hintStyle: GoogleFonts.manrope(

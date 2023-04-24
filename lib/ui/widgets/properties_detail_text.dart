@@ -11,6 +11,7 @@ class PropertiesDetailesText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
@@ -24,6 +25,7 @@ class PropertiesDetailesText extends StatelessWidget {
           ),
         ),
         Expanded(
+
           child: Padding(
             padding: const EdgeInsets.only(left: 5),
             child: desc.mediumText(

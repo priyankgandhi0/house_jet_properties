@@ -61,10 +61,13 @@ class HomeScreen extends StatelessWidget {
               currentIndex: ctrl.currentIndex.value,
               selectedItemColor: app_Orange_FF7448,
               unselectedItemColor: app_grey_99A7AE,
+
               onTap: (index) {
                 ctrl.onPageChange(index);
               },
             ),
+
+
           ),
         ),
         body: Obx(

@@ -72,6 +72,7 @@ class ProfileScreen extends StatelessWidget {
                 "Michael Dam "
                     .appBlackText1B1B1B(size: 18, fontWeight: FontWeight.w600),
                 (4.0).addHSpace(),
+
                 "michaeldam@gmail.com"
                     .appGreyText(size: 16, fontWeight: FontWeight.w500),
                 (30.0).addHSpace(),
@@ -93,6 +94,7 @@ class ProfileScreen extends StatelessWidget {
                     icon: logoutIcon,
                     textColor: false,
                     onTap: () {
+
                       preferences.clearUserItem();
                       Get.find<HomeScreenController>().currentIndex.value = 0;
                       // HomeScreenController().currentIndex.value = 0;
