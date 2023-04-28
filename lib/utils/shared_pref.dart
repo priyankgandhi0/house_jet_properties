@@ -36,6 +36,7 @@ class SharedPreference {
   static const APPOINTMENT_END_DATE = "end_date_appointment";
 
   static const AGENT_PROFILE_DATA = "agent_profile_data";
+  static const RECENTLY_VIEWED_LIST = "recently_viewed_list";
 
   void clearUserItem() async {
     _preferences!.remove(IS_LOGGED_IN);

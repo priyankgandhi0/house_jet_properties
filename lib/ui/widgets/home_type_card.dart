@@ -26,6 +26,7 @@ Widget homeTypeCard({
             iconName,
             height: 24,
             color: iconColor,
+
           ),
           (10.0).addHSpace(),
           subtitleText.appColorChangeText(
@@ -43,6 +44,7 @@ Widget homeTypeTextCard({
 }) {
   return GestureDetector(
     onTap: onTap,
+
     child: Container(
       decoration: BoxDecoration(
           color: app_back_grey_F5F8FB,

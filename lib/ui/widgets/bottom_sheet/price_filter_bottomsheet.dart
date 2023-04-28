@@ -28,7 +28,6 @@ class PriceFilterBottomSheet extends StatelessWidget {
             children: [
               (10.0).addHSpace(),
               Container(
-
                 width: 70,
                 height: 4,
                 decoration: BoxDecoration(
@@ -40,6 +39,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
               Stack(
                 alignment: Alignment.center,
                 children: [
+
                   "Price Range".appBlackText1B1B1B(
                       size: 20, fontWeight: FontWeight.w600),
                   Align(
@@ -53,6 +53,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
               ),
               (20.0).addHSpace(),
               SliderTheme(
+
                 data: Theme.of(context).sliderTheme.copyWith(
                     inactiveTrackColor: const Color(0xffC8D9E1),
                     rangeThumbShape: ctrl.indicatorRangeSliderThumbShape,

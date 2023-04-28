@@ -202,7 +202,7 @@ showModelBottomSheet(
       });
 }
 
-showAppSnackBar(String tittle, [bool button = false]) {
+showAppSnackBar(String tittle, [bool button = false,bool isForLocation = false]) {
   return Get.showSnackbar(
     GetSnackBar(
         message: tittle,
@@ -215,7 +215,12 @@ showAppSnackBar(String tittle, [bool button = false]) {
         mainButton: button
             ? TextButton(
                 onPressed: () {
-                  AppSettings.openAppSettings();
+                  if(isForLocation){
+                    AppSettings.openLocationSettings();
+                  }else{
+                    AppSettings.openAppSettings();
+                  }
+
                 },
                 // child: "Setting".mediumText(
                 //     color: app_Orange_FF7448, size: 16, fontWeight: FontWeight.w500),

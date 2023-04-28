@@ -172,6 +172,7 @@ class FilterScreenController extends GetxController
       isSeleacted: true,
     ),
     HomeTypeModel(
+
       subTitleText: "01",
       isSeleacted: false,
     ),
@@ -214,9 +215,11 @@ class FilterScreenController extends GetxController
       subTitleText: "40 min",
       isSeleacted: false,
     ),
+
     HomeTypeModel(
       subTitleText: "50 min",
       isSeleacted: false,
+
     ),
   ];
 
@@ -247,15 +250,19 @@ class FilterScreenController extends GetxController
   }
 
   onSchoolIndicatorRangeChange(double start, double end) {
+
     schoolRatingSliderThumbShape.start = start.toInt();
     schoolRatingSliderThumbShape.end = end.toInt();
+
     update();
   }
 
   onWalkRatingChange(double start,  ) {
+
     walkScoreValueStart = start;
     // walkScoreValueEndValue = end;
     update();
+
   }
 
   onWalkIndicatorRangeChange(double start, double end) {

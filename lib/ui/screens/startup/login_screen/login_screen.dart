@@ -26,6 +26,7 @@ class LoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   child: Column(
                     children: [
+
                       Image.asset("assets/icons/ic_logo.png",height: 145,width: 150,).paddingOnly(top: 40,bottom: 25),
                           // .paddingOnly(
                           // left: 99.0, right: 99, top: 90, bottom: 50),
@@ -49,7 +50,9 @@ class LoginScreen extends StatelessWidget {
                         hintText: 'Enter Email',
                         isSecureEntry: false,
                       ),
+
                       (40.0).addHSpace(),
+
                       if (!ctrl.isPasswordValid.value) ...[
                         Align(
                           alignment: Alignment.topRight,
@@ -58,6 +61,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         (4.0).addHSpace(),
                       ],
+
                       AppTextFields(
                         controller: ctrl.passwordController,
                         hintText: "Enter Mobile No",
@@ -66,11 +70,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                       (30.0).addHSpace(),
                       Row(
-
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
-
                             overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                             onTap: () {
                               ctrl.onCheckTerms(!ctrl.termCheck.value);
@@ -201,6 +203,7 @@ class LoginScreen extends StatelessWidget {
                               TextSpan(
                                 text: 'Sign Up',
                                 style: TextStyle(
+
                                     fontSize: 14,
                                     color: app_Orange_FF7448,
                                     fontWeight: FontWeight.w400),

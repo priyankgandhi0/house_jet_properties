@@ -46,6 +46,7 @@ class HomeScreen extends StatelessWidget {
                   label: 'Search',
                 ),
                 BottomNavigationBarItem(
+
                     icon: ImageIcon(
                       AssetImage(navigationFavouriteIcon),
                       // color: app_grey_99A7AE,

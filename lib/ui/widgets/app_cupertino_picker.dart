@@ -24,7 +24,7 @@ class AppExpansionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
+      return Theme(
 
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
@@ -32,6 +32,7 @@ class AppExpansionTile extends StatelessWidget {
         childrenPadding: const EdgeInsets.only(left: 4, right: 4),
         trailing: isExpanded
             ? Image.asset(
+
                 icArrowUpIcon,
                 color: app_Orange_FF7448,
                 height: 23,

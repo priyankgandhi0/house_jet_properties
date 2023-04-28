@@ -1,5 +1,6 @@
 const String userCurrentLocationText = "User Current Location";
 const String recentlySearchesText = "Recent Searches";
+const String placesText = "Places";
 const String recentlyViewedText = "Recently Viewed";
 const String clearAllText = "Clear all";
 const String filterText = "Filter";

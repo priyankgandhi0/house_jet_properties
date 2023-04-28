@@ -20,7 +20,6 @@ class FilterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FilterScreenController>(builder: (ctrl) {
       return Scaffold(
-
         appBar: appHeaderBar(
             titleText: filterText,
             leadingOnTap: () {
@@ -66,7 +65,6 @@ class FilterScreen extends StatelessWidget {
 
   colorHandle(String title, int currentIndex, int index) {
     if (currentIndex == index) {
-
       return Tab(
         child: title.appOrangeText(size: 14, fontWeight: FontWeight.w500),
       );

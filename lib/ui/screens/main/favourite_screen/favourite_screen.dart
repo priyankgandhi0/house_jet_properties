@@ -47,15 +47,12 @@ class FavouriteScreen extends StatelessWidget {
                         const MaterialStatePropertyAll(Colors.transparent),
                     onTap: () {
                       ctrl.imageSliderIndex = 0;
-
                       ctrl.setInfoWindowModel(ctrl.propertiesDetailList[index],isFormDrag: false);
                       if(preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false){
                         Get.toNamed(Routes.propertyDetailScreen);
-
                       }else{
                         Get.toNamed(Routes.loginScreen);
                       }
-
 
 
                     },
@@ -82,6 +79,7 @@ class FavouriteScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Container(
+
                               height: 30,
                               decoration: BoxDecoration(
                                   color: Colors.black54,
@@ -114,6 +112,7 @@ class FavouriteScreen extends StatelessWidget {
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+
                                   children: [
                                     ctrl.propertiesDetailList[index].name
                                         .whiteText(
@@ -123,6 +122,7 @@ class FavouriteScreen extends StatelessWidget {
                                     ("\$${ctrl.propertiesDetailList[index].price}")
                                         .toString()
                                         .whiteText(
+
                                             size: 20,
                                             fontWeight: FontWeight.w700),
                                   ],

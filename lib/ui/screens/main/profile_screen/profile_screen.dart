@@ -59,7 +59,6 @@ class ProfileScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: CircleAvatar(
-
                         backgroundImage: ctrl.profileImage == null
                             ? Image.asset(userProfileImage).image
                             : Image.file(ctrl.profileImage!, fit: BoxFit.fill)
@@ -88,7 +87,9 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 AppListTile(title: "Help", icon: helpIcon, onTap: () {}),
                 AppListTile(
-                    title: "Contact Us", icon: contactUsIcon, onTap: () {}),
+                    title: "Contact Us",
+                    icon: contactUsIcon,
+                    onTap: () {}),
                 AppListTile(
                     title: "Log Out",
                     icon: logoutIcon,

@@ -6,10 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:geolocator/geolocator.dart' ;
 import 'package:get/get.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:house_jet_properties/constants/request_const.dart';
 import 'package:house_jet_properties/models/properties_detail.dart';
 import 'package:house_jet_properties/theme/app_colors.dart';
 import 'package:house_jet_properties/ui/widgets/app_price_slider.dart';
@@ -22,13 +23,17 @@ import 'package:house_jet_properties/utils/extension.dart';
 import 'package:house_jet_properties/utils/map_utils.dart';
 import 'package:house_jet_properties/utils/shared_pref.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:google_place/google_place.dart' as googleplace;
 
 class SearchController extends GetxController
     with GetSingleTickerProviderStateMixin {
   @override
   void onInit() {
+    googlePlace = googleplace.GooglePlace(googlePlaceApiKey);
+     setData();
     configTabBar();
     loadData();
+    loadNewPropertiesData();
     configCall();
     // _getPlaces();
     manager = _initClusterManager();
@@ -38,6 +43,8 @@ class SearchController extends GetxController
   bool hasCallSupport = false;
   Future<void>? launched;
   String phone = '';
+
+
 
   configCall(){
     canLaunchUrl(
@@ -50,7 +57,6 @@ class SearchController extends GetxController
   Future<void> makePhoneCall(String phoneNumber) async {
     final Uri launchUri = Uri(
       scheme: 'tel',
-
       path: phoneNumber,
     );
     await launchUrl(launchUri);
@@ -94,13 +100,17 @@ class SearchController extends GetxController
 
   // List<Place> placeList = [];
   // List<Place> nearByProperty = [];
-
+  Timer? debounce;
   List<PropertiesDetailModel> propertiesDetailList = [];
+
+
   List<PropertiesDetailModel> searchTempList = [];
 
   TextEditingController searchFiledController = TextEditingController();
   TextEditingController scheduleTimeCtr = TextEditingController();
   Set<Marker> markers = {};
+
+
 
 
   Map<MarkerId, Marker> markers2 = <MarkerId, Marker>{};
@@ -109,8 +119,8 @@ class SearchController extends GetxController
 
   Position? currentPosition;
 
-  Set<Polygon> polygon = {};
-  Set<Circle> circles = {};
+  // Set<Polygon> polygon = {};
+  // Set<Circle> circles = {};
 
   LatLng? cicleMark;
 
@@ -152,6 +162,31 @@ class SearchController extends GetxController
     "Land"
   ];
 
+  RxList<googleplace.AutocompletePrediction> predictions = <googleplace.AutocompletePrediction>[].obs;
+  RxList<googleplace.AutocompletePrediction> recentViewedList = <googleplace.AutocompletePrediction>[].obs;
+  googleplace.GooglePlace? googlePlace;
+  TextEditingController addressController = TextEditingController();
+  List<googleplace.AutocompletePrediction>? result;
+
+  void autoCompleteSearch(String value) async {
+    var result = await googlePlace!.autocomplete.get(value);
+    if (result != null && result.predictions != null) {
+      predictions.clear();
+      print("--------------------------------------------------------------------------------------------->(*)");
+
+        print(result.predictions!.length);
+
+      print("--------------------------------------------------------------------------------------------->(*)");
+      predictions.addAll(result.predictions!);
+      update();
+    }
+
+  }
+
+
+
+
+
   resultSearch(String val) {
 
     searchTempList = propertiesDetailList
@@ -160,6 +195,8 @@ class SearchController extends GetxController
 
     update();
   }
+
+
 
   RxInt currentIndex = 0.obs;
 
@@ -276,31 +313,60 @@ class SearchController extends GetxController
 
   }
 
+  setToRecentData(int index){
+
+    if(recentViewedList.isNotEmpty && !recentViewedList.any((c) => c.placeId == predictions[index].placeId)){
+      recentViewedList.insert(0, predictions[index]);
+    }if(recentViewedList.isNotEmpty && recentViewedList.any((c) => c.placeId == predictions[index].placeId)){
+      recentViewedList.removeWhere((m) => m.placeId == predictions[index].placeId);
+      recentViewedList.insert(0, predictions[index]);
+    }
+    else if(recentViewedList.isEmpty){
+      recentViewedList.add(predictions[index]);
+    }
+
+    print("Recent List ---> ${recentViewedList.value.length}");
+    List<String> seleactedData = recentViewedList.map((e) {
+      return jsonEncode(e.toJson());
+    }).toList();
+     preferences.putList(SharedPreference.RECENTLY_VIEWED_LIST, seleactedData);
+
+      update();
+
+  }
+
+  setData(){
+    List<String> getRecentData =
+        preferences.getList(SharedPreference.RECENTLY_VIEWED_LIST) ?? [];
+
+    if (getRecentData.isNotEmpty) {
+      recentViewedList.value = getRecentData.map((e) => googleplace.AutocompletePrediction.fromJson(jsonDecode(e))).toList();
+    }
+  }
+  clearAllRecently({bool isForRecently = true,BuildContext? context}){
+    if(isForRecently){
+     recentViewedList.clear();
+      preferences.putList(SharedPreference.RECENTLY_VIEWED_LIST, []);
+    }else{
+      FocusScope.of(context!).unfocus();
+      searchFiledController.clear();
+      predictions.clear();
+
+    }
+
+    update();
+  }
+
+
   setInfoWindowModel(PropertiesDetailModel? placeDetail,
       {bool isFormDrag = false, int? index})async {
     // placeDetailes = placeDetail;
     propertiesDetailModel = placeDetail;
 
-
-
     // new one
     if(placeDetail != null){
 
       print("Address ===> ${placeDetail.address}");
-
-      circles = {
-        Circle(
-          circleId: const CircleId("myCircle"),
-          radius: 500,
-          center:await getLocationData(placeDetail.address),
-          fillColor: app_Orange_FF7448.withOpacity(0.1),
-          strokeColor: app_Orange_FF7448,
-          onTap: () {
-            print('circle pressed');
-
-          })
-
-      };
 
       isFormDrag ? mapController.animateCamera(
         // CameraUpdate.newCameraPosition(
@@ -314,44 +380,13 @@ class SearchController extends GetxController
         // ),
 
           CameraUpdate.newLatLngZoom(LatLng(propertiesDetailModel!.lat, propertiesDetailModel!.long), 15.0)
+
       ):null;
     }
 
-    // LatLngBounds visibleRegion =  await mapController.getVisibleRegion();
-    // polygon = {
-    //   Polygon(
-    //       polygonId: const PolygonId("1"),
-    //
-    //
-    //
-    //
-    //       points:   [
-    //         LatLng(visibleRegion.northeast.latitude,visibleRegion.northeast.longitude),
-    //         LatLng(visibleRegion.southwest.latitude,visibleRegion.northeast.longitude),
-    //         LatLng(visibleRegion.northeast.latitude,visibleRegion.southwest.longitude),
-    //         // LatLng(21.2497222,72.6946928),
-    //         // //LatLng(21.2435317,72.8701549),
-    //         // LatLng(21.2702262,72.8951576),
-    //         // // LatLng(21.2501985,72.8698966),
-    //         // LatLng(21.2045978,72.9248321),
-    //         // LatLng(21.1397199,72.8107377),
-    //
-    //       ],
-    //       visible: true,
-    //       geodesic: false,
-    //
-    //
-    //       strokeWidth: 2,
-    //       strokeColor: app_Orange_FF7448,
-    //       fillColor: app_divider_E1EBF0.withOpacity(0.1)
-    //   )
-    // };
-   // old one
-    // mapController.animateCamera(
-    //   CameraUpdate.newLatLng(
-    //     LatLng(propertiesDetailModel!.lat, propertiesDetailModel!.long),
-    //   ),
-    // );
+
+
+
 
     if (isFormDrag) {
       // selectedMarkerIndex = index??0;
@@ -547,9 +582,6 @@ class SearchController extends GetxController
   //
   // ];
 
-
-
-
   ClusterManager _initClusterManager() {
     return ClusterManager<PropertiesDetailModel>(
       propertiesDetailList,
@@ -562,12 +594,14 @@ class SearchController extends GetxController
         10.0,
         12.5,
         15.0,
+
       ],
       stopClusteringZoom: 15.0,
       // extraPercent: 0.1,
       markerBuilder: markerBuilder,
     );
   }
+
 
 /*  _getPlaces() {
     Properties data = Properties(data: propertyDetailes);
@@ -588,6 +622,7 @@ class SearchController extends GetxController
     final jsonResponse = await json.decode(jsonString);
 
     for (int i = 0; i < jsonResponse.length; i++) {
+
       propertiesDetailList.add(PropertiesDetailModel(
           id: jsonResponse[i]["id"],
           name: jsonResponse[i]["name"],
@@ -604,8 +639,35 @@ class SearchController extends GetxController
     }
   }
 
+  Future loadNewPropertiesData() async {
+    String jsonString =
+        await rootBundle.loadString('assets/json/new_properties.json');
+    final jsonResponse = await json.decode(jsonString);
+
+    for (int i = 0; i < jsonResponse.length; i++) {
+
+       Map<String,dynamic> data = jsonResponse[i]["homeData"]["addressInfo"]["centroid"]["centroid"];
+
+      markers.add(
+        Marker(
+          markerId:   MarkerId(jsonResponse[i]["homeData"]["propertyId"]),
+          anchor: const ui.Offset(0.5, 1),
+          flat: false,
+          draggable: true,
+          position:LatLng(data["latitude"],data["longitude"]),
+            icon:await MapUtils().getMarkerImage(const Size(150.0, 150.0),
+
+          ),
+        ),
+      );
+      update();
+    }
+
+  }
+
   Future<void> launchingUrl(double lat, double lng) async {
     if (Platform.isAndroid) {
+
       // if (!await launchUrl(Uri.parse("google.navigation:q=$lat,$lng"))) {
       if (!await launchUrl(Uri.parse(
           "https://www.google.com/maps/search/?api=1&query=$lat,$lng"))) {
@@ -620,11 +682,93 @@ class SearchController extends GetxController
       }
     }
   }
+  List<LatLng> latLen = [
+
+   LatLng(34.2188174,-118.574612),
+   LatLng(34.219768,-118.5828756),
+   LatLng(34.2247554,-118.6000859),
+   LatLng(34.2391913,-118.6078768),
+   LatLng(34.2564872,-118.617112),
+   LatLng(34.27916,-118.606056),
+   LatLng(34.2986712,-118.584522),
+   LatLng(34.2962003,-118.5609489),
+   LatLng(34.2871879,-118.5518242),
+   LatLng(34.2321442,-118.5450906),
+   LatLng(34.2261774,-118.5510262),
+   LatLng(34.2197353,-118.5689503),
+   LatLng(34.2188174,-118.574612),
+
+  ];
+
+  // List<LatLng> latLen = [
+  //   // LatLng(19.0759837, 72.8776559),
+  //   // LatLng(28.679079, 77.069710),
+  //   // LatLng(26.850000, 80.949997),
+  //   // LatLng(24.879999, 74.629997),
+  //   // LatLng(16.166700, 74.833298),
+  //   // LatLng(12.971599, 77.594563),
+  //   // LatLng(19.0759837, 72.8776559),
+  // LatLng(34.2188174,-118.574612),
+  // LatLng(34.219768,-118.5828756),
+  // LatLng(34.2247554,-118.6000859),
+  // LatLng(34.2391913,-118.6078768),
+  // LatLng(34.2564872,-118.617112),
+  // LatLng(34.27916,-118.606056),
+  // LatLng(34.2986712,-118.584522),
+  // LatLng(34.2962003,-118.5609489),
+  // LatLng(34.2871879,-118.5518242),
+  // LatLng(34.2321442,-118.5450906),
+  // LatLng(34.2261774,-118.5510262),
+  // LatLng(34.2197353,-118.5689503),
+  // LatLng(34.2188174,-118.574612),
+  //    const LatLng(21.1226839,
+  //      72.8393287,),
+  //    const LatLng(21.2431667,
+  //      72.8692053,),
+  //    const LatLng(21.2421801,
+  //        72.8724391,),
+  //    const LatLng(21.2478622,
+  //        72.894569,),
+  //   const LatLng(21.1226839,
+  //     72.8393287,),
+  //   //  const LatLng(22.3315748, 70.65689,),
+  //   // const LatLng(21.1226840, 72.8393297,),
+  // ];
+
+
+  setStartCap()async{
+    return  Polyline(
+    polylineId: const PolylineId('1'),
+    points: latLen,
+    width: 1,
+
+    // patterns: [
+    //   PatternItem.dot,
+    //   PatternItem.dash(1),
+    //   PatternItem.gap(1)],
+    patterns: [
+    PatternItem.dash(8),
+    PatternItem.gap(8),
+    ],
+    startCap: Cap.customCapFromBitmap(await MapUtils().getMarkerImage(
+    const Size(200.0, 200.0)
+
+    // id: selectedMarkerId == cluster.getId() ||
+    //         selectedMarkerId == cluster.items.first.id.toString()
+    //     ? selectedMarkerId
+    //          : null
+
+    ) ),
+
+    color: app_Orange_FF7448,
+
+    );
+
+  }
 
   Future<Marker> Function(Cluster<PropertiesDetailModel>) get markerBuilder =>
       (cluster) async {
         return Marker(
-
           markerId: MarkerId(cluster.getId()),
           position: cluster.location,
           anchor: const ui.Offset(0.5, 1),
@@ -730,10 +874,11 @@ class SearchController extends GetxController
     bool serviceEnabled;
     LocationPermission permission;
 
+
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       showAppSnackBar(
-          "Please enable location permission from app setting.", true);
+          "Please enable location permission from app setting.", true,true);
       return false;
     }
     permission = await Geolocator.checkPermission();
@@ -741,13 +886,13 @@ class SearchController extends GetxController
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         showAppSnackBar(
-            "Please enable location permission from app setting.", true);
+            "Please enable location permission from app setting.", true,true);
         return false;
       }
     }
     if (permission == LocationPermission.deniedForever) {
       showAppSnackBar(
-          "Please enable location permission from app setting.", true);
+          "Please enable location permission from app setting.", true,true);
       return false;
     }
     return true;

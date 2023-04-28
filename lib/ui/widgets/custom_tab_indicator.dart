@@ -53,6 +53,7 @@ class _CustomPainter extends BoxPainter {
           width: configuration.size!.width / 1,
           height: indicatorHeight,
         ),
+
         topLeft: Radius.circular(radius),
         topRight: Radius.circular(radius),
         bottomRight: Radius.circular(radius),

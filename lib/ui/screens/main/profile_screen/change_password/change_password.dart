@@ -71,6 +71,7 @@ class ChangePassword extends StatelessWidget {
                   AppTextFields(
                       controller: ctrl.oldPassword,
                       hintText: "Old Password",
+                      isSecureEntry: false,
                       hintStyle: GoogleFonts.manrope(
                           color: app_grey_99A7AE,
                           fontWeight: FontWeight.w500,
@@ -79,7 +80,9 @@ class ChangePassword extends StatelessWidget {
                   AppTextFields(
                       controller: ctrl.newPassword,
                       hintText: "New Password",
+                      isSecureEntry: false,
                       hintStyle: GoogleFonts.manrope(
+
                           color: app_grey_99A7AE,
                           fontWeight: FontWeight.w500,
                           fontSize: 16)),
@@ -87,7 +90,9 @@ class ChangePassword extends StatelessWidget {
                   AppTextFields(
                       controller: ctrl.confirmNewPassword,
                       hintText: "Re-enter Password",
+                      isSecureEntry: false,
                       hintStyle: GoogleFonts.manrope(
+
                           color: app_grey_99A7AE,
                           fontWeight: FontWeight.w500,
                           fontSize: 16)),
@@ -105,15 +110,19 @@ class ChangePassword extends StatelessWidget {
                       } else if (ctrl.confirmNewPassword.text
                           .trim()
                           .isEmpty) {
+
                         showAppSnackBar("Enter confirm new password");
                       } else if (ctrl.newPassword.text.trim() !=
                           ctrl.confirmNewPassword.text.trim()) {
                         showAppSnackBar(
                             "New password and confirm new password doesn't match");
+
                       } else {
                         Get.back();
                         ctrl.clearTextFiled();
+
                         showAppSnackBar("Password change success");
+
                       }
                     },
                     text: "CHANGE",

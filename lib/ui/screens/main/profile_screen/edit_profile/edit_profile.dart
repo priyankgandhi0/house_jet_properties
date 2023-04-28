@@ -50,6 +50,7 @@ class EditProfile extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 "My Profile".darkText(size: 20, fontWeight: FontWeight.w700),
               ],
             ),
@@ -60,6 +61,7 @@ class EditProfile extends StatelessWidget {
       body: GetBuilder<EditProfileController>(
         builder: (ctrl) =>
             Padding(
+
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
                 child: Column(
@@ -167,11 +169,9 @@ class EditProfile extends StatelessWidget {
                         else if (ctrl.userLastName.text
                             .trim()
                             .isEmpty) {
-
                           showAppSnackBar("Enter Last Name");
                         }
                         else {
-
                           Get.back();
                           showAppSnackBar("Profile update Success");
                         }

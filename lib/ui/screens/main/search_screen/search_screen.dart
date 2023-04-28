@@ -8,6 +8,7 @@ import 'package:house_jet_properties/ui/screens/main/search_screen/search_module
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
 import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/extension.dart';
+import 'package:house_jet_properties/utils/map_utils.dart';
 import 'package:house_jet_properties/utils/shared_pref.dart';
 
 
@@ -17,17 +18,10 @@ class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
 
   SearchController searchController = Get.put(SearchController());
-  List<LatLng> latLen = [
-    LatLng(19.0759837, 72.8776559),
-    LatLng(28.679079, 77.069710),
-    LatLng(26.850000, 80.949997),
-    LatLng(24.879999, 74.629997),
-    LatLng(16.166700, 74.833298),
-    LatLng(12.971599, 77.594563),
-    LatLng(19.0759837, 72.8776559),
-  ];
+
   @override
   Widget build(BuildContext context) {
+
     return GetBuilder<SearchController>(
       builder: (ctrl) =>
           Scaffold(
@@ -52,36 +46,38 @@ class SearchScreen extends StatelessWidget {
                     mapToolbarEnabled: false,
                     initialCameraPosition: ctrl.cameraPosition,
                     polylines:  {
-                      Polyline(
-                        polylineId: PolylineId('1'),
-                        points: latLen,
-                        width: 4,
+                       Polyline(
+                      polylineId: PolylineId('1'),
+                      points: ctrl.latLen,
+                      width: 2,
 
-                  patterns: [
-                    PatternItem.dot,
-                    PatternItem.dash(1),
-                    PatternItem.gap(1)],
-                        // patterns: [
-                        //  // PatternItem.dash(8),
-                        //   PatternItem.gap(15),
-                        // ],
-                        color: Colors.green,
+                      // patterns: [
+                      //   PatternItem.dot,
+                      //   PatternItem.dash(1),
+                      //   PatternItem.gap(1)],
+                      patterns: [
+                      PatternItem.dash(25),
+                      PatternItem.gap(8),
 
-                      ),
+                      ],
+                      startCap: Cap.roundCap,
+                      endCap: Cap.roundCap,
+                      jointType: JointType.round,
+                      color: app_Orange_FF7448,
+                        ),
                     },
                     onMapCreated: (GoogleMapController controller) {
                       ctrl.manager.setMapId(controller.mapId);
                       ctrl.mapController = controller;
                       // ctrl.controller.complete(controller);
                     },
-
                     markers: ctrl.markers,
-                    circles: ctrl.circles,
-                     polygons: ctrl.polygon,
+                    // circles: ctrl.circles,
+                    //  polygons: ctrl.polygon,
                     onCameraMove: (position) {
-
                       ctrl.manager.onCameraMove(position);
                     },
+
                     onCameraIdle: ctrl.manager.updateMap,
                   )
                       : Padding(
@@ -95,7 +91,6 @@ class SearchScreen extends StatelessWidget {
                               onTap: () {
                                 ctrl.imageSliderIndex = 0;
                                 ctrl.setInfoWindowModel(
-
                                     ctrl.propertiesDetailList[index]);
                                 if (preferences.getBool(
                                     SharedPreference.IS_LOGGED_IN) ?? false) {
@@ -105,6 +100,7 @@ class SearchScreen extends StatelessWidget {
                                 }
                               },
                               child: Container(
+
                                 height: 210,
                                 margin: const EdgeInsets.symmetric(
                                   horizontal: 20,
@@ -131,7 +127,6 @@ class SearchScreen extends StatelessWidget {
                                       child: Container(
                                         height: 30,
                                         decoration: BoxDecoration(
-
                                             color: Colors.black54,
                                             borderRadius:
                                             BorderRadiusDirectional
@@ -142,13 +137,12 @@ class SearchScreen extends StatelessWidget {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              const CircleAvatar
-                                                (
+                                              const CircleAvatar(
                                                 radius: 5,
                                                 backgroundColor:
                                                 Color(0xff3EE763),
                                               ),
-                                              7.0.addWSpace(),
+                                              (7.0).addWSpace(),
                                               "For Sale".whiteText(
                                                   size: 12,
                                                   fontWeight:
@@ -168,6 +162,7 @@ class SearchScreen extends StatelessWidget {
                                             crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                             children: [
+
                                               ctrl.propertiesDetailList[index]
                                                   .name
                                                   .whiteText(
@@ -198,7 +193,6 @@ class SearchScreen extends StatelessWidget {
                         itemCount: ctrl.propertiesDetailList.length),
                   ),
                   Column(
-
                     children: [
                       Container(
                         height: 140,
@@ -367,6 +361,7 @@ class SearchScreen extends StatelessWidget {
                                     ],
                                   ),
                                   child: Row(
+
                                     mainAxisAlignment:
                                     MainAxisAlignment.center,
                                     children: [
@@ -382,6 +377,8 @@ class SearchScreen extends StatelessWidget {
                                       (ctrl.filterTextList[index])
                                           .toString()
                                           .mediumText(
+
+
                                           color: sameIndex
                                               ? Colors.white
                                               : app_text_black_1B1B1B,
@@ -433,8 +430,10 @@ class SearchScreen extends StatelessWidget {
 
   void _showModal(BuildContext context) {
     Navigator.of(context).push(FullScreenSearchModal());
+    searchController.predictions.clear();
+    searchController.searchFiledController.clear();
+    searchController.update();
     //return FullScreenSearchModal()
-
   }
 }
 

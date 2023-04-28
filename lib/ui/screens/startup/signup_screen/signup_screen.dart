@@ -7,8 +7,6 @@ import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/extension.dart';
 import 'package:house_jet_properties/utils/shared_pref.dart';
 import '../../../../Theme/app_colors.dart';
-
-import '../../../../Theme/app_colors.dart';
 import '../login_screen/login_controller.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -18,6 +16,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return WillPopScope(
       onWillPop: () => loginController.onPop(),
       child: SafeArea(
@@ -31,6 +30,7 @@ class SignUpScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 30, right: 30),
                     child: Column(
                       children: [
+
                         Image.asset("assets/icons/ic_logo.png",height: 145,width: 150,).paddingOnly(top: 40,bottom: 25),
                         // Image.asset("assets/icons/ic_logo.png").paddingOnly(
                         //     left: 99.0, right: 99, top: 90, bottom: 50),
@@ -53,6 +53,7 @@ class SignUpScreen extends StatelessWidget {
                         ],
                         Row(
                           children: [
+
                             Expanded(
                               child: AppTextFields(
                                 controller: ctrl.userFirstNameController,
@@ -71,6 +72,7 @@ class SignUpScreen extends StatelessWidget {
                           ],
                         ),
                         (30.0).addHSpace(),
+
                         AppTextFields(
                           controller: ctrl.userEmailController,
                           hintText: 'Enter Email',
@@ -83,7 +85,9 @@ class SignUpScreen extends StatelessWidget {
                             child: 'please enter valid Mobile No.'
                                 .appOrangeText(size: 14),
                           ),
+
                           (4.0).addHSpace(),
+
                         ],
                         AppTextFields(
                           controller: ctrl.passwordController,
@@ -102,6 +106,7 @@ class SignUpScreen extends StatelessWidget {
                         //   hintText: 'Confirm Password ',
                         //   isSecureEntry: true,
                         // ),
+
                         (60.0).addHSpace(),
                         AppButton(
                           text: 'SIGN UP',
@@ -116,6 +121,7 @@ class SignUpScreen extends StatelessWidget {
                             } else if(ctrl.userEmailController.text
                                 .trim()
                                 .isEmpty){
+
                               showAppSnackBar("Please Enter Email");
                               // Get.off(() => HomeScreen());
                             } else if(ctrl.passwordController.text
@@ -140,9 +146,11 @@ class SignUpScreen extends StatelessWidget {
                           overlayColor: const MaterialStatePropertyAll(
                               Colors.transparent),
                           onTap: () {
+
                             primaryFocus?.unfocus();
                             loginController.clearAllTextField();
                             Get.back();
+
                           },
                           child: RichText(
                             text: TextSpan(
@@ -164,7 +172,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        20.0.addHSpace(),
+                        (20.0).addHSpace(),
                       ],
                     ),
                   ),

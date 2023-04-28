@@ -26,7 +26,7 @@ class BedBathFilterBottomSheet extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              10.0.addHSpace(),
+              (10.0).addHSpace(),
               Container(
                 width: 70,
                 height: 4,
@@ -80,6 +80,7 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                             child: (ctrl.bedBathList[index])
                                 .toString()
                                 .mediumText(
+
                                     color: sameIndex
                                         ? Colors.white
                                         : app_grey_99A7AE,
@@ -107,7 +108,6 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                       bool sameIndex = ctrl.filterBathroomIndex == index;
                       return InkWell(
                         onTap: () {
-
                           ctrl.onBathroomFilterClick(index);
                         },
                         child: Container(
@@ -118,7 +118,6 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Center(
-
                             child: (ctrl.bedBathList[index])
                                 .toString()
                                 .mediumText(
@@ -131,13 +130,14 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                         ),
                       );
                     },
-                    separatorBuilder: (context, index) => 8.0.addWSpace(),
+                    separatorBuilder: (context, index) => (8.0).addWSpace(),
                     itemCount: ctrl.bedBathList.length),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                 child: AppButton(
+
                   onTap: () {},
                   text: "SEE 85 HOMES",
                   textSize: 16,

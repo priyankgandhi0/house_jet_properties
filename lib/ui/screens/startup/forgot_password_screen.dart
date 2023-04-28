@@ -27,8 +27,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 // old one
                 // Image.asset("assets/icons/ic_logo.png")
                 //     .paddingOnly(left: 99.0, right: 99, top: 90, bottom: 52),
-                'Forgot Password'
-                    .appOrangeText(size: 30, fontWeight: FontWeight.w600),
+                'Forgot Password'.appOrangeText(size: 30, fontWeight: FontWeight.w600),
                 (10.0).addHSpace(),
                 'Enter your email to reset your password'.appGreyText(
                   size: 14,
@@ -75,6 +74,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         TextSpan(
                           text: 'Sign In',
                           style: TextStyle(
+
                               fontSize: 14,
                               color: app_Orange_FF7448,
                               fontWeight: FontWeight.w400),

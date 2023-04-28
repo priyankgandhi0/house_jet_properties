@@ -51,7 +51,6 @@ class ContactAgentScreen extends StatelessWidget {
               toolbarHeight: 80,
               shadowColor: Colors.grey.withOpacity(0.15),
               bottom: PreferredSize(
-
                 preferredSize: Size.zero,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 15),
@@ -83,10 +82,14 @@ class ContactAgentScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     (20.0).addHSpace(),
+
                     " Full Name".appBlackText1B1B1B(
                         size: 14, fontWeight: FontWeight.w400),
+
                     (10.0).addHSpace(),
+
                     AppTextFields(
                         controller: TextEditingController(),
                         hintText: "Enter Name",
@@ -98,7 +101,9 @@ class ContactAgentScreen extends StatelessWidget {
 
                     " Email Address".appBlackText1B1B1B(
                         size: 14, fontWeight: FontWeight.w400),
+
                     (10.0).addHSpace(),
+
                     AppTextFields(
                         controller: TextEditingController(),
                         hintText: "Enter Email",
@@ -107,9 +112,12 @@ class ContactAgentScreen extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             fontSize: 14)),
                     (15.0).addHSpace(),
+
                     " Phone Number".appBlackText1B1B1B(
                         size: 14, fontWeight: FontWeight.w400),
+
                     (10.0).addHSpace(),
+
                     AppTextFields(
                         controller: TextEditingController(),
                         hintText: "Enter Number",
@@ -118,9 +126,11 @@ class ContactAgentScreen extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             fontSize: 14)),
                     (15.0).addHSpace(),
+
                     " Message".appBlackText1B1B1B(
                         size: 14, fontWeight: FontWeight.w400),
                     (10.0).addHSpace(),
+
                     AppTextFields(
                         controller: TextEditingController(),
                         hintText: "Type Something.....",

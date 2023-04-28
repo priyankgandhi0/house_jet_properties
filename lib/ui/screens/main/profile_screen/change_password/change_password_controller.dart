@@ -7,6 +7,7 @@ class ChangePasswordController extends GetxController {
   TextEditingController confirmNewPassword = TextEditingController();
 
   clearTextFiled() {
+
     oldPassword.clear();
     newPassword.clear();
     confirmNewPassword.clear();

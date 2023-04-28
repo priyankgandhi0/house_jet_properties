@@ -11,7 +11,6 @@ import 'package:house_jet_properties/ui/widgets/app_price_slider.dart';
 import 'package:house_jet_properties/ui/widgets/home_type_card.dart';
 import 'package:house_jet_properties/ui/widgets/startup_text_field.dart';
 import 'package:house_jet_properties/utils/extension.dart';
-
 import '../../../../../theme/app_colors.dart';
 
 
@@ -44,8 +43,6 @@ class ForSaleScreen extends StatelessWidget {
                       crossAxisSpacing: 10,
                       mainAxisExtent: 76,
                       mainAxisSpacing: 10),
-
-
                   itemCount: ctrl.homeTypeList.length,
                   itemBuilder: (context, i) => homeTypeCard(
                       onTap: () {
@@ -86,6 +83,7 @@ class ForSaleScreen extends StatelessWidget {
                       fillColor: Colors.transparent,
                       isSecureEntry: false,
                       borderColor: app_grey_E3EAEE,
+                      textInputType: TextInputType.number,
                       textInputForMater: [
                         FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d{0,2})'))
                       ],
@@ -93,8 +91,10 @@ class ForSaleScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: AppTextFields(
+
                       controller: ctrl.maxPriceController,
                       hintText: 'Max Price',
+                      textInputType: TextInputType.number,
                       fillColor: Colors.transparent,
                       isSecureEntry: false,
                       borderColor: app_grey_E3EAEE,
@@ -116,17 +116,20 @@ class ForSaleScreen extends StatelessWidget {
                     ctrl.onPriceRangeChange(val.start, val.end);
                     ctrl.onIndicatorRangeChange(val.start, val.end);
                   }).paddingSymmetric(horizontal: 12),
+
               (20.0).addHSpace(),
               Divider(
                 color: app_divider_E1EBF0,
               ),
 
-
               bedRoomText
                   .appBlackText1B1B1B(fontWeight: FontWeight.w600, size: 16)
                   .paddingSymmetric(horizontal: 20),
+
               (10.0).addHSpace(),
+
               SizedBox(
+
                 height: 50,
                 child: ListView.builder(
                   shrinkWrap: true,
@@ -148,6 +151,7 @@ class ForSaleScreen extends StatelessWidget {
                                       : app_grey_99A7AE)
                               .paddingSymmetric(horizontal: 27, vertical: 12))
                       .paddingOnly(right: 8),
+
                 ),
               ).paddingSymmetric(horizontal: 20),
               (20.0).addHSpace(),
@@ -191,7 +195,6 @@ class ForSaleScreen extends StatelessWidget {
                             .paddingSymmetric(horizontal: 20),
                         (10.0).addHSpace(),
                         AppTextFields(
-
                           controller: ctrl.commuteController,
                           hintText: commuteDestinationAddressText,
                           trailing: GestureDetector(
@@ -207,13 +210,14 @@ class ForSaleScreen extends StatelessWidget {
                                 color: app_grey_99A7AE,
                               ).paddingAll(16)),
                         ).paddingSymmetric(horizontal: 20),
+
                         (20.0).addHSpace(),
                         selectMaximumDriveTimeText
                             .appBlackText1B1B1B(
-
                                 fontWeight: FontWeight.w400, size: 16)
                             .paddingSymmetric(horizontal: 20),
                         (10.0).addHSpace(),
+
                         SizedBox(
                           height: 50,
                           child: ListView.builder(
@@ -260,6 +264,7 @@ class ForSaleScreen extends StatelessWidget {
                             ctrl.update();
                           },
                           tileTileWidget: Row(
+
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               petsText.appBlackText1B1B1B(

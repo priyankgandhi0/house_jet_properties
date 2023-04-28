@@ -1,7 +1,11 @@
 // KindaCode.com
 // main.dart
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:house_jet_properties/models/properties_detail.dart';
 import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/theme/app_strings.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
@@ -60,9 +64,19 @@ class FullScreenSearchModal extends ModalRoute {
             ],
           ),
           title: TextField(
-            onChanged: (val) {
-              ctrl.resultSearch(val);
-            },
+            // onChanged: (val) {
+            //   ctrl.resultSearch(val);
+            // },
+            onChanged:(value) {
+          if (ctrl.debounce?.isActive ?? false) ctrl.debounce!.cancel();
+          ctrl.debounce = Timer(const Duration(milliseconds: 400), () {
+          if (value.isNotEmpty) {
+          ctrl.autoCompleteSearch(value);
+          } else {
+          ctrl.predictions.clear();
+          }
+          });
+          },
             cursorColor: Colors.black26,
             controller: ctrl.searchFiledController,
             style: appTextStyleBlack500,
@@ -75,10 +89,10 @@ class FullScreenSearchModal extends ModalRoute {
           actions: [
             IconButton(
               onPressed: () {
-                FocusScope.of(context).unfocus();
-                ctrl.searchFiledController.clear();
 
-                ctrl.update();
+                ctrl.clearAllRecently(isForRecently:false,context: context);
+
+
 
               },
               icon: Image.asset(
@@ -141,25 +155,34 @@ class FullScreenSearchModal extends ModalRoute {
               ),
               (15.0).addHSpace(),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+              ctrl.predictions.isEmpty ? (0.0).addHSpace() :placesText.appBlackText1B1B1B(
+                      size: 16, fontWeight: FontWeight.w600).paddingSymmetric(horizontal: 20),
 
-                  recentlySearchesText.appBlackText1B1B1B(
-                      size: 16, fontWeight: FontWeight.w600),
-
-                  clearAllText.appOrangeText600(
-                      size: 14, fontWeight: FontWeight.w500),
-                ],
-              ).paddingSymmetric(horizontal: 20),
-              ListView.builder(
+              ctrl.predictions.isEmpty ? 0.0.addHSpace(): ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: ctrl.searchTempList.length,
+                itemCount: ctrl.predictions.length,
                 itemBuilder: (context, index) => InkWell(
-                  onTap: () {
+                  onTap: () async{
+                    LatLng locationData = await ctrl.getLocationData(ctrl.predictions[index].description!);
                     Get.back();
-                    ctrl.setInfoWindowModel(ctrl.searchTempList[index],isFormDrag: true);
+                    PropertiesDetailModel property =  PropertiesDetailModel(
+                        id:int.parse(ctrl.predictions[index].id??"58"),
+                        name: ctrl.predictions[index].description!,
+                        price: 1801000,
+                        image: 'http://codonnier.tech/dipak/flutter/housejet_property/ambi.png',
+                        isForSale: 1,
+                        description:ctrl.predictions[index].description!,
+                        bedSize: 3,
+                        squareFt: 1200,
+                            address:ctrl.predictions[index].description! ,
+                              bathRoomSize: 2,
+                              lat:locationData.latitude,
+                              long: locationData.longitude,
+
+                    );
+                    ctrl.setInfoWindowModel(property,isFormDrag: true);
+                    ctrl.setToRecentData(index);
 
                   },
                   child: Container(
@@ -170,35 +193,104 @@ class FullScreenSearchModal extends ModalRoute {
 
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ctrl.searchTempList[index].name.appBlackText1B1B1B(
+                        (ctrl.predictions[index].description!).appBlackText1B1B1B(
                             size: 16, fontWeight: FontWeight.w400),
                         (5.0).addHSpace(),
+                        "For Sale".appGreyText(size: 14, fontWeight: FontWeight.w400)
 
-                        "For Sale".appGreyText(size: 14, fontWeight: FontWeight.w400),
+
 
                       ],
                     ),
                   ),
                 ),
               ),
-              (30.0).addHSpace(),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: recentlyViewedText.appBlackText1B1B1B(
-                      size: 16, fontWeight: FontWeight.w600)),
+              ctrl.predictions.isEmpty ? (0.0).addHSpace(): (30.0).addHSpace(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
 
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  recentlyViewedText.appBlackText1B1B1B(
+                      size: 16, fontWeight: FontWeight.w600),
 
-                    "433 sylvan Ave Spc 16, Mountain View, CA"
-                        .appBlackText1B1B1B(
+
+                  GestureDetector(
+                    onTap: (){
+                      ctrl.clearAllRecently();
+                    },
+                    child: SizedBox(
+                      child:  clearAllText.appOrangeText600(
+                          size: 14, fontWeight: FontWeight.w500),
+                    ),
+                  )
+
+                ],
+              ).paddingSymmetric(horizontal: 20),
+              // Padding(
+              //     padding: const EdgeInsets.symmetric(horizontal: 20),
+              //     child: recentlyViewedText.appBlackText1B1B1B(
+              //         size: 16, fontWeight: FontWeight.w600)),
+
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: ctrl.recentViewedList.length,
+                itemBuilder: (context, index) => InkWell(
+                  onTap: () async{
+                    LatLng locationData = await ctrl.getLocationData(ctrl.recentViewedList[index].description!);
+                    Get.back();
+                    PropertiesDetailModel property =  PropertiesDetailModel(
+                      id:int.parse(ctrl.recentViewedList[index].id??"58"),
+                      name: ctrl.recentViewedList[index].description!,
+                      price: 1801000,
+                      image: 'http://codonnier.tech/dipak/flutter/housejet_property/ambi.png',
+                      isForSale: 1,
+                      description:ctrl.recentViewedList[index].description!,
+                      bedSize: 3,
+                      squareFt: 1200,
+                      address:ctrl.recentViewedList[index].description! ,
+                      bathRoomSize: 2,
+                      lat:locationData.latitude,
+                      long: locationData.longitude,
+
+
+                    );
+                    ctrl.setInfoWindowModel(property,isFormDrag: true);
+
+
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    child: Column(
+
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        (ctrl.recentViewedList[index].description!).appBlackText1B1B1B(
                             size: 16, fontWeight: FontWeight.w400),
-                  ],
+                        (5.0).addHSpace(),
+
+                        "For Sale".appGreyText(size: 14, fontWeight: FontWeight.w400),
+
+
+                      ],
+                    ),
+                  ),
                 ),
               ),
+
+              // Container(
+              //   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //
+              //       "433 sylvan Ave Spc 16, Mountain View, CA"
+              //           .appBlackText1B1B1B(
+              //               size: 16, fontWeight: FontWeight.w400),
+              //     ],
+              //   ),
+              // ),
 
               // const ListTile(
               //   title: Text('How to fry a chicken'),
@@ -220,6 +312,7 @@ class FullScreenSearchModal extends ModalRoute {
               //   leading: Icon(Icons.search),
               //   trailing: Icon(Icons.close),
               // )
+
             ],
           ),
         ),

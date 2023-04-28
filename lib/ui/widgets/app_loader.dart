@@ -12,8 +12,10 @@ class AppLoader extends StatelessWidget {
     return Visibility(
       visible: visible,
       child: Container(
+
         color: Colors.black.withOpacity(0.3),
         child: Center(
+
           child: CircularProgressIndicator(
             color: app_Orange_FF7448,
           ),

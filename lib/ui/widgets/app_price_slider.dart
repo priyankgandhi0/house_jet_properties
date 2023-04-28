@@ -11,6 +11,7 @@ Widget priceSlider({
   required Function(RangeValues) onChanged,
 }) {
   return SliderTheme(
+
     data: Theme.of(context).sliderTheme.copyWith(
         inactiveTrackColor: const Color(0xffC8D9E1),
         rangeThumbShape: rangeThumbShape,

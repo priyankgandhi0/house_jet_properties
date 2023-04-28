@@ -10,7 +10,6 @@ Widget appCheckBox({
     visualDensity: VisualDensity.compact,
     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     value: value,
-    
     onChanged: onChanged,
     activeColor: app_Orange_FF7448,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),

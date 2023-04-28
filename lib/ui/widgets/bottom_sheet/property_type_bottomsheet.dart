@@ -26,6 +26,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+
               (10.0).addHSpace(),
               Container(
                 width: 70,
@@ -94,6 +95,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                       ),
                       fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
                       onChanged: (value) {
+
                         ctrl.condoCheckBox = value!;
                         ctrl.update();
                       },
@@ -105,7 +107,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  "town home"
+
                   "Townhome".toString().appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w500),
                   SizedBox(
@@ -174,9 +176,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                       ),
                       fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
                       onChanged: (value) {
-
                         ctrl.mobileCheckBox = value!;
-
                         ctrl.update();
                       },
                     ),
@@ -190,7 +190,6 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                   "Farm".toString().appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w500),
                   SizedBox(
-
                     width: 15,
                     height: 15,
                     child: Checkbox(
@@ -214,7 +213,6 @@ class PropertyTypeBottomSheet extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   "Land".toString().appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w500),
                   SizedBox(

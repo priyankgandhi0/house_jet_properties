@@ -28,6 +28,7 @@ class AppListTile extends StatelessWidget {
           leading: Image.asset(height: 20, width: 20, icon!),
           horizontalTitleGap: 14,
           minLeadingWidth: 0,
+
           title: textColor ?? true
               ? title!.appBlackText1B1B1B(size: 14, fontWeight: FontWeight.w400)
               : title!.appOrangeText(size: 14, fontWeight: FontWeight.w400),

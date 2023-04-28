@@ -14,6 +14,7 @@ class MarkerDetailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GetBuilder<SearchController>(
       builder: (ctrl) => Container(
         height: 380,
@@ -73,7 +74,6 @@ class MarkerDetailCard extends StatelessWidget {
                             child: Stack(
                               children: [
                                 Container(
-
                                   height: 195,
                                   margin: const EdgeInsets.only(right: 1),
                                   decoration: BoxDecoration(

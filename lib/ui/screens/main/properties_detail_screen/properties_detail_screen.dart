@@ -335,16 +335,14 @@ class PropertiesDetail extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 20, left: 20, bottom: 26),
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             AppButton(
-
                 onTap: () {
                   searchController.makePhoneCall("(667) 596 5407");
+
                  // Get.toNamed(Routes.contactAnAgentScreen);
                 },
-
                 text: "CONTACT AN AGENT",
                 textSize: 16,
                 textFontWeight: FontWeight.w600,
@@ -352,13 +350,10 @@ class PropertiesDetail extends StatelessWidget {
             (10.0).addHSpace(),
             AppButton(
               unselected: true,
-
                 onTap: () {
-
                   //Get.toNamed(Routes.contactAnAgentScreen);
                   Get.dialog(
                       AppScheduleTimeDialog(
-
                       context: context,
                       buttonColor: Colors.blue,
                       onTap: () {
@@ -368,9 +363,6 @@ class PropertiesDetail extends StatelessWidget {
                       buttonText: "Yes",
                       description: "Are you sure you  want to Sign Out ?",
                       tittle: "Schedule a showing",
-
-
-
 
                   ));
                 },

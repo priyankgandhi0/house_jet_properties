@@ -20,6 +20,7 @@ class EditProfileController extends GetxController {
   }
 
   pickImage(BuildContext context) {
+
     PickImageOnly().openImageChooser(
         context: context,
         wantFile: false,

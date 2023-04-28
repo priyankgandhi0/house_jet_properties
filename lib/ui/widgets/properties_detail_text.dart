@@ -25,8 +25,8 @@ class PropertiesDetailesText extends StatelessWidget {
           ),
         ),
         Expanded(
-
           child: Padding(
+
             padding: const EdgeInsets.only(left: 5),
             child: desc.mediumText(
                 fontWeight: FontWeight.w700,
