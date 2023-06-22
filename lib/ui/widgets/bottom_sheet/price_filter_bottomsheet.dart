@@ -15,7 +15,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchController>(
+    return GetBuilder<SearchScreenController >(
       builder: (ctrl) => Container(
         decoration: const BoxDecoration(
             color: Colors.white,
@@ -37,6 +37,7 @@ class PriceFilterBottomSheet extends StatelessWidget {
               ),
               (20.0).addHSpace(),
               Stack(
+
                 alignment: Alignment.center,
                 children: [
 

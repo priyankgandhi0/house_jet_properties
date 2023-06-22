@@ -3,6 +3,7 @@ class Assets {
   Assets._();
 
   static const String iconsIcArrowBack = 'assets/icons/ic_arrow_back.png';
+  static const String cautionIcon = 'assets/icons/ic_caution.png';
   static const String iconsIcLocation = 'assets/icons/ic_location.png';
   static const String iconsIcMyLocation = 'assets/icons/ic_my_location.png';
   static const String imagesIgApartment1 = 'assets/images/ig_apartment1.jpeg';

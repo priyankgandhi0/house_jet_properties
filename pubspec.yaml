@@ -55,6 +55,8 @@ dependencies:
   geolocator: ^8.2.0
   location: ^4.3.0
   geocoding: ^2.1.0
+  dio: ^5.1.1
+  connectivity_plus: ^4.0.1
 
 
 
@@ -91,7 +93,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/json/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

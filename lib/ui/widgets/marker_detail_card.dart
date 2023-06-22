@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
-import 'package:house_jet_properties/ui/widgets/app_button.dart';
+
 import 'package:house_jet_properties/utils/extension.dart';
 
-import '../../../theme/app_colors.dart';
+
 
 class MarkerDetailCard extends StatelessWidget {
   MarkerDetailCard({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class MarkerDetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return GetBuilder<SearchController>(
+    return GetBuilder<SearchScreenController>(
       builder: (ctrl) => Container(
         height: 380,
         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
@@ -83,9 +83,11 @@ class MarkerDetailCard extends StatelessWidget {
                                     ),
                                     image: DecorationImage(
                                         image: NetworkImage(
-                                            ctrl.propertiesDetailModel!.image),
+                                            ctrl.propertiesDetailModel!.propertyPhotos![0].thumbnailUrl!,
+                                        ),
                                         fit: BoxFit.cover),
                                   ),
+                                 // child: Image.network(ctrl.propertiesDetailModel!.propertyPhotos![0].thumbnailUrl!),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(12.0),
@@ -137,14 +139,14 @@ class MarkerDetailCard extends StatelessWidget {
                               ],
                             ),
                           ),
-                          ctrl.propertiesDetailModel!.name.appBlackText1B1B1B(
+                          (ctrl.propertiesDetailModel!.alias??"").appBlackText1B1B1B(
                               size: 18, fontWeight: FontWeight.w600),
                           (8.0).addHSpace(),
-                          '\$${ctrl.propertiesDetailModel?.price}'
+                          '\$${ctrl.propertiesDetailModel?.listPrice??""}'
                               .appBlackText1B1B1B(
                                   size: 20, fontWeight: FontWeight.w700),
                           (10.0).addHSpace(),
-                          ("${ctrl.propertiesDetailModel?.bedSize} beds, ${ctrl.propertiesDetailModel?.bathRoomSize} Bathrooms, 1 Swimming Pool, ${ctrl.propertiesDetailModel?.squareFt} Sqft Lot")
+                          ("${ctrl.propertiesDetailModel?.beds??""} beds, ${ctrl.propertiesDetailModel?.baths} Bathrooms, 1 Swimming Pool, ${ctrl.propertiesDetailModel?.sqFtTotal} Sqft Lot")
                               .toString()
                               .appGreyText(
                                   size: 14, fontWeight: FontWeight.w400),
@@ -159,8 +161,7 @@ class MarkerDetailCard extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                 top: 0,
                               ),
-                              child: ctrl.propertiesDetailModel?.address
-                                  .appGreyText(
+                              child: (ctrl.propertiesDetailModel?.streetAddress??"").appGreyText(
                                       size: 14, fontWeight: FontWeight.w400),
                             ),
                           )

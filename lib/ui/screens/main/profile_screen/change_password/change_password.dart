@@ -98,6 +98,7 @@ class ChangePassword extends StatelessWidget {
                           fontSize: 16)),
                   50.0.addHSpace(),
                   AppButton(
+
                     onTap: () {
                       if (ctrl.oldPassword.text
                           .trim()
@@ -111,6 +112,7 @@ class ChangePassword extends StatelessWidget {
                           .trim()
                           .isEmpty) {
 
+
                         showAppSnackBar("Enter confirm new password");
                       } else if (ctrl.newPassword.text.trim() !=
                           ctrl.confirmNewPassword.text.trim()) {
@@ -120,9 +122,7 @@ class ChangePassword extends StatelessWidget {
                       } else {
                         Get.back();
                         ctrl.clearTextFiled();
-
                         showAppSnackBar("Password change success");
-
                       }
                     },
                     text: "CHANGE",

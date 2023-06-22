@@ -36,7 +36,7 @@ class FavouriteScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
-      body: GetBuilder<SearchController>(
+      body: GetBuilder<SearchScreenController>(
         builder: (ctrl) => SizedBox(
 
           height: Get.height,
@@ -69,7 +69,7 @@ class FavouriteScreen extends StatelessWidget {
                             ColorFilter.mode(Colors.black.withOpacity(0.1),
                                 BlendMode.darken),
                             image: NetworkImage(
-                                ctrl.propertiesDetailList[index].image),
+                                ctrl.propertiesDetailList[index].propertyPhotos![0].thumbnailUrl??""),
                             fit: BoxFit.cover),
                       ),
                       child: Column(
@@ -114,12 +114,12 @@ class FavouriteScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
 
                                   children: [
-                                    ctrl.propertiesDetailList[index].name
+                                    ctrl.propertiesDetailList[index].alias??""
                                         .whiteText(
                                             size: 18,
                                             fontWeight: FontWeight.w600),
                                     5.0.addHSpace(),
-                                    ("\$${ctrl.propertiesDetailList[index].price}")
+                                    ("\$${ctrl.propertiesDetailList[index].listPrice??""}")
                                         .toString()
                                         .whiteText(
 

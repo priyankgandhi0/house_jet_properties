@@ -29,6 +29,7 @@ extension AppDateTime on DateTime {
   }
 
   appDateMonthExtension() {
+
     return DateFormat('MMM dd, yyyy ').format(this);
   }
 
@@ -186,6 +187,14 @@ extension AppText on String {
           color: app_text_white_ffffff, fontSize: size, fontWeight: fontWeight),
     );
   }
+  appRedText({double? size, FontWeight? fontWeight}) {
+    return Text(
+      this,
+      style: GoogleFonts.manrope(
+          color: app_red_FF2C2C, fontSize: size, fontWeight: fontWeight),
+    );
+  }
+
 }
 
 showModelBottomSheet(

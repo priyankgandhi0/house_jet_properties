@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:house_jet_properties/theme/app_assets.dart';
-import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/contact_agent_screen/contact_agent_screen.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
 import 'package:house_jet_properties/ui/widgets/app_button.dart';
-import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/app_schedule_time_dialog.dart';
 import 'package:house_jet_properties/utils/extension.dart';
 
@@ -18,12 +16,12 @@ import '../../../../theme/app_colors.dart';
 class PropertiesDetail extends StatelessWidget {
   PropertiesDetail({Key? key}) : super(key: key);
 
-  final SearchController searchController = Get.put(SearchController());
+  final SearchScreenController searchController = Get.put(SearchScreenController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<SearchController>(
+      body: GetBuilder<SearchScreenController>(
         builder: (ctrl) {
           return Stack(
             children: [
@@ -43,7 +41,7 @@ class PropertiesDetail extends StatelessWidget {
                               int pageViewIndex) =>
                           Image.network(
                         width: Get.width,
-                        ctrl.propertiesDetailModel!.image,
+                        ctrl.propertiesDetailModel!.propertyPhotos![0].thumbnailUrl??"",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -52,7 +50,6 @@ class PropertiesDetail extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
-
                           alignment: Alignment.center,
                           height: 18,
                           width: 46,
@@ -99,11 +96,10 @@ class PropertiesDetail extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              ctrl.propertiesDetailModel!.name
-                                  .appBlackText1B1B1B(
+                              (ctrl.propertiesDetailModel!.alias??"").appBlackText1B1B1B(
                                       size: 22, fontWeight: FontWeight.w600),
                               10.0.addHSpace(),
-                              ("\$${ctrl.propertiesDetailModel?.price}")
+                              ("\$${ctrl.propertiesDetailModel?.listPrice??""}")
                                   .toString()
                                   .appBlackText1B1B1B(
                                       size: 20, fontWeight: FontWeight.w700),
@@ -140,7 +136,7 @@ class PropertiesDetail extends StatelessWidget {
                                           Image.asset(bedIcon,
                                               height: 19, width: 23),
                                           5.0.addWSpace(),
-                                          ("${ctrl.propertiesDetailModel?.bedSize} Beds")
+                                          ("${ctrl.propertiesDetailModel?.beds??""} Beds")
                                               .toString()
                                               .appOrangeText(
                                                   size: 12,
@@ -170,7 +166,7 @@ class PropertiesDetail extends StatelessWidget {
                                             Image.asset(bathRoomIcon,
                                                 height: 19, width: 23),
                                             5.0.addWSpace(),
-                                            ("${ctrl.propertiesDetailModel?.bathRoomSize} Bathrooms")
+                                            ("${ctrl.propertiesDetailModel?.baths??""} Bathrooms")
                                                 .toString()
                                                 .appOrangeText(
                                                     size: 12,
@@ -199,7 +195,7 @@ class PropertiesDetail extends StatelessWidget {
                                           Image.asset(sqftIcon,
                                               height: 19, width: 23),
                                           5.0.addWSpace(),
-                                          ("${ctrl.propertiesDetailModel?.squareFt} Sqft")
+                                          ("${ctrl.propertiesDetailModel?.sqFtTotal??""} Sqft")
                                               .toString()
                                               .appOrangeText(
                                                   size: 12,
@@ -214,9 +210,10 @@ class PropertiesDetail extends StatelessWidget {
                               "Description".appBlackText1B1B1B(
                                   size: 18, fontWeight: FontWeight.w600),
                               10.0.addHSpace(),
-                              ctrl.propertiesDetailModel?.description
-                                  .appGreyText(
-                                      size: 14, fontWeight: FontWeight.w400),
+                            // Description
+                              // ctrl.propertiesDetailModel?.description??""
+                              //     .appGreyText(
+                              //         size: 14, fontWeight: FontWeight.w400),
                               30.0.addHSpace(),
                               "Address".appBlackText1B1B1B(
                                   size: 18, fontWeight: FontWeight.w600),
@@ -228,8 +225,7 @@ class PropertiesDetail extends StatelessWidget {
                                 minLeadingWidth: 0,
                                 minVerticalPadding: 0,
                                 leading: Image.asset(locationIcon, height: 20),
-                                title: ctrl.propertiesDetailModel?.address
-                                    .appGreyText(
+                                title: ctrl.propertiesDetailModel?.streetAddress!.appGreyText(
                                         size: 16,
                                         fontWeight: FontWeight.w400,
                                         maxLines: 1),
@@ -252,20 +248,20 @@ class PropertiesDetail extends StatelessWidget {
                                     myLocationButtonEnabled: false,
                                     zoomGesturesEnabled: false,
                                     onTap: (argument) => ctrl.launchingUrl(
-                                        ctrl.propertiesDetailModel!.lat,
-                                        ctrl.propertiesDetailModel!.long),
+                                        ctrl.propertiesDetailModel!.latitude!,
+                                        ctrl.propertiesDetailModel!.longitude!),
                                     onMapCreated:
                                         (GoogleMapController controller) async {
                                       final marker = Marker(
                                         onTap: () => ctrl.launchingUrl(
-                                            ctrl.propertiesDetailModel!.lat,
-                                            ctrl.propertiesDetailModel!.long),
+                                            ctrl.propertiesDetailModel!.latitude!,
+                                            ctrl.propertiesDetailModel!.longitude!),
                                         markerId: const MarkerId('place_name'),
                                         icon: await MapUtils().getMarkerImage(
                                             const Size(150.0, 150.0)),
                                         position: LatLng(
-                                            ctrl.propertiesDetailModel!.lat,
-                                            ctrl.propertiesDetailModel!.long),
+                                            ctrl.propertiesDetailModel!.latitude!,
+                                            ctrl.propertiesDetailModel!.longitude!),
                                       );
                                       ctrl.markers2[
                                               const MarkerId('place_name')] =
@@ -275,8 +271,8 @@ class PropertiesDetail extends StatelessWidget {
                                     markers: ctrl.markers2.values.toSet(),
                                     initialCameraPosition: CameraPosition(
                                         target: LatLng(
-                                            ctrl.propertiesDetailModel!.lat,
-                                            ctrl.propertiesDetailModel!.long),
+                                            ctrl.propertiesDetailModel!.latitude!,
+                                            ctrl.propertiesDetailModel!.latitude!),
                                         zoom: 15.5),
                                   ),
                                 ),

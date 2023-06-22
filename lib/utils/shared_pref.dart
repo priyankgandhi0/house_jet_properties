@@ -3,6 +3,8 @@
 import 'dart:convert';
 
 
+import 'package:get/get.dart';
+import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/get_loged_in_user_profile_model.dart';
@@ -40,6 +42,9 @@ class SharedPreference {
 
   void clearUserItem() async {
     _preferences!.remove(IS_LOGGED_IN);
+    _preferences!.clear();
+    Get.offAllNamed(Routes.loginScreen);
+
   }
 
   static UserData? getUserModel() {

@@ -10,11 +10,11 @@ import '../../../theme/app_colors.dart';
 class PropertyTypeBottomSheet extends StatelessWidget {
   PropertyTypeBottomSheet({Key? key}) : super(key: key);
 
-  SearchController searchController = Get.put(SearchController());
+  SearchScreenController searchController = Get.put(SearchScreenController());
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchController>(
+    return GetBuilder<SearchScreenController>(
       builder: (ctrl) => Container(
         height: 800,
         decoration: const BoxDecoration(

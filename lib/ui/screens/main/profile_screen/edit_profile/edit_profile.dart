@@ -61,7 +61,6 @@ class EditProfile extends StatelessWidget {
       body: GetBuilder<EditProfileController>(
         builder: (ctrl) =>
             Padding(
-
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
                 child: Column(
@@ -76,13 +75,8 @@ class EditProfile extends StatelessWidget {
                             height: 160,
                             width: 160,
                             decoration: BoxDecoration(
-
                               image: DecorationImage(
-
-
                                 image: AssetImage(profileDashedIcon),
-
-
                               ),
                             ),
                             child: Padding(
@@ -115,6 +109,7 @@ class EditProfile extends StatelessWidget {
                               ctrl.pickImage(context);
                             },
                             child: Image.asset(
+
                               cameraImage,
                               height: 40,
                             ),

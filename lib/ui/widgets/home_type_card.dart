@@ -26,7 +26,6 @@ Widget homeTypeCard({
             iconName,
             height: 24,
             color: iconColor,
-
           ),
           (10.0).addHSpace(),
           subtitleText.appColorChangeText(

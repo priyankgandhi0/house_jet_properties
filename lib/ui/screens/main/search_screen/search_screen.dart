@@ -6,6 +6,7 @@ import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/properties_detail_screen.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_module.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
+import 'package:house_jet_properties/ui/widgets/app_loader.dart';
 import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/extension.dart';
 import 'package:house_jet_properties/utils/map_utils.dart';
@@ -17,12 +18,12 @@ import '../../../../theme/app_colors.dart';
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
 
-  SearchController searchController = Get.put(SearchController());
+  SearchScreenController searchController = Get.put(SearchScreenController());
 
   @override
   Widget build(BuildContext context) {
 
-    return GetBuilder<SearchController>(
+    return GetBuilder<SearchScreenController>(
       builder: (ctrl) =>
           Scaffold(
               key: searchController.scaffoldKey,
@@ -30,7 +31,7 @@ class SearchScreen extends StatelessWidget {
               body: Stack(
                 children: [
                   ctrl.viewAsGoogleMap
-                      ? GoogleMap(
+                      ? ctrl.manager == null?SizedBox(): GoogleMap(
                     onTap: (argument) {
                       if (ctrl.isBottomSheetOpen) {
                         Navigator.pop(context);
@@ -45,29 +46,29 @@ class SearchScreen extends StatelessWidget {
                     myLocationButtonEnabled: false,
                     mapToolbarEnabled: false,
                     initialCameraPosition: ctrl.cameraPosition,
-                    polylines:  {
-                       Polyline(
-                      polylineId: PolylineId('1'),
-                      points: ctrl.latLen,
-                      width: 2,
-
-                      // patterns: [
-                      //   PatternItem.dot,
-                      //   PatternItem.dash(1),
-                      //   PatternItem.gap(1)],
-                      patterns: [
-                      PatternItem.dash(25),
-                      PatternItem.gap(8),
-
-                      ],
-                      startCap: Cap.roundCap,
-                      endCap: Cap.roundCap,
-                      jointType: JointType.round,
-                      color: app_Orange_FF7448,
-                        ),
-                    },
+                    // polylines:  {
+                    //    Polyline(
+                    //   polylineId: PolylineId('1'),
+                    //   points: ctrl.latLen,
+                    //   width: 2,
+                    //
+                    //   // patterns: [
+                    //   //   PatternItem.dot,
+                    //   //   PatternItem.dash(1),
+                    //   //   PatternItem.gap(1)],
+                    //   patterns: [
+                    //   PatternItem.dash(25),
+                    //   PatternItem.gap(8),
+                    //
+                    //   ],
+                    //   startCap: Cap.roundCap,
+                    //   endCap: Cap.roundCap,
+                    //   jointType: JointType.round,
+                    //   color: app_Orange_FF7448,
+                    //     ),
+                    // },
                     onMapCreated: (GoogleMapController controller) {
-                      ctrl.manager.setMapId(controller.mapId);
+                      ctrl.manager!.setMapId(controller.mapId);
                       ctrl.mapController = controller;
                       // ctrl.controller.complete(controller);
                     },
@@ -75,10 +76,10 @@ class SearchScreen extends StatelessWidget {
                     // circles: ctrl.circles,
                     //  polygons: ctrl.polygon,
                     onCameraMove: (position) {
-                      ctrl.manager.onCameraMove(position);
+                      ctrl.manager!.onCameraMove(position);
                     },
 
-                    onCameraIdle: ctrl.manager.updateMap,
+                    onCameraIdle: ctrl.manager!.updateMap,
                   )
                       : Padding(
                     padding: const EdgeInsets.only(top: 140),
@@ -113,7 +114,7 @@ class SearchScreen extends StatelessWidget {
                                           Colors.black.withOpacity(0.1),
                                           BlendMode.darken),
                                       image: NetworkImage(ctrl
-                                          .propertiesDetailList[index].image),
+                                          .propertiesDetailList[index].propertyPhotos![0].thumbnailUrl!),
                                       fit: BoxFit.cover),
                                 ),
                                 child: Column(
@@ -137,12 +138,15 @@ class SearchScreen extends StatelessWidget {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
+
                                               const CircleAvatar(
                                                 radius: 5,
                                                 backgroundColor:
                                                 Color(0xff3EE763),
                                               ),
+
                                               (7.0).addWSpace(),
+
                                               "For Sale".whiteText(
                                                   size: 12,
                                                   fontWeight:
@@ -164,7 +168,7 @@ class SearchScreen extends StatelessWidget {
                                             children: [
 
                                               ctrl.propertiesDetailList[index]
-                                                  .name
+                                                  .alias??""
                                                   .whiteText(
                                                   size: 18,
                                                   fontWeight:
@@ -172,7 +176,7 @@ class SearchScreen extends StatelessWidget {
                                               5.0.addHSpace(),
                                               ("\$${ctrl
                                                   .propertiesDetailList[index]
-                                                  .price}")
+                                                  .listPrice}")
                                                   .toString()
                                                   .whiteText(
                                                   size: 20,
@@ -400,7 +404,6 @@ class SearchScreen extends StatelessWidget {
                   ///Current location button
                   ctrl.viewAsGoogleMap
                       ? Align(
-
                     alignment: Alignment.bottomRight,
                     child: Container(
                       margin: const EdgeInsets.only(right: 20, bottom: 40),
@@ -423,6 +426,8 @@ class SearchScreen extends StatelessWidget {
                   //         alignment: Alignment.bottomRight,
                   //         child: _showModal(context))
                   //     : (0.0).addHSpace(),
+
+                  Obx(() => AppLoader(visible: ctrl.showLoading.value),)
                 ],
               )),
     );

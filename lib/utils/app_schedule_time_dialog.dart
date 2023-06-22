@@ -45,7 +45,7 @@ class AppScheduleTimeDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SearchController>(builder: (ctrl) {
+    return GetBuilder<SearchScreenController>(builder: (ctrl) {
       return WillPopScope(
         onWillPop: () async => false,
         child: AlertDialog(

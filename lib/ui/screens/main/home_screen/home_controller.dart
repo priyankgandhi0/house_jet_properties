@@ -11,7 +11,7 @@ import 'package:house_jet_properties/utils/shared_pref.dart';
 
 
 class HomeScreenController extends GetxController {
-  SearchController searchController = Get.put(SearchController());
+  SearchScreenController searchController = Get.put(SearchScreenController());
 
   @override
   void onInit() {

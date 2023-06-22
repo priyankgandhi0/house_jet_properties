@@ -24,3 +24,22 @@ class AppLoader extends StatelessWidget {
     );
   }
 }
+
+ class AppProgress extends StatelessWidget {
+   const AppProgress({Key? key}) : super(key: key);
+
+   @override
+   Widget build(BuildContext context) {
+     return  Container(
+
+       color: Colors.black.withOpacity(0.3),
+       child: Center(
+
+         child: CircularProgressIndicator(
+           color: app_Orange_FF7448,
+         ),
+       ),
+     );
+   }
+ }
+

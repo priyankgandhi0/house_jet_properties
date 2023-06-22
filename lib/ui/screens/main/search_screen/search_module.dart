@@ -39,7 +39,7 @@ class FullScreenSearchModal extends ModalRoute {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
   ) {
-    return GetBuilder<SearchController>(builder: (ctrl) {
+    return GetBuilder<SearchScreenController>(builder: (ctrl) {
       return Scaffold(
         backgroundColor: app_text_white_ffffff,
         appBar: AppBar(
@@ -166,19 +166,19 @@ class FullScreenSearchModal extends ModalRoute {
                   onTap: () async{
                     LatLng locationData = await ctrl.getLocationData(ctrl.predictions[index].description!);
                     Get.back();
-                    PropertiesDetailModel property =  PropertiesDetailModel(
+                    PropertiesModel property =  PropertiesModel(
                         id:int.parse(ctrl.predictions[index].id??"58"),
-                        name: ctrl.predictions[index].description!,
-                        price: 1801000,
-                        image: 'http://codonnier.tech/dipak/flutter/housejet_property/ambi.png',
-                        isForSale: 1,
-                        description:ctrl.predictions[index].description!,
-                        bedSize: 3,
-                        squareFt: 1200,
-                            address:ctrl.predictions[index].description! ,
-                              bathRoomSize: 2,
-                              lat:locationData.latitude,
-                              long: locationData.longitude,
+                        // name: ctrl.predictions[index].description!,
+                        // price: 1801000,
+                        // image: 'http://codonnier.tech/dipak/flutter/housejet_property/ambi.png',
+                        // isForSale: 1,
+                        // description:ctrl.predictions[index].description!,
+                        // bedSize: 3,
+                        // squareFt: 1200,
+                        //     address:ctrl.predictions[index].description! ,
+                        //       bathRoomSize: 2,
+                        //       lat:locationData.latitude,
+                        //       long: locationData.longitude,
 
                     );
                     ctrl.setInfoWindowModel(property,isFormDrag: true);
@@ -239,19 +239,19 @@ class FullScreenSearchModal extends ModalRoute {
                   onTap: () async{
                     LatLng locationData = await ctrl.getLocationData(ctrl.recentViewedList[index].description!);
                     Get.back();
-                    PropertiesDetailModel property =  PropertiesDetailModel(
+                    PropertiesModel property =  PropertiesModel(
                       id:int.parse(ctrl.recentViewedList[index].id??"58"),
-                      name: ctrl.recentViewedList[index].description!,
-                      price: 1801000,
-                      image: 'http://codonnier.tech/dipak/flutter/housejet_property/ambi.png',
-                      isForSale: 1,
-                      description:ctrl.recentViewedList[index].description!,
-                      bedSize: 3,
-                      squareFt: 1200,
-                      address:ctrl.recentViewedList[index].description! ,
-                      bathRoomSize: 2,
-                      lat:locationData.latitude,
-                      long: locationData.longitude,
+                      // name: ctrl.recentViewedList[index].description!,
+                      // price: 1801000,
+                      // image: 'http://codonnier.tech/dipak/flutter/housejet_property/ambi.png',
+                      // isForSale: 1,
+                      // description:ctrl.recentViewedList[index].description!,
+                      // bedSize: 3,
+                      // squareFt: 1200,
+                      // address:ctrl.recentViewedList[index].description! ,
+                      // bathRoomSize: 2,
+                      // lat:locationData.latitude,
+                      // long: locationData.longitude,
 
 
                     );

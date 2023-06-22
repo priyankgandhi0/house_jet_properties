@@ -22,7 +22,8 @@ class HomeScreen extends StatelessWidget {
         key: ctrl.scaffoldKey,
         bottomNavigationBar: Obx(
           () => Container(
-            decoration: BoxDecoration(boxShadow: [
+            decoration: BoxDecoration(
+                boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
                 spreadRadius: 1,
@@ -46,7 +47,6 @@ class HomeScreen extends StatelessWidget {
                   label: 'Search',
                 ),
                 BottomNavigationBarItem(
-
                     icon: ImageIcon(
                       AssetImage(navigationFavouriteIcon),
                       // color: app_grey_99A7AE,
