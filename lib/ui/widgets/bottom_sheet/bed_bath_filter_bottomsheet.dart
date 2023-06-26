@@ -138,8 +138,13 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                 child: AppButton(
 
-                  onTap: () {},
-                  text: "SEE 85 HOMES",
+                  onTap: ()async{
+                    Get.back();
+                    Get.back();
+                    ctrl.manager = await  ctrl.initClusterManager();
+                    ctrl.manager!.setMapId(ctrl.mapController.mapId);
+                  },
+                  text: "SEE HOMES",
                   textSize: 16,
                   textFontWeight: FontWeight.w600,
                   radius: 50,

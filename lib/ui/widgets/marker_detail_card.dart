@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
+import 'package:house_jet_properties/ui/widgets/loading_builder_comon.dart';
 
 import 'package:house_jet_properties/utils/extension.dart';
 
@@ -64,7 +65,6 @@ class MarkerDetailCard extends StatelessWidget {
                     },
                     itemBuilder: (context, index) => SingleChildScrollView(
                       child: Column(
-
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
@@ -82,9 +82,16 @@ class MarkerDetailCard extends StatelessWidget {
                                       topLeft: Radius.circular(10),
                                     ),
                                     image: DecorationImage(
-                                        image: NetworkImage(
-                                            ctrl.propertiesDetailModel!.propertyPhotos![0].thumbnailUrl!,
-                                        ),
+                                        image: Image.network(
+                                            ctrl.propertiesDetailModel!.propertyPhotos![0].mediumUrl!,
+                                          loadingBuilder:
+                                              (context, child, loadingProgress) {
+                                            return loadingBuilder(context, child, loadingProgress);
+                                          },
+                                          errorBuilder: (context, error, stackTrace) {
+                                            return networkImageErrorBuilder(context, error, stackTrace);
+                                          },
+                                        ).image,
                                         fit: BoxFit.cover),
                                   ),
                                  // child: Image.network(ctrl.propertiesDetailModel!.propertyPhotos![0].thumbnailUrl!),

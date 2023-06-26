@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/properties_detail_screen.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
+import 'package:house_jet_properties/ui/widgets/loading_builder_comon.dart';
 import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/extension.dart';
 import 'package:house_jet_properties/utils/shared_pref.dart';
@@ -49,7 +50,7 @@ class FavouriteScreen extends StatelessWidget {
                       ctrl.imageSliderIndex = 0;
                       ctrl.setInfoWindowModel(ctrl.propertiesDetailList[index],isFormDrag: false);
                       if(preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false){
-                        Get.toNamed(Routes.propertyDetailScreen);
+                        Get.toNamed(Routes.propertyDetailScreen,arguments:ctrl.propertiesDetailList[index].alias);
                       }else{
                         Get.toNamed(Routes.loginScreen);
                       }
@@ -65,11 +66,22 @@ class FavouriteScreen extends StatelessWidget {
 
                         borderRadius: BorderRadiusDirectional.circular(10),
                         image: DecorationImage(
+
                             colorFilter:
                             ColorFilter.mode(Colors.black.withOpacity(0.1),
                                 BlendMode.darken),
-                            image: NetworkImage(
-                                ctrl.propertiesDetailList[index].propertyPhotos![0].thumbnailUrl??""),
+                            image: Image.network(
+
+                                ctrl.propertiesDetailList[index].propertyPhotos!.isNotEmpty ?  ctrl.propertiesDetailList[index].propertyPhotos!.first.mediumUrl!:"",
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                return loadingBuilder(context, child, loadingProgress);
+                              },
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(housePlaceHolder);
+                              },
+                            ).image,
+
                             fit: BoxFit.cover),
                       ),
                       child: Column(
@@ -110,22 +122,23 @@ class FavouriteScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
 
-                                  children: [
-                                    ctrl.propertiesDetailList[index].alias??""
-                                        .whiteText(
-                                            size: 18,
-                                            fontWeight: FontWeight.w600),
-                                    5.0.addHSpace(),
-                                    ("\$${ctrl.propertiesDetailList[index].listPrice??""}")
-                                        .toString()
-                                        .whiteText(
+                                    children: [
+                                      (ctrl.propertiesDetailList[index].alias??"").whiteText(
+                                              size: 18,
+                                              fontWeight: FontWeight.w600),
+                                      5.0.addHSpace(),
+                                      ("\$${ctrl.propertiesDetailList[index].listPrice??""}")
+                                          .toString()
+                                          .whiteText(
 
-                                            size: 20,
-                                            fontWeight: FontWeight.w700),
-                                  ],
+                                              size: 20,
+                                              fontWeight: FontWeight.w700),
+                                    ],
+                                  ),
                                 ),
                                 Image.asset(likeIcon, height: 22),
                               ],

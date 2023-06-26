@@ -5,14 +5,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:house_jet_properties/models/properties_detail.dart';
+import 'package:house_jet_properties/models/properties_model.dart';
 import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/theme/app_strings.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
 import 'package:house_jet_properties/ui/widgets/custom_tab_indicator.dart';
 import 'package:house_jet_properties/utils/extension.dart';
-import '../../../../Theme/app_colors.dart';
 
+import '../../../../Theme/app_colors.dart';
 
 class FullScreenSearchModal extends ModalRoute {
   @override
@@ -67,16 +67,16 @@ class FullScreenSearchModal extends ModalRoute {
             // onChanged: (val) {
             //   ctrl.resultSearch(val);
             // },
-            onChanged:(value) {
-          if (ctrl.debounce?.isActive ?? false) ctrl.debounce!.cancel();
-          ctrl.debounce = Timer(const Duration(milliseconds: 400), () {
-          if (value.isNotEmpty) {
-          ctrl.autoCompleteSearch(value);
-          } else {
-          ctrl.predictions.clear();
-          }
-          });
-          },
+            onChanged: (value) {
+              if (ctrl.debounce?.isActive ?? false) ctrl.debounce!.cancel();
+              ctrl.debounce = Timer(const Duration(milliseconds: 400), () {
+                if (value.isNotEmpty) {
+                  ctrl.autoCompleteSearch(value);
+                } else {
+                  ctrl.predictions.clear();
+                }
+              });
+            },
             cursorColor: Colors.black26,
             controller: ctrl.searchFiledController,
             style: appTextStyleBlack500,
@@ -89,11 +89,7 @@ class FullScreenSearchModal extends ModalRoute {
           actions: [
             IconButton(
               onPressed: () {
-
-                ctrl.clearAllRecently(isForRecently:false,context: context);
-
-
-
+                ctrl.clearAllRecently(isForRecently: false, context: context);
               },
               icon: Image.asset(
                 closeIcon,
@@ -106,10 +102,10 @@ class FullScreenSearchModal extends ModalRoute {
         ),
         body: SingleChildScrollView(
           child: Column(
+
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               DecoratedBox(
                 decoration: BoxDecoration(
                   //This is for background color
@@ -119,13 +115,11 @@ class FullScreenSearchModal extends ModalRoute {
                       bottom: BorderSide(color: app_grey_99A7AE, width: 0.8)),
                 ),
                 child: TabBar(
-
                   controller: ctrl.tabController,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: CustomTabIndicator(
                       color: app_Orange_FFB49C, indicatorHeight: 2),
                   tabs: [
-
                     colorHandle('Buy', ctrl.currentIndex.value, 0),
                     //.appGreyText(size: 14, fontWeight: FontWeight.w500),
                     colorHandle('Rent', ctrl.currentIndex.value, 1),
@@ -155,75 +149,72 @@ class FullScreenSearchModal extends ModalRoute {
               ),
               (15.0).addHSpace(),
 
-              ctrl.predictions.isEmpty ? (0.0).addHSpace() :placesText.appBlackText1B1B1B(
-                      size: 16, fontWeight: FontWeight.w600).paddingSymmetric(horizontal: 20),
+              ctrl.predictions.isEmpty
+                  ? (0.0).addHSpace()
+                  : placesText
+                      .appBlackText1B1B1B(size: 16, fontWeight: FontWeight.w600)
+                      .paddingSymmetric(horizontal: 20),
 
-              ctrl.predictions.isEmpty ? 0.0.addHSpace(): ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: ctrl.predictions.length,
-                itemBuilder: (context, index) => InkWell(
-                  onTap: () async{
-                    LatLng locationData = await ctrl.getLocationData(ctrl.predictions[index].description!);
-                    Get.back();
-                    PropertiesModel property =  PropertiesModel(
-                        id:int.parse(ctrl.predictions[index].id??"58"),
-                        // name: ctrl.predictions[index].description!,
-                        // price: 1801000,
-                        // image: 'http://codonnier.tech/dipak/flutter/housejet_property/ambi.png',
-                        // isForSale: 1,
-                        // description:ctrl.predictions[index].description!,
-                        // bedSize: 3,
-                        // squareFt: 1200,
-                        //     address:ctrl.predictions[index].description! ,
-                        //       bathRoomSize: 2,
-                        //       lat:locationData.latitude,
-                        //       long: locationData.longitude,
-
-                    );
-                    ctrl.setInfoWindowModel(property,isFormDrag: true);
-                    ctrl.setToRecentData(index);
-
-                  },
-                  child: Container(
-
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    child: Column(
-
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        (ctrl.predictions[index].description!).appBlackText1B1B1B(
-                            size: 16, fontWeight: FontWeight.w400),
-                        (5.0).addHSpace(),
-                        "For Sale".appGreyText(size: 14, fontWeight: FontWeight.w400)
-
-
-
-                      ],
+              ctrl.predictions.isEmpty
+                  ? 0.0.addHSpace()
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: ctrl.predictions.length,
+                      itemBuilder: (context, index) => InkWell(
+                        onTap: () async {
+                          LatLng locationData = await ctrl.getLocationData(
+                              ctrl.predictions[index].description!);
+                          Get.back();
+                          PropertiesModel property = PropertiesModel(
+                            id: int.parse(ctrl.predictions[index].id ?? "58"),
+                            // name: ctrl.predictions[index].description!,
+                            // price: 1801000,
+                            // image: 'http://codonnier.tech/dipak/flutter/housejet_property/ambi.png',
+                            // isForSale: 1,
+                            // description:ctrl.predictions[index].description!,
+                            // bedSize: 3,
+                            // squareFt: 1200,
+                            //     address:ctrl.predictions[index].description! ,
+                            //       bathRoomSize: 2,
+                            //       lat:locationData.latitude,
+                            //       long: locationData.longitude,
+                          );
+                          ctrl.setInfoWindowModel(property, isFormDrag: true);
+                          ctrl.setToRecentData(index);
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              (ctrl.predictions[index].description!)
+                                  .appBlackText1B1B1B(
+                                      size: 16, fontWeight: FontWeight.w400),
+                              (5.0).addHSpace(),
+                              "For Sale".appGreyText(
+                                  size: 14, fontWeight: FontWeight.w400)
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              ctrl.predictions.isEmpty ? (0.0).addHSpace(): (30.0).addHSpace(),
+              ctrl.predictions.isEmpty ? (0.0).addHSpace() : (30.0).addHSpace(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   recentlyViewedText.appBlackText1B1B1B(
                       size: 16, fontWeight: FontWeight.w600),
-
-
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       ctrl.clearAllRecently();
                     },
                     child: SizedBox(
-                      child:  clearAllText.appOrangeText600(
+                      child: clearAllText.appOrangeText600(
                           size: 14, fontWeight: FontWeight.w500),
                     ),
                   )
-
                 ],
               ).paddingSymmetric(horizontal: 20),
               // Padding(
@@ -236,11 +227,12 @@ class FullScreenSearchModal extends ModalRoute {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: ctrl.recentViewedList.length,
                 itemBuilder: (context, index) => InkWell(
-                  onTap: () async{
-                    LatLng locationData = await ctrl.getLocationData(ctrl.recentViewedList[index].description!);
+                  onTap: () async {
+                    LatLng locationData = await ctrl.getLocationData(
+                        ctrl.recentViewedList[index].description!);
                     Get.back();
-                    PropertiesModel property =  PropertiesModel(
-                      id:int.parse(ctrl.recentViewedList[index].id??"58"),
+                    PropertiesModel property = PropertiesModel(
+                      id: int.parse(ctrl.recentViewedList[index].id ?? "58"),
                       // name: ctrl.recentViewedList[index].description!,
                       // price: 1801000,
                       // image: 'http://codonnier.tech/dipak/flutter/housejet_property/ambi.png',
@@ -252,27 +244,21 @@ class FullScreenSearchModal extends ModalRoute {
                       // bathRoomSize: 2,
                       // lat:locationData.latitude,
                       // long: locationData.longitude,
-
-
                     );
-                    ctrl.setInfoWindowModel(property,isFormDrag: true);
-
-
+                    ctrl.setInfoWindowModel(property, isFormDrag: true);
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
                     child: Column(
-
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        (ctrl.recentViewedList[index].description!).appBlackText1B1B1B(
-                            size: 16, fontWeight: FontWeight.w400),
+                        (ctrl.recentViewedList[index].description!)
+                            .appBlackText1B1B1B(
+                                size: 16, fontWeight: FontWeight.w400),
                         (5.0).addHSpace(),
-
-                        "For Sale".appGreyText(size: 14, fontWeight: FontWeight.w400),
-
-
+                        "For Sale"
+                            .appGreyText(size: 14, fontWeight: FontWeight.w400),
                       ],
                     ),
                   ),
@@ -312,7 +298,6 @@ class FullScreenSearchModal extends ModalRoute {
               //   leading: Icon(Icons.search),
               //   trailing: Icon(Icons.close),
               // )
-
             ],
           ),
         ),

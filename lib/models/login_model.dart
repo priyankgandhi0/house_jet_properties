@@ -399,7 +399,7 @@ class User {
     acceptedTermsOfUse: json["accepted_terms_of_use"],
     registrationUrl: json["registration_url"],
     type: json["type"],
-    rating: json["rating"],
+    rating: json["rating"].toString(),
     origin: json["origin"],
     loginTime: json["login_time"] == null ? null : DateTime.parse(json["login_time"]),
     countLogin: json["count_login"],

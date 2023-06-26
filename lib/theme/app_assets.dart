@@ -29,7 +29,7 @@ String markerImage = 'assets/images/ig_marker.png';
 String markerImageBright = 'assets/images/ig_marker_bright.png';
 
 String closeIcon = 'assets/icons/ic_close.png';
-
+String cautionIcon = 'assets/icons/ic_caution.png';
 //  Filter Screen
 String homeIcon = 'assets/icons/ic_home.png';
 String townHouseIcon = 'assets/icons/ic_town_house.png';
@@ -46,3 +46,4 @@ String icArrowDownIcon = 'assets/icons/ic_arrow_dropdown.png';
 String bedIcon = 'assets/icons/ic_bed.png';
 String bathRoomIcon = 'assets/icons/ic_bathroom.png';
 String sqftIcon = 'assets/icons/ic_sqft.png';
+String housePlaceHolder = 'assets/images/house_place_holder.png';

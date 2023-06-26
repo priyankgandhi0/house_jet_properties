@@ -19,7 +19,7 @@ class AppListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
-      child: Container(
+      child: SizedBox(
         height: 50,
         child: ListTile(
           tileColor: app_foreground_color_F6F8FB,

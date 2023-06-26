@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:house_jet_properties/constants/request_const.dart';
 import 'package:house_jet_properties/ui/widgets/app_button.dart';
 import 'package:house_jet_properties/ui/widgets/app_loader.dart';
 import 'package:house_jet_properties/ui/widgets/startup_text_field.dart';
@@ -55,7 +56,7 @@ var signupKey = GlobalKey<FormState>();
                                   isSecureEntry: false,
                                   validator: (val){
                                     if(ctrl.userFirstNameController.text.isEmpty){
-                                      return "please enter valid firstName";
+                                      return "Enter valid firstname";
                                     }
                                     return null;
                                   },
@@ -69,7 +70,7 @@ var signupKey = GlobalKey<FormState>();
                                   isSecureEntry: false,
                                   validator: (val){
                                     if(ctrl.userLastNameController.text.isEmpty){
-                                      return "please enter valid lastname";
+                                      return "Enter valid lastname";
                                     }
                                     return null;
                                   },
@@ -84,8 +85,10 @@ var signupKey = GlobalKey<FormState>();
                             hintText: 'Enter Email',
                             isSecureEntry: false,
                             validator: (val){
-                              if(ctrl.userEmailController.text.isEmpty){
-                                return "please enter valid email";
+                              if(ctrl.userEmailController.text.trim().isEmpty){
+                                return "Enter valid email";
+                              }else if(!ctrl.userEmailController.text.isValidEmail()){
+                                return "Enter valid email";
                               }
                               return null;
                             },
@@ -98,7 +101,7 @@ var signupKey = GlobalKey<FormState>();
                             isSecureEntry: false,
                             validator: (val){
                               if(ctrl.passwordController.text.isEmpty){
-                                return "please enter valid password";
+                                return "Please enter valid mobile no";
                               }
                               return null;
                             },
@@ -120,27 +123,15 @@ var signupKey = GlobalKey<FormState>();
                           AppButton(
                             text: 'SIGN UP',
                             onTap: () {
-                              if (ctrl.userFirstNameController.text.trim().isEmpty) {
-                                showAppSnackBar("Please Enter First Name");
-                              } else if (ctrl.userLastNameController.text
-                                  .trim()
-                                  .isEmpty) {
-                                // showAppSnackBar("Please Enter Password");
-                                showAppSnackBar("Please Enter Last Name");
-                              } else if(ctrl.userEmailController.text
-                                  .trim()
-                                  .isEmpty){
+                              FocusScope.of(context).unfocus();
+                              if (hasInternet.value) {
 
-                                showAppSnackBar("Please Enter Email");
-                                // Get.off(() => HomeScreen());
-                              } else if(ctrl.passwordController.text.trim().isEmpty ||ctrl.passwordController.text.length <= 10  ){
-                                showAppSnackBar("Please Enter valid Mobile No");
-                                // Get.off(() => HomeScreen());
+                                if(signupKey.currentState!.validate()){
+                                  ctrl.signUp();
+                                }
+                              } else {
+                                showAppSnackBar("Internet connection is required");
                               }
-                              else{
-                                 ctrl.signUp();
-                              }
-                              // printData(tittle: 'tittle');
 
                             },
                           ),

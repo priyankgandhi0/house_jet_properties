@@ -925,6 +925,7 @@ class ForSaleScreen extends StatelessWidget {
                             tileTileWidget: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+
                                 garageText.appBlackText1B1B1B(
                                     fontWeight: FontWeight.w500, size: 16),
                                 ctrl.isGarageSpots

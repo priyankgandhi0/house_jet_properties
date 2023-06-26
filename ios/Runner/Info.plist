@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>House Jet Property needs access to location to show your location in app.</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -22,7 +26,19 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array/>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>House Jet Property requires access to the camera.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>House Jet Property does not require access to the microphone.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>House Jet Property requires access to the photo library.</string>
+	<key>NSUserDefaults</key>
+	<string></string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -43,23 +59,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key> Privacy - Location Always and When In Use Usage Description</key>
-	<string>House Jet Property needs access to location to show your location in app.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>House Jet Property requires access to the photo library.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>House Jet Property requires access to the camera.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>House Jet Property does not require access to the microphone.</string>
-	<key>NSUserDefaults</key>
-	<string></string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array/>
 	<key>tel</key>
 	<string></string>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>

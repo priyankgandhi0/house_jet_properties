@@ -70,6 +70,8 @@ class LoginController extends GetxController {
           }
 
           Get.offAllNamed(Routes.homeScreen);
+        }else{
+          showAppSnackBar(data.error);
         }
         showLoading.value = false;
     } catch (e) {

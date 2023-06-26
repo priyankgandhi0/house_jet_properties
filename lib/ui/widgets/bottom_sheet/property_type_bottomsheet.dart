@@ -16,7 +16,7 @@ class PropertyTypeBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SearchScreenController>(
       builder: (ctrl) => Container(
-        height: 800,
+
         decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadiusDirectional.only(
@@ -27,226 +27,261 @@ class PropertyTypeBottomSheet extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
 
-              (10.0).addHSpace(),
+
               Container(
                 width: 70,
                 height: 4,
+                margin: EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(10),
                     shape: BoxShape.rectangle,
                     color: const Color(0xffC5CFD3)),
               ),
-              (20.0).addHSpace(),
-              Stack(
-                alignment: Alignment.center,
+
+              Row(
+               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
 
                   "Property Type".appBlackText1B1B1B(
                       size: 20, fontWeight: FontWeight.w600),
 
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: InkWell(
-                        onTap: () => Navigator.pop(context),
-                        child: Image.asset(closeIcon, height: 25)),
-                  ),
+                  InkWell(
+                      onTap: () => Navigator.pop(context),
+                      child: Image.asset(closeIcon, height: 25)),
                 ],
-              ),
-              (30.0).addHSpace(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  "Single Family Home".toString().appBlackText1B1B1B(
-                      size: 16, fontWeight: FontWeight.w500),
-                  SizedBox(
-                    width: 15,
-                    height: 15,
-                    child: Checkbox(
-                      value: ctrl.singleFamilyHomeCheckBox,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(2),
+              ).paddingOnly( top: 20,bottom: 10,right: 10),
+
+                SingleChildScrollView(
+
+                  child: Column(
+                    children: [
+                      ...ctrl.propertyTypeList.map((e) => Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: [
+
+                          e.subTitleText.appBlackText1B1B1B(
+                              size: 16, fontWeight: FontWeight.w500),
+                          Radio<String>(
+                            materialTapTargetSize:
+                            MaterialTapTargetSize.shrinkWrap,
+                            value: e.subTitleText,
+                            groupValue:
+                            ctrl.propertyType.subTitleText,
+                            fillColor:
+                            MaterialStateColor.resolveWith(
+                                    (states) => app_Orange_FF7448),
+                            //<-- SEE HERE
+                            onChanged: (String? value) {
+                              ctrl.propertyType.subTitleText = value!;
+                              ctrl.update();
+                            },
+                          ),
+                        ],
+                      ).paddingOnly(left: 0, right: 0,)),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 20, left: 20, bottom: 20, top: 10),
+                        child: AppButton(
+                          onTap: () async{
+                            Get.back();
+                            ctrl.manager = await  ctrl.initClusterManager();
+                            ctrl.manager!.setMapId(ctrl.mapController.mapId);
+                          },
+                          text: "SEE 85 HOMES",
+                          textSize: 16,
+                          textFontWeight: FontWeight.w600,
+                          radius: 50,
                         ),
-                      ),
-                      fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
-                      onChanged: (value) {
-                        ctrl.singleFamilyHomeCheckBox = value!;
-                        ctrl.update();
-                      },
-                    ),
+                      )
+                    ],
                   ),
-                ],
-              ),
-              (10.0).addHSpace(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  "Condo".toString().appBlackText1B1B1B(
-                      size: 16, fontWeight: FontWeight.w500),
-                  SizedBox(
-                    width: 15,
-                    height: 15,
-                    child: Checkbox(
-                      value: ctrl.condoCheckBox,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(2),
-                        ),
-                      ),
-                      fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
-                      onChanged: (value) {
+                )
+              // (30.0).addHSpace(),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     "Single Family Home".toString().appBlackText1B1B1B(
+              //         size: 16, fontWeight: FontWeight.w500),
+              //     SizedBox(
+              //       width: 15,
+              //       height: 15,
+              //       child: Checkbox(
+              //         value: ctrl.singleFamilyHomeCheckBox,
+              //         shape: const RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //             Radius.circular(2),
+              //           ),
+              //         ),
+              //         fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
+              //         onChanged: (value) {
+              //           ctrl.singleFamilyHomeCheckBox = value!;
+              //           ctrl.update();
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // (10.0).addHSpace(),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     "Condo".toString().appBlackText1B1B1B(
+              //         size: 16, fontWeight: FontWeight.w500),
+              //     SizedBox(
+              //       width: 15,
+              //       height: 15,
+              //       child: Checkbox(
+              //         value: ctrl.condoCheckBox,
+              //         shape: const RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //             Radius.circular(2),
+              //           ),
+              //         ),
+              //         fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
+              //         onChanged: (value) {
+              //
+              //           ctrl.condoCheckBox = value!;
+              //           ctrl.update();
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // (10.0).addHSpace(),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //
+              //     "Townhome".toString().appBlackText1B1B1B(
+              //         size: 16, fontWeight: FontWeight.w500),
+              //     SizedBox(
+              //       width: 15,
+              //       height: 15,
+              //       child: Checkbox(
+              //         value: ctrl.townhomeCheckBox,
+              //         shape: const RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //             Radius.circular(2),
+              //           ),
+              //         ),
+              //         fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
+              //         onChanged: (value) {
+              //           ctrl.townhomeCheckBox = value!;
+              //           ctrl.update();
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // (10.0).addHSpace(),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     "Multi Family Home".toString().appBlackText1B1B1B(
+              //         size: 16, fontWeight: FontWeight.w500),
+              //     SizedBox(
+              //
+              //       width: 15,
+              //       height: 15,
+              //       child: Checkbox(
+              //         value: ctrl.multiFamilyHomeCheckBox,
+              //         shape: const RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //
+              //             Radius.circular(2),
+              //           ),
+              //         ),
+              //         fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
+              //         onChanged: (value) {
+              //
+              //           ctrl.multiFamilyHomeCheckBox = value!;
+              //           ctrl.update();
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // (10.0).addHSpace(),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     "Mobile".toString().appBlackText1B1B1B(
+              //
+              //         size: 16, fontWeight: FontWeight.w500),
+              //     SizedBox(
+              //       width: 15,
+              //       height: 15,
+              //       child: Checkbox(
+              //         value: ctrl.mobileCheckBox,
+              //         shape: const RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //             Radius.circular(2),
+              //           ),
+              //         ),
+              //         fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
+              //         onChanged: (value) {
+              //           ctrl.mobileCheckBox = value!;
+              //           ctrl.update();
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // (10.0).addHSpace(),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     "Farm".toString().appBlackText1B1B1B(
+              //         size: 16, fontWeight: FontWeight.w500),
+              //     SizedBox(
+              //       width: 15,
+              //       height: 15,
+              //       child: Checkbox(
+              //         value: ctrl.farmCheckBox,
+              //         shape: const RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //
+              //             Radius.circular(2),
+              //           ),
+              //         ),
+              //         fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
+              //         onChanged: (value) {
+              //           ctrl.farmCheckBox = value!;
+              //           ctrl.update();
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // (10.0).addHSpace(),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     "Land".toString().appBlackText1B1B1B(
+              //         size: 16, fontWeight: FontWeight.w500),
+              //     SizedBox(
+              //       width: 15,
+              //       height: 15,
+              //       child: Checkbox(
+              //         value: ctrl.lanCheckBox,
+              //         shape: const RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //             Radius.circular(2),
+              //           ),
+              //         ),
+              //         fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
+              //         onChanged: (value) {
+              //           ctrl.lanCheckBox = value!;
+              //           ctrl.update();
+              //         },
+              //       ),
+              //     ),
+              //
+              //   ],
+              // ),
 
-                        ctrl.condoCheckBox = value!;
-                        ctrl.update();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              (10.0).addHSpace(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
 
-                  "Townhome".toString().appBlackText1B1B1B(
-                      size: 16, fontWeight: FontWeight.w500),
-                  SizedBox(
-                    width: 15,
-                    height: 15,
-                    child: Checkbox(
-                      value: ctrl.townhomeCheckBox,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(2),
-                        ),
-                      ),
-                      fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
-                      onChanged: (value) {
-                        ctrl.townhomeCheckBox = value!;
-                        ctrl.update();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              (10.0).addHSpace(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  "Multi Family Home".toString().appBlackText1B1B1B(
-                      size: 16, fontWeight: FontWeight.w500),
-                  SizedBox(
-
-                    width: 15,
-                    height: 15,
-                    child: Checkbox(
-                      value: ctrl.multiFamilyHomeCheckBox,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-
-                          Radius.circular(2),
-                        ),
-                      ),
-                      fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
-                      onChanged: (value) {
-
-                        ctrl.multiFamilyHomeCheckBox = value!;
-                        ctrl.update();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              (10.0).addHSpace(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  "Mobile".toString().appBlackText1B1B1B(
-
-                      size: 16, fontWeight: FontWeight.w500),
-                  SizedBox(
-                    width: 15,
-                    height: 15,
-                    child: Checkbox(
-                      value: ctrl.mobileCheckBox,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(2),
-                        ),
-                      ),
-                      fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
-                      onChanged: (value) {
-                        ctrl.mobileCheckBox = value!;
-                        ctrl.update();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              (10.0).addHSpace(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  "Farm".toString().appBlackText1B1B1B(
-                      size: 16, fontWeight: FontWeight.w500),
-                  SizedBox(
-                    width: 15,
-                    height: 15,
-                    child: Checkbox(
-                      value: ctrl.farmCheckBox,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-
-                          Radius.circular(2),
-                        ),
-                      ),
-                      fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
-                      onChanged: (value) {
-                        ctrl.farmCheckBox = value!;
-                        ctrl.update();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              (10.0).addHSpace(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  "Land".toString().appBlackText1B1B1B(
-                      size: 16, fontWeight: FontWeight.w500),
-                  SizedBox(
-                    width: 15,
-                    height: 15,
-                    child: Checkbox(
-                      value: ctrl.lanCheckBox,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(2),
-                        ),
-                      ),
-                      fillColor: MaterialStatePropertyAll(app_Orange_FF7448),
-                      onChanged: (value) {
-                        ctrl.lanCheckBox = value!;
-                        ctrl.update();
-                      },
-                    ),
-                  ),
-
-                ],
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(
-                    right: 20, left: 20, bottom: 40, top: 30),
-                child: AppButton(
-                  onTap: () {},
-                  text: "SEE 85 HOMES",
-                  textSize: 16,
-                  textFontWeight: FontWeight.w600,
-                  radius: 50,
-                ),
-              )
             ],
           ),
         ),

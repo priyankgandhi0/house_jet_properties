@@ -50,9 +50,10 @@ class LoginScreen extends StatelessWidget {
                           hintText: 'Enter Email',
                           isSecureEntry: false,
                           validator: (val){
-                            if (!RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                .hasMatch(ctrl.userEmailController.text)) {
+                            if (ctrl.userEmailController.text.trim().isEmpty) {
+                              return  "Enter valid email";
+                            }
+                            else if (!ctrl.userEmailController.text.isValidEmail()) {
                               return  "Enter valid email";
                             }
                             return null;
@@ -66,8 +67,9 @@ class LoginScreen extends StatelessWidget {
                           controller: ctrl.passwordController,
                           hintText: "Enter Mobile No",
                           validator: (val){
-                            if (ctrl.passwordController.text.trim().isEmpty) {
-                              return  "Enter valid password";
+
+                              if (ctrl.passwordController.text.trim().isEmpty) {
+                              return  "Enter valid mobile no";
                             }
                             return null;
                           },
@@ -101,21 +103,23 @@ class LoginScreen extends StatelessWidget {
                                           width: 1.0, color: app_Orange_FF7448),
                                     ),
                                   ),
-                                  RichText(
-                                      text: TextSpan(children: [
-                                    TextSpan(
-                                        text: 'I agree to the ',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: app_text_black_1B1B1B,
-                                            fontWeight: FontWeight.w400)),
-                                    TextSpan(
-                                        text: 'Terms of Service',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: app_Orange_FF7448,
-                                            fontWeight: FontWeight.w400))
-                                  ])),
+                                  Expanded(
+                                    child: RichText(
+                                        text: TextSpan(children: [
+                                      TextSpan(
+                                          text: 'I agree to the ',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: app_text_black_1B1B1B,
+                                              fontWeight: FontWeight.w400)),
+                                      TextSpan(
+                                          text: 'Terms of Service',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: app_Orange_FF7448,
+                                              fontWeight: FontWeight.w400))
+                                    ])),
+                                  ),
                                 ],
                               ),
                             ),
@@ -157,6 +161,7 @@ class LoginScreen extends StatelessWidget {
                           onTap: () {
                             // printData(tittle: 'tittle');
                             // ctrl.signIn();
+                            FocusScope.of(context).unfocus();
 
                             if (hasInternet.value) {
 

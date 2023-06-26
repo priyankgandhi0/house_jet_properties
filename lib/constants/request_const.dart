@@ -40,7 +40,7 @@ class MethodNames {
 class RequestParam {
   static const service = "Service"; // -> pass method name
   static const showError = "show_error"; // -> bool in String
-  static const showDebugPhotoStorm = "log-view=1&XDEBUG_SESSION_START=PHPSTORM";
+  static const showDebugPhotoStorm = "?log-view=1&XDEBUG_SESSION_START=PHPSTORM";
 }
 
 class RequestHeaderKey {

@@ -12,7 +12,10 @@ import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:house_jet_properties/api/repositories/home_screen_repo.dart';
 import 'package:house_jet_properties/constants/request_const.dart';
-import 'package:house_jet_properties/models/properties_detail.dart';
+import 'package:house_jet_properties/models/home_type_model.dart';
+
+import 'package:house_jet_properties/models/properties_detail_model.dart';
+import 'package:house_jet_properties/models/properties_model.dart';
 import 'package:house_jet_properties/models/response_item_model/response_item.dart';
 import 'package:house_jet_properties/theme/app_colors.dart';
 import 'package:house_jet_properties/ui/widgets/app_price_slider.dart';
@@ -31,16 +34,12 @@ class SearchScreenController extends GetxController
     with GetSingleTickerProviderStateMixin {
   @override
   void onInit() async{
-
     googlePlace = googleplace.GooglePlace(googlePlaceApiKey);
      setData();
     configTabBar();
-
     configCall();
     // _getPlaces();
-
-    manager = await _initClusterManager();
-
+    manager = await initClusterManager();
     super.onInit();
   }
 
@@ -98,39 +97,19 @@ class SearchScreenController extends GetxController
       tilt: 0);
 
   late GoogleMapController mapController;
-
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
-  // Place? placeDetailes;
-
   PropertiesModel? propertiesDetailModel;
-
-  // List<Place> placeList = [];
-  // List<Place> nearByProperty = [];
+  PropertyByAlias? propertiesDetailByAliasName;
   Timer? debounce;
   List<PropertiesModel> propertiesDetailList = [];
-
-
   List<PropertiesModel> searchTempList = [];
-
   TextEditingController searchFiledController = TextEditingController();
   TextEditingController scheduleTimeCtr = TextEditingController();
   Set<Marker> markers = {};
-
-
-
-
   Map<MarkerId, Marker> markers2 = <MarkerId, Marker>{};
-
    ClusterManager? manager;
-
   Position? currentPosition;
-
-  // Set<Polygon> polygon = {};
-  // Set<Circle> circles = {};
-
-  LatLng? cicleMark;
-
+  HomeTypeModel propertyType = HomeTypeModel();
   int imageSliderIndex = 0;
   String selectedMarkerId = "";
   int selectedMarkerIndex = 0;
@@ -159,14 +138,44 @@ class SearchScreenController extends GetxController
   List filterTextList = ["Filter", "Price", "Bed/Bath", "Property"];
 
   List bedBathList = ["Any", "01", "02", "03", "4+"];
-  List propertyTypeList = [
-    "Single Family Home",
-    "Condo",
-    "Townhome",
-    "Multi Family Home",
-    "Mobile",
-    "Farm",
-    "Land"
+  // List propertyTypeList = [
+  //   "Single Family Home",
+  //   "Condo",
+  //   "Townhome",
+  //   "Multi Family Home",
+  //   "Mobile",
+  //   "Farm",
+  //   "Land"
+  // ];
+
+  List<HomeTypeModel> propertyTypeList = [
+    HomeTypeModel(
+      subTitleText: "Single Family Home",
+      isSeleacted: true,
+    ),
+    HomeTypeModel(
+      subTitleText: "Condo",
+      isSeleacted: true,
+    ),
+    HomeTypeModel(
+      subTitleText: "Townhome",
+      isSeleacted: true,
+    ),
+    HomeTypeModel(
+      subTitleText: "Multi Family Home",
+      isSeleacted: true,
+    ),
+    HomeTypeModel(
+      subTitleText: "Mobile",
+      isSeleacted: true,
+    ),
+    HomeTypeModel(
+      subTitleText: "Farm",
+      isSeleacted: true,
+    ),HomeTypeModel(
+      subTitleText: "Land",
+      isSeleacted: true,
+    ),
   ];
 
   RxList<googleplace.AutocompletePrediction> predictions = <googleplace.AutocompletePrediction>[].obs;
@@ -189,11 +198,6 @@ class SearchScreenController extends GetxController
     }
 
   }
-
-
-
-
-
   resultSearch(String val) {
 
     searchTempList = propertiesDetailList
@@ -202,9 +206,6 @@ class SearchScreenController extends GetxController
 
     update();
   }
-
-
-
   RxInt currentIndex = 0.obs;
 
   onIndexChange(int index) {
@@ -302,10 +303,6 @@ class SearchScreenController extends GetxController
     update();
   }
 
-  /*void setInfoWindowModel(Place placeDetail) {
-    placeDetailes = placeDetail;
-    update();
-  }*/
 
 
   getLocationData(String address)async{
@@ -321,7 +318,6 @@ class SearchScreenController extends GetxController
   }
 
   setToRecentData(int index){
-
     if(recentViewedList.isNotEmpty && !recentViewedList.any((c) => c.placeId == predictions[index].placeId)){
       recentViewedList.insert(0, predictions[index]);
     }if(recentViewedList.isNotEmpty && recentViewedList.any((c) => c.placeId == predictions[index].placeId)){
@@ -397,7 +393,6 @@ class SearchScreenController extends GetxController
 
 
     if (isFormDrag) {
-      // selectedMarkerIndex = index??0;
       selectedMarkerId = placeDetail!.id.toString();
     }
 
@@ -406,44 +401,16 @@ class SearchScreenController extends GetxController
 
   void _showMarkers(Set<Marker> newMarkers) {
     if (kDebugMode) {
-
       print('Updated ${newMarkers.length} markers');
     }
     markers = newMarkers;
-    // polygon = {
-    //   Polygon(
-    //     polygonId: const PolygonId("1"),
-    //
-    //
-    //
-    //
-    //     points: const [
-    //       LatLng(21.2497222,72.6946928),
-    //       //LatLng(21.2435317,72.8701549),
-    //        LatLng(21.2702262,72.8951576),
-    //        LatLng(21.2702262,72.8951576),
-    //       // LatLng(21.2501985,72.8698966),
-    //       LatLng(21.2045978,72.9248321),
-    //       LatLng(21.1397199,72.8107377),
-    //
-    //     ],
-    //       visible: true,
-    //       geodesic: false,
-    //
-    //
-    //     strokeWidth: 10,
-    //     strokeColor: app_Orange_FF7448,
-    //     fillColor: app_divider_E1EBF0.withOpacity(0.1)
-    //   )
-    // };
-
     update();
 
   }
 
 
 
-  Future<ClusterManager<ClusterItem>> _initClusterManager() async{
+  Future<ClusterManager<ClusterItem>> initClusterManager() async{
     await getAllProperties();
     return ClusterManager<PropertiesModel>(
       propertiesDetailList,
@@ -515,40 +482,7 @@ class SearchScreenController extends GetxController
 
   ];
 
-  // List<LatLng> latLen = [
-  //   // LatLng(19.0759837, 72.8776559),
-  //   // LatLng(28.679079, 77.069710),
-  //   // LatLng(26.850000, 80.949997),
-  //   // LatLng(24.879999, 74.629997),
-  //   // LatLng(16.166700, 74.833298),
-  //   // LatLng(12.971599, 77.594563),
-  //   // LatLng(19.0759837, 72.8776559),
-  // LatLng(34.2188174,-118.574612),
-  // LatLng(34.219768,-118.5828756),
-  // LatLng(34.2247554,-118.6000859),
-  // LatLng(34.2391913,-118.6078768),
-  // LatLng(34.2564872,-118.617112),
-  // LatLng(34.27916,-118.606056),
-  // LatLng(34.2986712,-118.584522),
-  // LatLng(34.2962003,-118.5609489),
-  // LatLng(34.2871879,-118.5518242),
-  // LatLng(34.2321442,-118.5450906),
-  // LatLng(34.2261774,-118.5510262),
-  // LatLng(34.2197353,-118.5689503),
-  // LatLng(34.2188174,-118.574612),
-  //    const LatLng(21.1226839,
-  //      72.8393287,),
-  //    const LatLng(21.2431667,
-  //      72.8692053,),
-  //    const LatLng(21.2421801,
-  //        72.8724391,),
-  //    const LatLng(21.2478622,
-  //        72.894569,),
-  //   const LatLng(21.1226839,
-  //     72.8393287,),
-  //   //  const LatLng(22.3315748, 70.65689,),
-  //   // const LatLng(21.1226840, 72.8393297,),
-  // ];
+
 
 
   setStartCap()async{
@@ -619,7 +553,7 @@ class SearchScreenController extends GetxController
                     //     lang: cluster.items.first.long);
                     imageSliderIndex = 0;
                     if(preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false){
-                      Get.toNamed(Routes.propertyDetailScreen);
+                      Get.toNamed(Routes.propertyDetailScreen,arguments:propertiesDetailModel!.alias);
                     }else{
                       Get.toNamed(Routes.loginScreen);
                     }
@@ -629,18 +563,6 @@ class SearchScreenController extends GetxController
                   child: MarkerDetailCard(),
                 ),
               );
-/*          Get.bottomSheet(
-                InkWell(
-                  onTap: () {
-                    getNearbyLatLong(
-                        lat: cluster.items.first.lat,
-                        lang: cluster.items.first.lang);
-                    imageSliderIndex = 0;
-                    Get.to(PropertiesDetail());
-                  },
-                  child: MarkerDetailCard(),
-                ),
-              );*/
             }
           },
           icon: cluster.isMultiple
@@ -715,25 +637,7 @@ class SearchScreenController extends GetxController
 
 
 
-  /*getNearbyLatLong({required double lat, required double lang}) {
-    nearByProperty.clear();
-    Properties data = Properties(data: propertyDetailes);
 
-    for (var element in data.data) {
-      final distanceInMeters =
-      Geolocator.distanceBetween(lat, lang, element.lat, element.lang);
-
-      if (distanceInMeters / 1000 < 5 && lat != element.lat) {
-        nearByProperty.add(
-          Place(
-              name: element.name,
-              address: element.address,
-              lat: element.lat,
-              lang: element.lang),
-        );
-      }
-    }
-  }*/
 
 
   getAllProperties() async {
@@ -742,18 +646,17 @@ class SearchScreenController extends GetxController
     try {
       ResponseItem result;
       result = await homeRepo.getAllProperties(
-          bathroomsCount: bedBathList[filterBathroomIndex],
-          bedroomsCount: filterBedroomIndex == 0?"01": bedBathList[filterBedroomIndex],
-          priceRangeList: [priceStartValue,priceEndValue],
-          subType: ""
+          bathroomsCount: filterBathroomIndex == 0 ?"01":int.parse(bedBathList[filterBathroomIndex]),
+          bedroomsCount: filterBedroomIndex == 0?"01": int.parse(bedBathList[filterBedroomIndex]),
+          priceRangeList: [formatNumber(priceStartValue.toInt()),
+            formatNumber(priceEndValue.toInt())
+            ,],
+          subType:propertyType.subTitleText
       );
       GetAllPropertiesModel data = GetAllPropertiesModel.fromJson(result.data);
       propertiesDetailList = data.properties!;
-
-
       showLoading.value = false;
       print(json.encode(result.data));
-      debugPrint("Completed");
     } catch (e) {
       debugPrint("Catch Data of get all properties ----> $e");
       showLoading.value = true;
@@ -761,28 +664,21 @@ class SearchScreenController extends GetxController
     }
     update();
   }
-  getPropertiesByAlias() async {
+  getPropertiesByAlias(String aliasName) async {
     showLoading.value = true;
     update();
     try {
       ResponseItem result;
-      result = await homeRepo.getAllProperties(
-          bathroomsCount: bedBathList[filterBathroomIndex],
-          bedroomsCount: filterBedroomIndex == 0?"01": bedBathList[filterBedroomIndex],
-          priceRangeList: [priceStartValue,priceEndValue],
-          subType: ""
-      );
-      GetAllPropertiesModel data = GetAllPropertiesModel.fromJson(result.data);
-      propertiesDetailList = data.properties!;
-
+      result = await homeRepo.getPropertyByAlias(aliasName: aliasName);
+      PropertyByAlias data = PropertyByAlias.fromJson(result.data["property"]);
+      if(data.id != null){
+        propertiesDetailByAliasName = data;
+      }
 
       showLoading.value = false;
-      print(json.encode(result.data));
-      debugPrint("Completed");
     } catch (e) {
-      debugPrint("Catch Data of get all properties ----> $e");
-      showLoading.value = true;
-
+      debugPrint("Catch Data of properties by alias ----> $e");
+      showLoading.value = false;
     }
     update();
   }

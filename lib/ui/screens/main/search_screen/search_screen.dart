@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:house_jet_properties/theme/app_assets.dart';
-
-import 'package:house_jet_properties/ui/screens/main/properties_detail_screen/properties_detail_screen.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_module.dart';
 import 'package:house_jet_properties/ui/screens/main/search_screen/search_screen_controller.dart';
 import 'package:house_jet_properties/ui/widgets/app_loader.dart';
+import 'package:house_jet_properties/ui/widgets/loading_builder_comon.dart';
+import 'package:house_jet_properties/ui/widgets/no_data_found.dart';
 import 'package:house_jet_properties/utils/app_routes.dart';
 import 'package:house_jet_properties/utils/extension.dart';
-import 'package:house_jet_properties/utils/map_utils.dart';
 import 'package:house_jet_properties/utils/shared_pref.dart';
-
-
 import '../../../../theme/app_colors.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -24,6 +21,7 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return GetBuilder<SearchScreenController>(
+
       builder: (ctrl) =>
           Scaffold(
               key: searchController.scaffoldKey,
@@ -31,7 +29,7 @@ class SearchScreen extends StatelessWidget {
               body: Stack(
                 children: [
                   ctrl.viewAsGoogleMap
-                      ? ctrl.manager == null?SizedBox(): GoogleMap(
+                      ? ctrl.manager == null ? NoDataFoundWidget(): GoogleMap(
                     onTap: (argument) {
                       if (ctrl.isBottomSheetOpen) {
                         Navigator.pop(context);
@@ -46,35 +44,13 @@ class SearchScreen extends StatelessWidget {
                     myLocationButtonEnabled: false,
                     mapToolbarEnabled: false,
                     initialCameraPosition: ctrl.cameraPosition,
-                    // polylines:  {
-                    //    Polyline(
-                    //   polylineId: PolylineId('1'),
-                    //   points: ctrl.latLen,
-                    //   width: 2,
-                    //
-                    //   // patterns: [
-                    //   //   PatternItem.dot,
-                    //   //   PatternItem.dash(1),
-                    //   //   PatternItem.gap(1)],
-                    //   patterns: [
-                    //   PatternItem.dash(25),
-                    //   PatternItem.gap(8),
-                    //
-                    //   ],
-                    //   startCap: Cap.roundCap,
-                    //   endCap: Cap.roundCap,
-                    //   jointType: JointType.round,
-                    //   color: app_Orange_FF7448,
-                    //     ),
-                    // },
                     onMapCreated: (GoogleMapController controller) {
-                      ctrl.manager!.setMapId(controller.mapId);
+                       ctrl.manager!.setMapId(controller.mapId);
                       ctrl.mapController = controller;
+                      ctrl.update();
                       // ctrl.controller.complete(controller);
                     },
                     markers: ctrl.markers,
-                    // circles: ctrl.circles,
-                    //  polygons: ctrl.polygon,
                     onCameraMove: (position) {
                       ctrl.manager!.onCameraMove(position);
                     },
@@ -95,13 +71,12 @@ class SearchScreen extends StatelessWidget {
                                     ctrl.propertiesDetailList[index]);
                                 if (preferences.getBool(
                                     SharedPreference.IS_LOGGED_IN) ?? false) {
-                                  Get.toNamed(Routes.propertyDetailScreen);
+                                  Get.toNamed(Routes.propertyDetailScreen,arguments:ctrl.propertiesDetailList[index].alias );
                                 } else {
                                   Get.toNamed(Routes.loginScreen);
                                 }
                               },
                               child: Container(
-
                                 height: 210,
                                 margin: const EdgeInsets.symmetric(
                                   horizontal: 20,
@@ -113,15 +88,21 @@ class SearchScreen extends StatelessWidget {
                                       colorFilter: ColorFilter.mode(
                                           Colors.black.withOpacity(0.1),
                                           BlendMode.darken),
-                                      image: NetworkImage(ctrl
-                                          .propertiesDetailList[index].propertyPhotos![0].thumbnailUrl!),
+                                      image: Image.network(
+                                          ctrl.propertiesDetailList[index].propertyPhotos![0].thumbnailUrl??"",
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          return loadingBuilder(context, child, loadingProgress);
+                                        },
+                                        errorBuilder: (context, error, stackTrace) {
+                                          return networkImageErrorBuilder(context, error, stackTrace);
+                                        },
+                                      ).image,
                                       fit: BoxFit.cover),
                                 ),
                                 child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(15.0),
@@ -167,18 +148,12 @@ class SearchScreen extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                             children: [
 
-                                              ctrl.propertiesDetailList[index]
-                                                  .alias??""
-                                                  .whiteText(
+                                              (ctrl.propertiesDetailList[index].alias??"").whiteText(
                                                   size: 18,
                                                   fontWeight:
                                                   FontWeight.w600),
                                               5.0.addHSpace(),
-                                              ("\$${ctrl
-                                                  .propertiesDetailList[index]
-                                                  .listPrice}")
-                                                  .toString()
-                                                  .whiteText(
+                                              ("\$${ctrl.propertiesDetailList[index].listPrice}").toString().whiteText(
                                                   size: 20,
                                                   fontWeight:
                                                   FontWeight.w700),

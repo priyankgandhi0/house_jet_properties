@@ -12,8 +12,8 @@ class HomeRepo {
 
 
   Future<ResponseItem> getAllProperties({
-    String? bathroomsCount,
-    String? bedroomsCount,
+    dynamic bathroomsCount,
+    dynamic bedroomsCount,
     List? priceRangeList,
     String? subType,
 
@@ -62,7 +62,7 @@ class HomeRepo {
     //
     // String requestUrl = ApiUrl.baseUrl + queryString;
     String requestUrl =
-        '${AppUrls.baseUrlV1}${MethodNames.getAllProperties}$aliasName${RequestParam.showDebugPhotoStorm}';
+        '${AppUrls.baseUrlV1}${MethodNames.getPropertiesByAlias}$aliasName${RequestParam.showDebugPhotoStorm}';
 
     result = await BaseApiHelper.getRequest(
       requestUrl,

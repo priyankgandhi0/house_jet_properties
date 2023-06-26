@@ -66,7 +66,6 @@ class PriceFilterBottomSheet extends StatelessWidget {
                     ctrl.onIndicatorRangeChange(values.start, values.end);
                     ctrl.onPriceRangeChange(values.start, values.end);
                   },
-
                   min: 18,
                   max: 300,
                   activeColor: app_Orange_FF7448,
@@ -76,8 +75,12 @@ class PriceFilterBottomSheet extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 40),
                 child: AppButton(
-                  onTap: () {},
-                  text: "SEE 85 HOMES",
+                  onTap: () async{
+                    Get.back();
+                    ctrl.manager = await  ctrl.initClusterManager();
+                    ctrl.manager!.setMapId(ctrl.mapController.mapId);
+                  },
+                  text: "SEE HOMES",
                   textSize: 16,
                   textFontWeight: FontWeight.w600,
                   radius: 50,

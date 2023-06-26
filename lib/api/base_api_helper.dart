@@ -163,8 +163,7 @@ class BaseApiHelper {
           name: 'GET_HEADER');
     }
 
-    return await dio
-        .get(
+    return await dio.get(
       requestUrl,
       cancelToken: cancelToken,
       options: passAuthToken

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:house_jet_properties/constants/request_const.dart';
-import 'package:house_jet_properties/generated/assets.dart';
+import 'package:house_jet_properties/theme/app_assets.dart';
 import 'package:house_jet_properties/utils/extension.dart';
 import 'package:house_jet_properties/utils/shared_pref.dart';
 
@@ -29,7 +29,7 @@ showAlertDialog() {
     child: AlertDialog(
       title: Row(
         children: [
-          Image.asset(Assets.cautionIcon, height: 20, width: 20),
+          Image.asset(cautionIcon, height: 20, width: 20),
           (10.0).addHSpace(),
           Expanded(
             child: ("No internet connection")

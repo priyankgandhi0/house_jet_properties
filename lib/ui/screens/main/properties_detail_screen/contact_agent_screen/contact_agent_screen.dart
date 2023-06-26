@@ -141,13 +141,14 @@ class ContactAgentScreen extends StatelessWidget {
                             fontSize: 14)),
 
                     AppTextFields(
-
                         onTap: () async{
                          DateTime? meetingTime = await AppDateTimePicker
                               .showDateAndTimePicker(
                               context,DateTime.now());
                          if(meetingTime != null){
+
                            ctrl.scheduleTimeCtr.text = meetingTime.appDateTimeFormat();
+
                          }
                           ctrl.update();
                         },

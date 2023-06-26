@@ -85,7 +85,6 @@ class _AppTextFieldsState extends State<AppTextFields> {
           autofocus: false,
           inputFormatters:widget.textInputForMater??[],
           decoration: InputDecoration(
-
             prefixIcon: widget.leading,
             filled: true,
             contentPadding:
