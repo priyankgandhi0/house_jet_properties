@@ -9,6 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../theme/app_colors.dart';
 
 class PickImageOnly {
+
   void openImageChooser(
       {required BuildContext context,
       required Function(File? image) onImageChose,
@@ -22,7 +23,6 @@ class PickImageOnly {
                   onImageChose(image);
                 })
             : showModalBottomSheet(
-
                 context: context,
                 builder: (context) {
                   return SafeArea(

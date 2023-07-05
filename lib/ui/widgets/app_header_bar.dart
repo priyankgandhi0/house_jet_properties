@@ -22,7 +22,6 @@ PreferredSizeWidget appHeaderBar({
     leading: Padding(
       padding: const EdgeInsets.only(left: 15),
       child: Align(
-
         alignment: Alignment.centerLeft,
         child: InkWell(
           overlayColor: const MaterialStatePropertyAll(Colors.transparent),

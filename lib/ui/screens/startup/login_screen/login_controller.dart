@@ -60,23 +60,29 @@ class LoginController extends GetxController {
           await preferences.putString(SharedPreference.AUTH_TOKEN, data.token!);
           await preferences.putBool(SharedPreference.IS_LOGGED_IN, true);
           if (rememberCheck.value == true) {
+
             await preferences.putBool(SharedPreference.REMEMBER_PASSWORD, true);
           } else {
             await preferences.putString(SharedPreference.USER_INFO, '');
             userEmailController.clear();
             passwordController.clear();
-            await preferences.putBool(
-                SharedPreference.REMEMBER_PASSWORD, false);
+            await preferences.putBool(SharedPreference.REMEMBER_PASSWORD, false);
           }
 
           Get.offAllNamed(Routes.homeScreen);
+
         }else{
+
           showAppSnackBar(data.error);
+
         }
         showLoading.value = false;
     } catch (e) {
+
       print("Log in Exception ----> $e");
+
       showLoading.value = false;
+
     }
 
 
@@ -125,7 +131,6 @@ class LoginController extends GetxController {
   onCheckTerms(bool value) {
     termCheck.value = value;
     update();
-
   }
 
   onCheckRememberMe(bool value) {

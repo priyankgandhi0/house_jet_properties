@@ -34,26 +34,29 @@ class ChangePassword extends StatelessWidget {
         bottom: PreferredSize(
           preferredSize: Size.zero,
           child: Padding(
+
             padding: const EdgeInsets.only(bottom: 15),
             child: Stack(
               alignment: Alignment.center,
               children: [
 
                 Padding(
+
                   padding: const EdgeInsets.only(left: 15),
+
                   child: Align(
+
                     alignment: Alignment.centerLeft,
+
                     child: InkWell(
-                      overlayColor:
-                      const MaterialStatePropertyAll(Colors.transparent),
+                      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                       onTap: () => Get.back(),
                       child: Image.asset(backArrowIcon, height: 16),
                     ),
                   ),
                 ),
 
-                "Change Password"
-                    .darkText(size: 20, fontWeight: FontWeight.w700),
+                ("Change Password").darkText(size: 20, fontWeight: FontWeight.w700),
               ],
             ),
           ),
@@ -67,11 +70,17 @@ class ChangePassword extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
+
+
                   20.0.addHSpace(),
                   AppTextFields(
+
                       controller: ctrl.oldPassword,
+
                       hintText: "Old Password",
+
                       isSecureEntry: false,
+
                       hintStyle: GoogleFonts.manrope(
                           color: app_grey_99A7AE,
                           fontWeight: FontWeight.w500,
@@ -89,20 +98,25 @@ class ChangePassword extends StatelessWidget {
                   15.0.addHSpace(),
                   AppTextFields(
                       controller: ctrl.confirmNewPassword,
+
                       hintText: "Re-enter Password",
+
                       isSecureEntry: false,
+
                       hintStyle: GoogleFonts.manrope(
 
                           color: app_grey_99A7AE,
+
                           fontWeight: FontWeight.w500,
-                          fontSize: 16)),
-                  50.0.addHSpace(),
+
+                          fontSize: 16
+                      )),
+                  (50.0).addHSpace(),
                   AppButton(
 
                     onTap: () {
-                      if (ctrl.oldPassword.text
-                          .trim()
-                          .isEmpty) {
+
+                      if (ctrl.oldPassword.text.trim().isEmpty) {
                         showAppSnackBar("Enter old password");
                       } else if (ctrl.newPassword.text
                           .trim()
@@ -111,7 +125,6 @@ class ChangePassword extends StatelessWidget {
                       } else if (ctrl.confirmNewPassword.text
                           .trim()
                           .isEmpty) {
-
 
                         showAppSnackBar("Enter confirm new password");
                       } else if (ctrl.newPassword.text.trim() !=
@@ -124,6 +137,7 @@ class ChangePassword extends StatelessWidget {
                         ctrl.clearTextFiled();
                         showAppSnackBar("Password change success");
                       }
+
                     },
                     text: "CHANGE",
                     radius: 30,

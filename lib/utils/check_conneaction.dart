@@ -48,7 +48,6 @@ listenConnection() {
     if (preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false) {
       if (hasInternet.value) {
         Get.back();
-
         print("hasInternet true");
       } else {
         print("hasInternet false");

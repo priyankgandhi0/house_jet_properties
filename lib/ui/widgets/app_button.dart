@@ -27,10 +27,8 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-
           elevation: const MaterialStatePropertyAll(0),
-          minimumSize:
-              MaterialStateProperty.all<Size>(const Size.fromHeight(50)),
+          minimumSize: MaterialStateProperty.all<Size>(const Size.fromHeight(50)),
           backgroundColor: MaterialStateProperty.all<Color>(
               unselected! ? app_text_white_ffffff : app_Orange_FF7448),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

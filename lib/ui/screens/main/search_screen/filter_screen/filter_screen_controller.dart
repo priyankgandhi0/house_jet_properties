@@ -691,6 +691,7 @@ class FilterScreenController extends GetxController
   ///    For Sold Screeen                          / / / / /
   List<HomeTypeModel> soldWithinList = [
     HomeTypeModel(
+
       subTitleText: "Last 1 Month",
       isSeleacted: true,
     ),

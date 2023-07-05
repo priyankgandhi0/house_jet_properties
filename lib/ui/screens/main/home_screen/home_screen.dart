@@ -47,6 +47,7 @@ class HomeScreen extends StatelessWidget {
                   label: 'Search',
                 ),
                 BottomNavigationBarItem(
+
                     icon: ImageIcon(
                       AssetImage(navigationFavouriteIcon),
                       // color: app_grey_99A7AE,
@@ -57,7 +58,9 @@ class HomeScreen extends StatelessWidget {
                       AssetImage(navigationProfileIcon),
                       // color: app_grey_99A7AE,
                     ),
-                    label: 'Profile'),
+                    label: 'Profile',
+
+                ),
               ],
               currentIndex: ctrl.currentIndex.value,
               selectedItemColor: app_Orange_FF7448,
@@ -81,7 +84,7 @@ class HomeScreen extends StatelessWidget {
         /*     drawer: AppDrawer(
             // isIndexCallback: (index){
             //     if(index == 1){
-            //       ctrl.currentIndex.value = 1;
+            //       ctrl.currentIndex.va lue = 1;
             //        preferences.putString(SharedPreference.SORT, "Oldest To Newest");
             //       preferences.putBool(SharedPreference.FILTERED_API_CALLED, true);
             //     }

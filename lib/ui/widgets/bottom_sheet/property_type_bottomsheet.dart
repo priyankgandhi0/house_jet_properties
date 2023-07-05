@@ -73,8 +73,11 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                                     (states) => app_Orange_FF7448),
                             //<-- SEE HERE
                             onChanged: (String? value) {
+
                               ctrl.propertyType.subTitleText = value!;
+
                               ctrl.update();
+
                             },
                           ),
                         ],
@@ -84,14 +87,20 @@ class PropertyTypeBottomSheet extends StatelessWidget {
                             right: 20, left: 20, bottom: 20, top: 10),
                         child: AppButton(
                           onTap: () async{
+
                             Get.back();
                             ctrl.manager = await  ctrl.initClusterManager();
-                            ctrl.manager!.setMapId(ctrl.mapController.mapId);
+                            ctrl.manager!.setMapId(ctrl.mapController!.mapId);
+
                           },
                           text: "SEE 85 HOMES",
+
                           textSize: 16,
+
                           textFontWeight: FontWeight.w600,
+
                           radius: 50,
+
                         ),
                       )
                     ],

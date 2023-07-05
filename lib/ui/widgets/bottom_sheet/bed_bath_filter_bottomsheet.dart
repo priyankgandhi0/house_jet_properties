@@ -41,11 +41,13 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                 children: [
 
                   "Bed / Bath".appBlackText1B1B1B(
+
                       size: 20, fontWeight: FontWeight.w600),
 
                   Align(
                     alignment: Alignment.centerRight,
                     child: InkWell(
+
                         onTap: () => Navigator.pop(context),
                         child: Image.asset(closeIcon, height: 25)),
                   ),
@@ -53,6 +55,7 @@ class BedBathFilterBottomSheet extends StatelessWidget {
               ),
               (30.0).addHSpace(),
               Align(
+
                 alignment: AlignmentDirectional.centerStart,
                 child: "Bedrooms"
                     .appBlackText1B1B1B(size: 16, fontWeight: FontWeight.w500),
@@ -62,36 +65,37 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                 height: 45,
                 child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      bool sameIndex = ctrl.filterBedroomIndex == index;
-                      return InkWell(
-
-                        onTap: () {
-                          ctrl.onBedroomFilterClick(index);
-                        },
-                        child: Container(
-                          width: Get.width / 6.2,
-                          decoration: BoxDecoration(
-                            color:
-                                sameIndex ? app_Orange_FF7448 : app_grey_F5F8FB,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Center(
-                            child: (ctrl.bedBathList[index])
-                                .toString()
-                                .mediumText(
-
-                                    color: sameIndex
-                                        ? Colors.white
-                                        : app_grey_99A7AE,
-                                    size: 14,
-                                    fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      );
-                    },
                     separatorBuilder: (context, index) => 8.0.addWSpace(),
-                    itemCount: ctrl.bedBathList.length),
+                    itemCount: ctrl.bedBathList.length,
+                    itemBuilder: (context, index) {
+                    bool sameIndex = ctrl.filterBedroomIndex == index;
+                    return InkWell(
+
+                      onTap: () {
+                        ctrl.onBedroomFilterClick(index);
+                      },
+                      child: Container(
+                        width: Get.width / 6.2,
+                        decoration: BoxDecoration(
+                          color:
+                          sameIndex ? app_Orange_FF7448 : app_grey_F5F8FB,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Center(
+                          child: (ctrl.bedBathList[index])
+                              .toString()
+                              .mediumText(
+                              color: sameIndex
+                                  ? Colors.white
+                                  : app_grey_99A7AE,
+                              size: 14,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    );
+                  },
+
+                ),
               ),
               20.0.addHSpace(),
               Align(
@@ -113,11 +117,12 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                         child: Container(
                           width: Get.width / 6.2,
                           decoration: BoxDecoration(
-                            color:
-                                sameIndex ? app_Orange_FF7448 : app_grey_F5F8FB,
+                            color: sameIndex ? app_Orange_FF7448 : app_grey_F5F8FB,
                             borderRadius: BorderRadius.circular(6),
+
                           ),
                           child: Center(
+
                             child: (ctrl.bedBathList[index])
                                 .toString()
                                 .mediumText(
@@ -126,6 +131,7 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                                         : app_grey_99A7AE,
                                     size: 14,
                                     fontWeight: FontWeight.w500),
+
                           ),
                         ),
                       );
@@ -137,12 +143,11 @@ class BedBathFilterBottomSheet extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                 child: AppButton(
-
                   onTap: ()async{
                     Get.back();
                     Get.back();
                     ctrl.manager = await  ctrl.initClusterManager();
-                    ctrl.manager!.setMapId(ctrl.mapController.mapId);
+                    ctrl.manager!.setMapId(ctrl.mapController!.mapId);
                   },
                   text: "SEE HOMES",
                   textSize: 16,

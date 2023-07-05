@@ -41,7 +41,7 @@ class HomeScreenController extends GetxController {
   }
 
   List<Widget> screens = [
-    SearchScreen(),
+    SearchHomeScreen(),
     FavouriteScreen(),
     ProfileScreen(),
   ];
@@ -58,4 +58,5 @@ class HomeScreenController extends GetxController {
 /*  importLead() {
     Get.toNamed(Routes.importLead);
   }*/
+
 }

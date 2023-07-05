@@ -120,8 +120,7 @@ class _AppTextFieldsState extends State<AppTextFields> {
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide:
-                  const BorderSide(color: Colors.transparent, width: 1.0),
+              borderSide: const BorderSide(color: Colors.transparent, width: 1.0),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
@@ -145,6 +144,7 @@ class _AppTextFieldsState extends State<AppTextFields> {
             ),
           ),
           style: GoogleFonts.manrope(
+
               color: app_text_black_1B1B1B,
               fontSize: 16,
               fontWeight: FontWeight.w500),

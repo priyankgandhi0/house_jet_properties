@@ -16,7 +16,6 @@ Future<void> main() async {
   await preferences.init();
   final MyConnectivity _connectivity = MyConnectivity.instance;
   _connectivity.initialise();
-  Map _source = {ConnectivityResult.none: false};
   _connectivity.myStream.listen((source) {
     switch (source.keys.toList()[0]) {
       case ConnectivityResult.mobile:
@@ -41,8 +40,9 @@ Future<void> main() async {
         ),
         getPages: Routes.pages,
         debugShowCheckedModeBanner: false,
-        home:    (preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false)
+        home:(preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false)
         // ? HomeScreen()
+
             ? HomeScreen()
             : LoginScreen())
 

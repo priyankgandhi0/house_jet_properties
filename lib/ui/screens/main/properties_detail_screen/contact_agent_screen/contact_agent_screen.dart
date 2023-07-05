@@ -94,6 +94,7 @@ class ContactAgentScreen extends StatelessWidget {
                         controller: TextEditingController(),
                         hintText: "Enter Name",
                         hintStyle: GoogleFonts.manrope(
+
                             color: app_grey_99A7AE,
                             fontWeight: FontWeight.w400,
                             fontSize: 14)),
@@ -105,12 +106,16 @@ class ContactAgentScreen extends StatelessWidget {
                     (10.0).addHSpace(),
 
                     AppTextFields(
+
                         controller: TextEditingController(),
+
                         hintText: "Enter Email",
+
                         hintStyle: GoogleFonts.manrope(
                             color: app_grey_99A7AE,
                             fontWeight: FontWeight.w400,
                             fontSize: 14)),
+
                     (15.0).addHSpace(),
 
                     " Phone Number".appBlackText1B1B1B(
@@ -141,27 +146,25 @@ class ContactAgentScreen extends StatelessWidget {
                             fontSize: 14)),
 
                     AppTextFields(
+
                         onTap: () async{
                          DateTime? meetingTime = await AppDateTimePicker
                               .showDateAndTimePicker(
                               context,DateTime.now());
                          if(meetingTime != null){
-
                            ctrl.scheduleTimeCtr.text = meetingTime.appDateTimeFormat();
-
                          }
                           ctrl.update();
-                        },
+                         },
                         readOnly: true,
                         controller:ctrl.scheduleTimeCtr,
                         hintText: "Select Meeting Time",
                         maxLine: 1,
-
                         hintStyle: GoogleFonts.manrope(
-
                             color: app_grey_99A7AE,
                             fontWeight: FontWeight.w400,
-                            fontSize: 14)),
+                            fontSize: 14,
+                        )),
                   ],
                 ),
               ),

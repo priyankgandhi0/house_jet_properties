@@ -29,17 +29,22 @@ showAlertDialog() {
     child: AlertDialog(
       title: Row(
         children: [
-          Image.asset(cautionIcon, height: 20, width: 20),
+          Image.asset(
+
+              cautionIcon,
+
+              height: 20,
+              width: 20
+          ),
           (10.0).addHSpace(),
           Expanded(
+
             child: ("No internet connection")
                 .appBlackText1B1B1B(fontWeight: FontWeight.w500, size: 20),
           )
         ],
       ),
-      content:
-          ("Please, check internet connection on your smartphone to use the application")
-              .appColorChangeText(
+      content: ("Please, check internet connection on your smartphone to use the application").appColorChangeText(
                   fontWeight: FontWeight.w500,
                   size: 16,
                   color: app_grey_99A7AE),
@@ -61,7 +66,6 @@ listenConnection() {
     if (preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false) {
       if (hasInternet.value) {
         Get.back();
-
         print("hasInternet true");
       } else {
         print("hasInternet false");

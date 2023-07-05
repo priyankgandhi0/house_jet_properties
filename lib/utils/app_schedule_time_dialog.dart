@@ -55,6 +55,7 @@ class AppScheduleTimeDialog extends StatelessWidget {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12.0))),
           title: tittle.appOrangeText(
+
             size: 18,
             fontWeight: FontWeight.w600,
           ),
@@ -64,6 +65,7 @@ class AppScheduleTimeDialog extends StatelessWidget {
                     .showDateAndTimePicker(
                     context, DateTime.now());
                 if(meetingTime != null){
+
                   ctrl.scheduleTimeCtr.text = meetingTime.appDateTimeFormat();
 
                 }

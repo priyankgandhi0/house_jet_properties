@@ -943,7 +943,9 @@ class ForSaleScreen extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, i) => homeTypeTextCard(
                                           onTap: () {
+
                                             ctrl.onGarageCardTypeTap(i);
+
                                           },
                                           borderColor:
                                               ctrl.garageSpotList[i].isSeleacted
@@ -968,7 +970,7 @@ class ForSaleScreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      e.subTitleText.appBlackText1B1B1B(
+                                      (e.subTitleText).appBlackText1B1B1B(
                                           size: 16,
                                           fontWeight: FontWeight.w400),
                                       appCheckBox(

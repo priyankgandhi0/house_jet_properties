@@ -27,329 +27,373 @@ class PropertiesDetail extends StatelessWidget {
       body: GetBuilder<SearchScreenController>(
         initState: (initState) {
           // "4911-south-burrows-avenue-springfield-mo-60236180"
-          Future.delayed(Duration.zero).then((value) =>
-              searchController.getPropertiesByAlias(Get.arguments
-                 ));
+          Future.delayed(Duration.zero).then(
+              (value) => searchController.getPropertiesByAlias(Get.arguments));
         },
         builder: (ctrl) {
           return Stack(
             children: [
-              ctrl.propertiesDetailByAliasName == null? const NoDataFoundWidget():   Stack(
-                children: [
-                  SizedBox(
-                    height: 270,
-                    child: Stack(
+              ctrl.propertiesDetailByAliasName == null
+                  ? const NoDataFoundWidget()
+                  : Stack(
                       children: [
-                        CarouselSlider.builder(
-                          options: CarouselOptions(
-                            height: Get.height,
-                            viewportFraction: 1,
-                            onPageChanged: (index, reason) =>
-                                ctrl.onImageChange(index),
-                          ),
-                          itemCount: ctrl.propertiesDetailByAliasName!.propertyPhotos!.length,
-                          itemBuilder: (BuildContext context, int itemIndex,
-                                  int pageViewIndex) =>
-                              Image.network(
-                            width: Get.width,
-                            ctrl.propertiesDetailByAliasName!
-                                    .propertyPhotos![itemIndex].mediumUrl ??
-                                "",
-                            fit: BoxFit.cover,
-                                loadingBuilder:
-                                    (context, child, loadingProgress) {
-                                   return loadingBuilder(context, child, loadingProgress);
-                                },
-                                errorBuilder: (context, error, stackTrace) {
-                                  return networkImageErrorBuilder(context, error, stackTrace);
-                                },
+                        SizedBox(
+                          height: 270,
+                          child: Stack(
+                            children: [
+                              CarouselSlider.builder(
+                                options: CarouselOptions(
+                                    height: Get.height,
+                                    viewportFraction: 1,
+                                    onPageChanged: (index, reason) {
+                                      ctrl.onImageChange(index);
+                                    }),
+                                itemCount: ctrl.propertiesDetailByAliasName!
+                                    .propertyPhotos!.length,
+                                itemBuilder: (BuildContext context,
+                                        int itemIndex, int pageViewIndex) =>
+                                    Image.network(
+                                  width: Get.width,
+                                  ctrl.propertiesDetailByAliasName!
+                                          .propertyPhotos![itemIndex]
+                                          .mediumUrl ??
+                                      "",
+                                  fit: BoxFit.cover,
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    return loadingBuilder(
+                                        context, child, loadingProgress);
+                                  },
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return networkImageErrorBuilder(
+                                        context, error, stackTrace);
+                                  },
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 40),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: 18,
+                                    width: 46,
+                                    decoration: BoxDecoration(
+                                        color: Colors.black45,
+                                        borderRadius:
+                                            BorderRadiusDirectional.circular(50)),
+                                    child: AnimatedSmoothIndicator(
+                                      activeIndex: ctrl.imageSliderIndex,
+                                      count: 3,
+                                      effect: JumpingDotEffect(
+                                        spacing: 4,
+                                        dotHeight: 6,
+                                        dotWidth: 6,
+                                        dotColor: const Color(0xffC8D9E1),
+                                        activeDotColor: app_Orange_FF7448,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 40),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 18,
-                              width: 46,
-                              decoration: BoxDecoration(
-                                  color: Colors.black45,
-                                  borderRadius:
-                                      BorderRadiusDirectional.circular(50)),
-                              child: AnimatedSmoothIndicator(
-                                activeIndex: ctrl.imageSliderIndex,
-                                count: 3,
-                                effect: JumpingDotEffect(
-                                  spacing: 4,
-                                  dotHeight: 6,
-                                  dotWidth: 6,
-                                  dotColor: const Color(0xffC8D9E1),
-                                  activeDotColor: app_Orange_FF7448,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 220),
-                    child: Stack(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 25),
-                          height: Get.height,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(30),
-                              topLeft: Radius.circular(30),
-                            ),
-                          ),
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 30),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  (ctrl.propertiesDetailByAliasName!.alias ?? "")
-                                      .appBlackText1B1B1B(
-                                          size: 22, fontWeight: FontWeight.w600),
-                                  10.0.addHSpace(),
-                                  ("\$${ctrl.propertiesDetailByAliasName!.listPrice ?? ""}")
-                                      .toString()
-                                      .appBlackText1B1B1B(
-                                          size: 20, fontWeight: FontWeight.w700),
-                                  10.0.addHSpace(),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const CircleAvatar(
-                                        radius: 6,
-                                        backgroundColor: Color(0xff3EE763),
-                                      ),
-                                      7.0.addWSpace(),
-                                      "For Sale".appBlackText1B1B1B(
-                                          size: 12, fontWeight: FontWeight.w600),
-                                    ],
+                          padding: const EdgeInsets.only(top: 220),
+                          child: Stack(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(top: 25),
+                                height: Get.height,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(30),
+                                    topLeft: Radius.circular(30),
                                   ),
-                                  30.0.addHSpace(),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 8,
-                                        child: Container(
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: app_Orange_FFF0EC,
-                                            borderRadius:
-                                                BorderRadiusDirectional.circular(6),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Image.asset(bedIcon,
-                                                  height: 19, width: 23),
-                                              5.0.addWSpace(),
-                                              ("${ctrl.propertiesDetailByAliasName!.beds ?? ""} Beds")
-                                                  .toString()
-                                                  .appOrangeText(
-                                                      size: 12,
-                                                      fontWeight: FontWeight.w500)
-                                            ],
-                                          ),
+                                ),
+                                child: SingleChildScrollView(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 30),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        (ctrl.propertiesDetailByAliasName!
+                                                    .alias ??
+                                                "")
+                                            .appBlackText1B1B1B(
+                                                size: 22,
+                                                fontWeight: FontWeight.w600),
+                                        10.0.addHSpace(),
+                                        ("\$${ctrl.propertiesDetailByAliasName!.listPrice ?? ""}")
+                                            .toString()
+                                            .appBlackText1B1B1B(
+                                                size: 20,
+                                                fontWeight: FontWeight.w700),
+                                        10.0.addHSpace(),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            const CircleAvatar(
+                                              radius: 6,
+                                              backgroundColor:
+                                                  Color(0xff3EE763),
+                                            ),
+                                            7.0.addWSpace(),
+                                            "For Sale".appBlackText1B1B1B(
+                                                size: 12,
+                                                fontWeight: FontWeight.w600),
+                                          ],
                                         ),
-                                      ),
-                                      10.0.addWSpace(),
-                                      Expanded(
-                                        flex: 10,
-                                        child: Container(
-                                          height: 40,
+                                        (30.0).addHSpace(),
+                                        Row(
+
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Container(
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                  color: app_Orange_FFF0EC,
+                                                  borderRadius:
+                                                      BorderRadiusDirectional
+                                                          .circular(6),
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Image.asset(bedIcon,
+                                                        height: 19, width: 23),
+                                                    5.0.addWSpace(),
+                                                    ("${ctrl.propertiesDetailByAliasName!.beds ?? ""} Beds")
+                                                        .toString()
+                                                        .appOrangeText(
+                                                            size: 12,
+                                                            fontWeight:
+                                                                FontWeight.w500)
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            10.0.addWSpace(),
+                                            Expanded(
+                                              flex: 10,
+                                              child: Container(
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                  color: app_Orange_FFF0EC,
+                                                  borderRadius:
+                                                      BorderRadiusDirectional
+                                                          .circular(6),
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(horizontal: 0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Image.asset(
+                                                          bathRoomIcon,
+                                                          height: 19,
+                                                          width: 23),
+                                                      5.0.addWSpace(),
+                                                      ("${ctrl.propertiesDetailByAliasName!.baths ?? ""} Bathrooms")
+                                                          .toString()
+                                                          .appOrangeText(
+                                                              size: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            10.0.addWSpace(),
+                                            Expanded(
+                                              flex: 8,
+                                              child: Container(
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                  color: app_Orange_FFF0EC,
+                                                  borderRadius:
+                                                      BorderRadiusDirectional
+                                                          .circular(6),
+                                                ),
+                                                child: Row(
+
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Image.asset(sqftIcon,
+                                                        height: 19, width: 23),
+                                                    5.0.addWSpace(),
+                                                    ("${ctrl.propertiesDetailByAliasName!.sqFtTotal ?? ""} Sqft")
+                                                        .toString()
+                                                        .appOrangeText(
+                                                            size: 12,
+                                                            fontWeight:
+                                                                FontWeight.w500)
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        30.0.addHSpace(),
+                                        "Description".appBlackText1B1B1B(
+                                            size: 18,
+                                            fontWeight: FontWeight.w600),
+                                        10.0.addHSpace(),
+                                        // Description
+                                        (ctrl.propertiesDetailByAliasName!
+                                                    .publicRemarks ??
+                                                "")
+                                            .appGreyText(
+                                                size: 14,
+                                                fontWeight: FontWeight.w400),
+                                        30.0.addHSpace(),
+                                        "Address".appBlackText1B1B1B(
+                                            size: 18,
+                                            fontWeight: FontWeight.w600),
+                                        ListTile(
+                                          visualDensity:
+                                              const VisualDensity(vertical: -4),
+                                          contentPadding: EdgeInsets.zero,
+                                          horizontalTitleGap: 10,
+                                          minLeadingWidth: 0,
+                                          minVerticalPadding: 0,
+                                          leading: Image.asset(locationIcon,
+                                              height: 20),
+                                          title: ctrl
+                                              .propertiesDetailByAliasName!
+                                              .streetAddress!
+                                              .appGreyText(
+                                                  size: 16,
+                                                  fontWeight: FontWeight.w400,
+                                                  maxLines: 1),
+                                        ),
+                                        Container(
+                                          height: 160,
                                           decoration: BoxDecoration(
-                                            color: app_Orange_FFF0EC,
                                             borderRadius:
-                                                BorderRadiusDirectional.circular(6),
+                                                BorderRadiusDirectional
+                                                    .circular(10),
+                                            border: Border.all(
+                                                color: const Color(0xffCCD8DE),
+                                                width: 1),
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Image.asset(bathRoomIcon,
-                                                    height: 19, width: 23),
-                                                5.0.addWSpace(),
-                                                ("${ctrl.propertiesDetailByAliasName!.baths ?? ""} Bathrooms")
-                                                    .toString()
-                                                    .appOrangeText(
-                                                        size: 12,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                              ],
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadiusDirectional
+                                                    .circular(10),
+                                            child: GoogleMap(
+                                              zoomControlsEnabled: false,
+                                              mapToolbarEnabled: false,
+                                              scrollGesturesEnabled: false,
+                                              myLocationButtonEnabled: false,
+                                              zoomGesturesEnabled: false,
+                                              onTap: (argument) => ctrl.launchingUrl(
+                                                  ctrl.propertiesDetailByAliasName!
+                                                      .latitude!,
+                                                  ctrl.propertiesDetailByAliasName!
+                                                      .longitude!),
+                                              onMapCreated: (GoogleMapController
+                                                  controller) async {
+                                                final marker = Marker(
+                                                  onTap: () => ctrl.launchingUrl(
+                                                      ctrl.propertiesDetailByAliasName!
+                                                          .latitude!,
+                                                      ctrl.propertiesDetailByAliasName!
+                                                          .longitude!),
+                                                  markerId: const MarkerId(
+                                                      'place_name'),
+                                                  icon: await MapUtils()
+                                                      .getMarkerImage(
+                                                          const Size(
+                                                              150.0, 150.0)),
+                                                  position: LatLng(
+                                                      ctrl.propertiesDetailByAliasName!
+                                                          .latitude!,
+                                                      ctrl.propertiesDetailByAliasName!
+                                                          .longitude!),
+                                                );
+                                                ctrl.markers2[const MarkerId(
+                                                    'place_name')] = marker;
+                                                ctrl.update();
+                                              },
+                                              markers:
+                                                  ctrl.markers2.values.toSet(),
+                                              initialCameraPosition: CameraPosition(
+                                                  target: LatLng(
+                                                      ctrl.propertiesDetailByAliasName!
+                                                          .latitude!,
+                                                      ctrl.propertiesDetailByAliasName!
+                                                          .latitude!),
+                                                  zoom: 15.5),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      10.0.addWSpace(),
-                                      Expanded(
-                                        flex: 8,
-                                        child: Container(
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: app_Orange_FFF0EC,
-                                            borderRadius:
-                                                BorderRadiusDirectional.circular(6),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Image.asset(sqftIcon,
-                                                  height: 19, width: 23),
-                                              5.0.addWSpace(),
-                                              ("${ctrl.propertiesDetailByAliasName!.sqFtTotal ?? ""} Sqft")
-                                                  .toString()
-                                                  .appOrangeText(
-                                                      size: 12,
-                                                      fontWeight: FontWeight.w500)
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  30.0.addHSpace(),
-                                  "Description".appBlackText1B1B1B(
-                                      size: 18, fontWeight: FontWeight.w600),
-                                  10.0.addHSpace(),
-                                  // Description
-                                  (ctrl.propertiesDetailByAliasName!
-                                              .publicRemarks ??
-                                          "")
-                                      .appGreyText(
-                                          size: 14, fontWeight: FontWeight.w400),
-                                  30.0.addHSpace(),
-                                  "Address".appBlackText1B1B1B(
-                                      size: 18, fontWeight: FontWeight.w600),
-                                  ListTile(
-                                    visualDensity:
-                                        const VisualDensity(vertical: -4),
-                                    contentPadding: EdgeInsets.zero,
-                                    horizontalTitleGap: 10,
-                                    minLeadingWidth: 0,
-                                    minVerticalPadding: 0,
-                                    leading: Image.asset(locationIcon, height: 20),
-                                    title: ctrl
-                                        .propertiesDetailByAliasName!.streetAddress!
-                                        .appGreyText(
-                                            size: 16,
-                                            fontWeight: FontWeight.w400,
-                                            maxLines: 1),
-                                  ),
-                                  Container(
-                                    height: 160,
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadiusDirectional.circular(10),
-                                      border: Border.all(
-                                          color: const Color(0xffCCD8DE), width: 1),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadiusDirectional.circular(10),
-                                      child: GoogleMap(
-                                        zoomControlsEnabled: false,
-                                        mapToolbarEnabled: false,
-                                        scrollGesturesEnabled: false,
-                                        myLocationButtonEnabled: false,
-                                        zoomGesturesEnabled: false,
-                                        onTap: (argument) => ctrl.launchingUrl(
-                                            ctrl.propertiesDetailByAliasName!.latitude!,
-                                            ctrl.propertiesDetailByAliasName!.longitude!),
-                                        onMapCreated: (GoogleMapController controller) async {
-                                          final marker = Marker(
-                                            onTap: () => ctrl.launchingUrl(
-                                                ctrl.propertiesDetailByAliasName!
-                                                    .latitude!,
-                                                ctrl.propertiesDetailByAliasName!
-                                                    .longitude!),
-                                            markerId: const MarkerId('place_name'),
-                                            icon: await MapUtils().getMarkerImage(
-                                                const Size(150.0, 150.0)),
-                                            position: LatLng(ctrl.propertiesDetailByAliasName!.latitude!,
-                                                ctrl.propertiesDetailByAliasName!.longitude!),
-                                          );
-                                          ctrl.markers2[
-                                                  const MarkerId('place_name')] =
-                                              marker;
-                                          ctrl.update();
-                                        },
-                                        markers: ctrl.markers2.values.toSet(),
-                                        initialCameraPosition: CameraPosition(
-                                            target: LatLng(
-                                                ctrl.propertiesDetailByAliasName!
-                                                    .latitude!,
-                                                ctrl.propertiesDetailByAliasName!
-                                                    .latitude!),
-                                            zoom: 15.5),
-                                      ),
+                                        (130.0).addHSpace(),
+                                      ],
                                     ),
                                   ),
-                                  (130.0).addHSpace(),
-                                ],
+                                ),
                               ),
-                            ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20),
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child: FloatingActionButton(
+                                      onPressed: () {},
+                                      backgroundColor: Colors.white,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 5),
+                                        child:
+                                            Image.asset(likeIcon, height: 20),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: SizedBox(
-                              height: 50,
-                              width: 50,
-                              child: FloatingActionButton(
-                                onPressed: () {},
-                                backgroundColor: Colors.white,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 5),
-                                  child: Image.asset(likeIcon, height: 20),
-                                ),
+                          padding: const EdgeInsets.only(left: 20, top: 45),
+                          child: InkWell(
+                            onTap: () => Get.back(),
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.black38,
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(6)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Image.asset(backArrowIcon,
+                                    color: Colors.white),
                               ),
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, top: 45),
-                    child: InkWell(
-                      onTap: () => Get.back(),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            color: Colors.black38,
-                            borderRadius: BorderRadiusDirectional.circular(6)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Image.asset(backArrowIcon, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
               Obx(() => AppLoader(visible: ctrl.showLoading.value))
             ],
           );
@@ -398,5 +442,3 @@ class PropertiesDetail extends StatelessWidget {
     );
   }
 }
-
-

@@ -54,7 +54,6 @@ class PriceFilterBottomSheet extends StatelessWidget {
               ),
               (20.0).addHSpace(),
               SliderTheme(
-
                 data: Theme.of(context).sliderTheme.copyWith(
                     inactiveTrackColor: const Color(0xffC8D9E1),
                     rangeThumbShape: ctrl.indicatorRangeSliderThumbShape,
@@ -78,8 +77,9 @@ class PriceFilterBottomSheet extends StatelessWidget {
                   onTap: () async{
                     Get.back();
                     ctrl.manager = await  ctrl.initClusterManager();
-                    ctrl.manager!.setMapId(ctrl.mapController.mapId);
-                  },
+                    ctrl.manager!.setMapId(ctrl.mapController!.mapId);
+                    },
+
                   text: "SEE HOMES",
                   textSize: 16,
                   textFontWeight: FontWeight.w600,

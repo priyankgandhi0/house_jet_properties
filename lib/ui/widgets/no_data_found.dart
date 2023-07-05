@@ -6,6 +6,9 @@ class NoDataFoundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Center(child: "No Data Found".appBlackText1B1B1B(fontWeight: FontWeight.w500),);
+
+
   }
 }

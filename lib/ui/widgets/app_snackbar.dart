@@ -16,7 +16,6 @@ appSnachBar({required String title, required String message}) {
     boxShadows: [
 
       BoxShadow(
-
         color: Colors.black.withOpacity(0.1),
         spreadRadius: 1,
         blurRadius: 8,

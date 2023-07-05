@@ -48,7 +48,6 @@ class ProfileScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Container(
-
                     height: 160,
                     width: 160,
                     decoration: BoxDecoration(
@@ -98,7 +97,6 @@ class ProfileScreen extends StatelessWidget {
                       preferences.clearUserItem();
                       Get.find<HomeScreenController>().currentIndex.value = 0;
                       // HomeScreenController().currentIndex.value = 0;
-
                       // Get.off(LoginScreen());
                     }),
               ],

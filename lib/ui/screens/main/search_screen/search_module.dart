@@ -88,8 +88,11 @@ class FullScreenSearchModal extends ModalRoute {
           ),
           actions: [
             IconButton(
+
               onPressed: () {
+
                 ctrl.clearAllRecently(isForRecently: false, context: context);
+
               },
               icon: Image.asset(
                 closeIcon,
@@ -118,7 +121,10 @@ class FullScreenSearchModal extends ModalRoute {
                   controller: ctrl.tabController,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: CustomTabIndicator(
-                      color: app_Orange_FFB49C, indicatorHeight: 2),
+                      color: app_Orange_FFB49C,
+                      indicatorHeight: 2,
+
+                  ),
                   tabs: [
                     colorHandle('Buy', ctrl.currentIndex.value, 0),
                     //.appGreyText(size: 14, fontWeight: FontWeight.w500),
@@ -256,9 +262,10 @@ class FullScreenSearchModal extends ModalRoute {
                         (ctrl.recentViewedList[index].description!)
                             .appBlackText1B1B1B(
                                 size: 16, fontWeight: FontWeight.w400),
+
                         (5.0).addHSpace(),
-                        "For Sale"
-                            .appGreyText(size: 14, fontWeight: FontWeight.w400),
+
+                        ("For Sale").appGreyText(size: 14, fontWeight: FontWeight.w400),
                       ],
                     ),
                   ),

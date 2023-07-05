@@ -20,6 +20,7 @@ class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Colors.white,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
@@ -65,7 +66,7 @@ class EditProfile extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    35.0.addHSpace(),
+                    (35.0).addHSpace(),
                     Stack(
                       alignment: Alignment.bottomCenter,
                       children: [
@@ -81,15 +82,14 @@ class EditProfile extends StatelessWidget {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
-
                               /*child: ctrl.profileImage == null
                               ? Image.asset(userProfileImage)
                               : Image.file(ctrl.profileImage!),
                             */
                               child: CircleAvatar(
+
                                 backgroundImage: ctrl.profileImage == null
-                                    ? Image
-                                    .asset(userProfileImage)
+                                    ? Image.asset(userProfileImage)
                                     .image
                                     : Image
                                     .file(ctrl.profileImage!,
@@ -121,6 +121,7 @@ class EditProfile extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
+
                           child: AppTextFields(
                               controller: ctrl.userFirstName,
                               hintText: "First Name",
@@ -147,15 +148,14 @@ class EditProfile extends StatelessWidget {
                         readOnly: true,
                         shoeCursor: false,
                         hintText: "Email Address",
-
                         hintStyle: GoogleFonts.manrope(
+
                             color: app_grey_99A7AE,
                             fontWeight: FontWeight.w500,
                             fontSize: 16)),
                     60.0.addHSpace(),
                     AppButton(
                       onTap: () {
-
                         if (ctrl.userFirstName.text
                             .trim()
                             .isEmpty) {
@@ -175,7 +175,7 @@ class EditProfile extends StatelessWidget {
                       radius: 30,
                       textFontWeight: FontWeight.w600,
                     ),
-                    10.0.addHSpace()
+                    (10.0).addHSpace()
                   ],
                 ),
               ),

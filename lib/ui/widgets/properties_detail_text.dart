@@ -19,19 +19,25 @@ class PropertiesDetailesText extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+
               title.mediumText(fontWeight: FontWeight.bold, size: 15),
+
               ":".mediumText(fontWeight: FontWeight.bold, size: 15),
+
+
             ],
           ),
         ),
         Expanded(
+
           child: Padding(
 
             padding: const EdgeInsets.only(left: 5),
             child: desc.mediumText(
                 fontWeight: FontWeight.w700,
                 color: app_text_black_343434,
-                size: 14),
+                size: 14,
+            ),
           ),
         )
       ],

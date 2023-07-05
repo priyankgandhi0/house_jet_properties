@@ -29,7 +29,6 @@ extension AppDateTime on DateTime {
   }
 
   appDateMonthExtension() {
-
     return DateFormat('MMM dd, yyyy ').format(this);
   }
 

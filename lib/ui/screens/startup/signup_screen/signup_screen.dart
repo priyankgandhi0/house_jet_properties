@@ -101,7 +101,9 @@ var signupKey = GlobalKey<FormState>();
                             isSecureEntry: false,
                             validator: (val){
                               if(ctrl.passwordController.text.isEmpty){
-                                return "Please enter valid mobile no";
+                                return "Please enter valid mobile number";
+                              }  if(ctrl.passwordController.text.trim().length < 10){
+                                return "Please enter valid mobile number";
                               }
                               return null;
                             },
@@ -120,6 +122,7 @@ var signupKey = GlobalKey<FormState>();
                           // ),
 
                           (60.0).addHSpace(),
+
                           AppButton(
                             text: 'SIGN UP',
                             onTap: () {
@@ -129,6 +132,7 @@ var signupKey = GlobalKey<FormState>();
                                 if(signupKey.currentState!.validate()){
                                   ctrl.signUp();
                                 }
+
                               } else {
                                 showAppSnackBar("Internet connection is required");
                               }
@@ -144,12 +148,13 @@ var signupKey = GlobalKey<FormState>();
                               primaryFocus?.unfocus();
                               loginController.clearAllTextField();
                               Get.back();
-
                             },
                             child: RichText(
+
                               text: TextSpan(
                                 children: [
                                   TextSpan(
+
                                       text: 'Have an account? ',
                                       style: TextStyle(
                                           fontSize: 14,

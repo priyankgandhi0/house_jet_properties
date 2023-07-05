@@ -38,6 +38,7 @@ class FavouriteScreen extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: GetBuilder<SearchScreenController>(
+
         builder: (ctrl) => SizedBox(
 
           height: Get.height,
@@ -52,7 +53,9 @@ class FavouriteScreen extends StatelessWidget {
                       if(preferences.getBool(SharedPreference.IS_LOGGED_IN) ?? false){
                         Get.toNamed(Routes.propertyDetailScreen,arguments:ctrl.propertiesDetailList[index].alias);
                       }else{
+
                         Get.toNamed(Routes.loginScreen);
+
                       }
 
 
@@ -63,10 +66,8 @@ class FavouriteScreen extends StatelessWidget {
                         horizontal: 20,
                       ),
                       decoration: BoxDecoration(
-
                         borderRadius: BorderRadiusDirectional.circular(10),
                         image: DecorationImage(
-
                             colorFilter:
                             ColorFilter.mode(Colors.black.withOpacity(0.1),
                                 BlendMode.darken),
@@ -81,8 +82,9 @@ class FavouriteScreen extends StatelessWidget {
                                 return Image.asset(housePlaceHolder);
                               },
                             ).image,
+                            fit: BoxFit.cover,
 
-                            fit: BoxFit.cover),
+                        ),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +93,6 @@ class FavouriteScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Container(
-
                               height: 30,
                               decoration: BoxDecoration(
                                   color: Colors.black54,

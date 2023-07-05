@@ -296,7 +296,7 @@ class BaseApiHelper {
     String message;
     dynamic data = responseData;
 
-    log('responseCode: ${response.statusCode}');
+    log('responseCoCde: ${response.statusCode}');
     if (response.statusCode == 200) {
       status = true;
       message = '';

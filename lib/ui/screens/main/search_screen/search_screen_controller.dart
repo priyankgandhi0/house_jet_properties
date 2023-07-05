@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,6 +43,12 @@ class SearchScreenController extends GetxController
     manager = await initClusterManager();
     super.onInit();
   }
+
+
+
+
+
+
 
   bool hasCallSupport = false;
   Future<void>? launched;
@@ -96,7 +103,7 @@ class SearchScreenController extends GetxController
       bearing: 0,
       tilt: 0);
 
-  late GoogleMapController mapController;
+      GoogleMapController? mapController;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   PropertiesModel? propertiesDetailModel;
   PropertyByAlias? propertiesDetailByAliasName;
@@ -243,6 +250,7 @@ class SearchScreenController extends GetxController
   }
 
   onImageChange(int index) {
+    //carouselController.
     imageSliderIndex = index;
     update();
   }
@@ -372,7 +380,7 @@ class SearchScreenController extends GetxController
 
       print("Address ===> ${placeDetail.streetAddress}");
 
-      isFormDrag ? mapController.animateCamera(
+      isFormDrag ? mapController!.animateCamera(
         // CameraUpdate.newCameraPosition(
         //   CameraPosition(
         //     target:  LatLng(propertiesDetailModel!.lat, propertiesDetailModel!.long),
@@ -532,8 +540,7 @@ class SearchScreenController extends GetxController
                 latLon.add(LatLng(p.latitude!, p.longitude!));
               }
               LatLngBounds bound = MapUtils().computeBounds(latLon);
-              mapController
-                  .animateCamera(CameraUpdate.newLatLngBounds(bound, 60));
+              mapController!.animateCamera(CameraUpdate.newLatLngBounds(bound, 60));
             } else {
 
               // List<LatLng> latLon = [];
@@ -590,7 +597,7 @@ class SearchScreenController extends GetxController
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) {
       currentPosition = position;
-      mapController.animateCamera(
+      mapController!.animateCamera(
         CameraUpdate.newLatLng(
           LatLng(currentPosition!.latitude, currentPosition!.longitude),
         ),
@@ -654,12 +661,20 @@ class SearchScreenController extends GetxController
           subType:propertyType.subTitleText
       );
       GetAllPropertiesModel data = GetAllPropertiesModel.fromJson(result.data);
-      propertiesDetailList = data.properties!;
+      if(data.properties != null){
+        propertiesDetailList = data.properties!;
+
+        if(mapController!.mapId.toString().isNotEmpty){
+          mapController!.animateCamera(
+              CameraUpdate.newLatLngZoom(LatLng(propertiesDetailList.first.latitude!, propertiesDetailList.first.longitude!), 15.0)
+          ) ;
+        }
+
+      }
       showLoading.value = false;
-      print(json.encode(result.data));
     } catch (e) {
       debugPrint("Catch Data of get all properties ----> $e");
-      showLoading.value = true;
+      showLoading.value = false;
 
     }
     update();
@@ -669,12 +684,13 @@ class SearchScreenController extends GetxController
     update();
     try {
       ResponseItem result;
-      result = await homeRepo.getPropertyByAlias(aliasName: aliasName);
+      result = await homeRepo.getPropertyByAlias(
+          aliasName: aliasName
+      );
       PropertyByAlias data = PropertyByAlias.fromJson(result.data["property"]);
       if(data.id != null){
         propertiesDetailByAliasName = data;
       }
-
       showLoading.value = false;
     } catch (e) {
       debugPrint("Catch Data of properties by alias ----> $e");

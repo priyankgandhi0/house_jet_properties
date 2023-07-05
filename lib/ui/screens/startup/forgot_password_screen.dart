@@ -68,13 +68,15 @@ class ForgotPasswordScreen extends StatelessWidget {
                         TextSpan(
                             text: 'Remember password? ',
                             style: TextStyle(
+
                                 fontSize: 14,
                                 color: app_text_black_1B1B1B,
                                 fontWeight: FontWeight.w400)),
                         TextSpan(
-                          text: 'Sign In',
-                          style: TextStyle(
 
+                          text: 'Sign In',
+
+                          style: TextStyle(
                               fontSize: 14,
                               color: app_Orange_FF7448,
                               fontWeight: FontWeight.w400),

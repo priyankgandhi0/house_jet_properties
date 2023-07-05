@@ -69,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                           validator: (val){
 
                               if (ctrl.passwordController.text.trim().isEmpty) {
-                              return  "Enter valid mobile no";
+                              return  "Enter valid mobile number";
                             }
                             return null;
                           },
@@ -77,84 +77,141 @@ class LoginScreen extends StatelessWidget {
                         ),
                         (30.0).addHSpace(),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            InkWell(
-                              overlayColor: const MaterialStatePropertyAll(
-                                  Colors.transparent),
-                              onTap: () {
-                                ctrl.onCheckTerms(!ctrl.termCheck.value);
+                            Checkbox(
+
+                              visualDensity: VisualDensity.compact,
+                              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              value: ctrl.termCheck.value,
+                              onChanged: (value) {
+                                ctrl.onCheckTerms(value!);
                               },
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                    visualDensity: VisualDensity.compact,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    value: ctrl.termCheck.value,
-                                    onChanged: (value) {
-                                      ctrl.onCheckTerms(value!);
-                                    },
-                                    activeColor: app_Orange_FF7448,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5)),
-                                    side: MaterialStateBorderSide.resolveWith(
-                                      (states) => BorderSide(
-                                          width: 1.0, color: app_Orange_FF7448),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: RichText(
-                                        text: TextSpan(children: [
-                                      TextSpan(
-                                          text: 'I agree to the ',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: app_text_black_1B1B1B,
-                                              fontWeight: FontWeight.w400)),
-                                      TextSpan(
-                                          text: 'Terms of Service',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: app_Orange_FF7448,
-                                              fontWeight: FontWeight.w400))
-                                    ])),
-                                  ),
-                                ],
+                              activeColor: app_Orange_FF7448,
+                              shape: RoundedRectangleBorder(
+
+                                  borderRadius: BorderRadius.circular(5)),
+                              side: MaterialStateBorderSide.resolveWith(
+                                    (states) =>
+                                    BorderSide(width: 1.0, color: app_Orange_FF7448),
                               ),
                             ),
+                            Expanded(
+                              child: RichText(
+                                  text: TextSpan(children: [
+                                    TextSpan(
+                                        text: 'I agree to the ',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: app_text_black_1B1B1B,
+                                            fontWeight: FontWeight.w400)),
+                                    TextSpan(
+                                        text: 'Terms of Service',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: app_Orange_FF7448,
+                                            fontWeight: FontWeight.w400))
+                                  ])),
+                            ),
                             (20.0).addHSpace(),
-                            InkWell(
-                              overlayColor: const MaterialStatePropertyAll(
-                                  Colors.transparent),
-                              onTap: () {
-                                ctrl.onCheckRememberMe(!ctrl.rememberCheck.value);
+                            Checkbox(
+                              visualDensity: VisualDensity.compact,
+                              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              value: ctrl.rememberCheck.value,
+                              onChanged: (value) {
+                                ctrl.onCheckRememberMe(value!);
                               },
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                    visualDensity: VisualDensity.compact,
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    value: ctrl.rememberCheck.value,
-                                    onChanged: (value) {
-                                      ctrl.onCheckRememberMe(value!);
-                                    },
-                                    activeColor: app_Orange_FF7448,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5)),
-                                    side: MaterialStateBorderSide.resolveWith(
-                                      (states) => BorderSide(
-                                          width: 1.0, color: app_Orange_FF7448),
-                                    ),
-                                  ),
-                                  'Remember me'.appBlackText1B1B1B(
-                                      size: 12, fontWeight: FontWeight.w400)
-                                ],
+                              activeColor: app_Orange_FF7448,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+                              side: MaterialStateBorderSide.resolveWith(
+                                    (states) =>
+                                    BorderSide(width: 1.0, color: app_Orange_FF7448),
                               ),
+                            ),
+                            Expanded(
+
+                              child: 'Remember me'.appBlackText1B1B1B(),
                             )
                           ],
                         ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     InkWell(
+                        //       overlayColor: const MaterialStatePropertyAll(
+                        //           Colors.transparent),
+                        //       onTap: () {
+                        //         ctrl.onCheckTerms(!ctrl.termCheck.value);
+                        //       },
+                        //       child: Row(
+                        //         children: [
+                        //           Checkbox(
+                        //             visualDensity: VisualDensity.compact,
+                        //             materialTapTargetSize:
+                        //                 MaterialTapTargetSize.shrinkWrap,
+                        //             value: ctrl.termCheck.value,
+                        //             onChanged: (value) {
+                        //               ctrl.onCheckTerms(value!);
+                        //             },
+                        //             activeColor: app_Orange_FF7448,
+                        //             shape: RoundedRectangleBorder(
+                        //                 borderRadius: BorderRadius.circular(5)),
+                        //             side: MaterialStateBorderSide.resolveWith(
+                        //               (states) => BorderSide(
+                        //                   width: 1.0, color: app_Orange_FF7448),
+                        //             ),
+                        //           ),
+                        //           RichText(
+                        //               text: TextSpan(children: [
+                        //             TextSpan(
+                        //                 text: 'I agree to the ',
+                        //                 style: TextStyle(
+                        //                     fontSize: 12,
+                        //                     color: app_text_black_1B1B1B,
+                        //                     fontWeight: FontWeight.w400)),
+                        //             TextSpan(
+                        //                 text: 'Terms of Service',
+                        //                 style: TextStyle(
+                        //                     fontSize: 12,
+                        //                     color: app_Orange_FF7448,
+                        //                     fontWeight: FontWeight.w400))
+                        //           ])),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //     (20.0).addHSpace(),
+                        //     InkWell(
+                        //       overlayColor: const MaterialStatePropertyAll(
+                        //           Colors.transparent),
+                        //       onTap: () {
+                        //         ctrl.onCheckRememberMe(!ctrl.rememberCheck.value);
+                        //       },
+                        //       child: Row(
+                        //         children: [
+                        //           Checkbox(
+                        //             visualDensity: VisualDensity.compact,
+                        //             materialTapTargetSize:
+                        //                 MaterialTapTargetSize.shrinkWrap,
+                        //             value: ctrl.rememberCheck.value,
+                        //             onChanged: (value) {
+                        //               ctrl.onCheckRememberMe(value!);
+                        //             },
+                        //             activeColor: app_Orange_FF7448,
+                        //             shape: RoundedRectangleBorder(
+                        //                 borderRadius: BorderRadius.circular(5)),
+                        //             side: MaterialStateBorderSide.resolveWith(
+                        //               (states) => BorderSide(
+                        //                   width: 1.0, color: app_Orange_FF7448),
+                        //             ),
+                        //           ),
+                        //           'Remember me'.appBlackText1B1B1B(
+                        //               size: 12, fontWeight: FontWeight.w400)
+                        //         ],
+                        //       ),
+                        //     )
+                        //   ],
+                        // ),
                         (50.0).addHSpace(),
                         AppButton(
                           text: 'SIGN IN',
@@ -162,9 +219,7 @@ class LoginScreen extends StatelessWidget {
                             // printData(tittle: 'tittle');
                             // ctrl.signIn();
                             FocusScope.of(context).unfocus();
-
                             if (hasInternet.value) {
-
                               if(loginKey.currentState!.validate()){
                                 ctrl.signIn();
                               }

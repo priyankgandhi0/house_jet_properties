@@ -29,7 +29,9 @@ Widget homeTypeCard({
           ),
           (10.0).addHSpace(),
           subtitleText.appColorChangeText(
-              size: 12, fontWeight: FontWeight.w400, color: textColor),
+
+              size: 12, fontWeight: FontWeight.w400, color: textColor
+          ),
         ],
       ),
     ),
@@ -43,9 +45,10 @@ Widget homeTypeTextCard({
 }) {
   return GestureDetector(
     onTap: onTap,
-
     child: Container(
+
       decoration: BoxDecoration(
+
           color: app_back_grey_F5F8FB,
           border: Border.all(color: borderColor ?? app_back_grey_F5F8FB),
           borderRadius: BorderRadius.circular(6)),

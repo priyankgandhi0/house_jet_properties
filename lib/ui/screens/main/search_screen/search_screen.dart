@@ -12,8 +12,8 @@ import 'package:house_jet_properties/utils/extension.dart';
 import 'package:house_jet_properties/utils/shared_pref.dart';
 import '../../../../theme/app_colors.dart';
 
-class SearchScreen extends StatelessWidget {
-  SearchScreen({Key? key}) : super(key: key);
+class SearchHomeScreen extends StatelessWidget {
+  SearchHomeScreen({Key? key}) : super(key: key);
 
   SearchScreenController searchController = Get.put(SearchScreenController());
 
@@ -58,6 +58,7 @@ class SearchScreen extends StatelessWidget {
                     onCameraIdle: ctrl.manager!.updateMap,
                   )
                       : Padding(
+
                     padding: const EdgeInsets.only(top: 140),
                     child: ListView.separated(
                         padding: const EdgeInsets.only(top: 20, bottom: 20),
@@ -77,6 +78,7 @@ class SearchScreen extends StatelessWidget {
                                 }
                               },
                               child: Container(
+
                                 height: 210,
                                 margin: const EdgeInsets.symmetric(
                                   horizontal: 20,
@@ -104,6 +106,7 @@ class SearchScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
+
                                     Padding(
                                       padding: const EdgeInsets.all(15.0),
                                       child: Container(
@@ -117,9 +120,9 @@ class SearchScreen extends StatelessWidget {
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 12),
                                           child: Row(
+
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-
                                               const CircleAvatar(
                                                 radius: 5,
                                                 backgroundColor:
@@ -143,21 +146,22 @@ class SearchScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-
-                                              (ctrl.propertiesDetailList[index].alias??"").whiteText(
-                                                  size: 18,
-                                                  fontWeight:
-                                                  FontWeight.w600),
-                                              5.0.addHSpace(),
-                                              ("\$${ctrl.propertiesDetailList[index].listPrice}").toString().whiteText(
-                                                  size: 20,
-                                                  fontWeight:
-                                                  FontWeight.w700),
-                                            ],
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                (ctrl.propertiesDetailList[index].alias??"").whiteText(
+                                                    size: 18,
+                                                    fontWeight:
+                                                    FontWeight.w600),
+                                                5.0.addHSpace(),
+                                                ("\$${ctrl.propertiesDetailList[index].listPrice}").toString().whiteText(
+                                                    size: 20,
+                                                    fontWeight:
+                                                    FontWeight.w700),
+                                              ],
+                                            ),
                                           ),
                                           Image.asset(likeIcon, height: 22),
                                         ],
@@ -272,7 +276,7 @@ class SearchScreen extends StatelessWidget {
                                   overlayColor: const MaterialStatePropertyAll(
                                       Colors.transparent),
                                   onTap: () {
-                                    searchController.onViewGoogleMap();
+                                   // searchController.onViewGoogleMap();
                                   },
                                   child: Container(
                                     height: 54,

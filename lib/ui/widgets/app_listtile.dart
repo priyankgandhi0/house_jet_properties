@@ -22,18 +22,19 @@ class AppListTile extends StatelessWidget {
       child: SizedBox(
         height: 50,
         child: ListTile(
+
           tileColor: app_foreground_color_F6F8FB,
           shape: RoundedRectangleBorder(borderRadius: BorderRadiusDirectional.circular(5)),
           onTap: () => onTap(),
           leading: Image.asset(height: 20, width: 20, icon!),
           horizontalTitleGap: 14,
           minLeadingWidth: 0,
-
           title: textColor ?? true
               ? title!.appBlackText1B1B1B(size: 14, fontWeight: FontWeight.w400)
               : title!.appOrangeText(size: 14, fontWeight: FontWeight.w400),
           contentPadding: const EdgeInsets.only(left: 16, right: 19),
           trailing: Image.asset(height: 20, width: 10, arrowIcon),
+
         ),
       ),
     );
